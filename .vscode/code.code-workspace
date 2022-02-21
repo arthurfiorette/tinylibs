@@ -1,0 +1,23 @@
+{
+  "folders": [
+    {
+      "path": "../packages/object-code",
+      "name": "Object Code"
+    },{
+      "path": "../packages/fast-defer",
+      "name": "Fast Defer"
+    },{
+      "path": "../packages/cache-control",
+      "name": "Cache Control"
+    },
+    {
+      "path": "..",
+      "name": "Root"
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "packages/**": true
+    }
+  }
+}

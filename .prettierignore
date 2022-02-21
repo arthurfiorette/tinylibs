@@ -1,0 +1,10 @@
+# keep beauty comments
+/tsconfig.json
+
+# Generated files
+CHANGELOG.md
+dist
+coverage
+
+# Yarn
+.yarn
