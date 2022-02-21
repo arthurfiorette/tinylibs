@@ -1,0 +1,30 @@
+{
+  "name": "object-code",
+  "description": "Blazing fast hash code generator that supports every possible javascript value.",
+  "version": "1.1.2",
+  "source": "src/index.ts",
+  "main": "dist/index.js",
+  "umd:main": "dist/index.umd.js",
+  "unpkg": "dist/index.umd.js",
+  "module": "dist/index.mjs",
+  "exports": {
+    "require": "./dist/index.js",
+    "default": "./dist/index.modern.js"
+  },
+  "types": "dist/index.d.ts",
+  "sideEffects": false,
+  "author": "Arthur Fiorette <npm@arthur.place>",
+  "license": "MIT",
+  "repository": "git+https://github.com/arthurfiorette/tinylibs.git",
+  "bugs": "https://github.com/arthurfiorette/tinylibs/issues",
+  "homepage": "https://tinylibs.js.org/#/object-code",
+  "scripts": {
+    "build": "microbundle --tsconfig tsconfig.build.json",
+    "changelog": "auto-changelog -p -c ../../changelog.json",
+    "test": "jest --coverage"
+  },
+  "dependencies": {
+    "microbundle": "^0.14.2",
+    "auto-changelog": "^2.4.0"
+  }
+}
