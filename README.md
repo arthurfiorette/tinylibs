@@ -20,6 +20,14 @@ Tiny Libs</h1>
 
 <br />
 
+- [`Fast Defer`](packages/fast-defer)
+
+- [`Object Code`](packages/object-code)
+
+- [`Cache Parser`](packages/cache-parser)
+
+<br />
+
 ## License
 
 Licensed under the **MIT**. See [`LICENSE`](LICENSE) for more informations.
