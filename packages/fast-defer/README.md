@@ -18,7 +18,7 @@
 
 <div align="center">
   <pre>
-  <h1>run🏃<br />Fast Defer</h1>
+  <h1>🏃<br />Fast Defer</h1>
   </pre>
   <br />
 </div>
