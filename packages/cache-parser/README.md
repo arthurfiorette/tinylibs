@@ -1,75 +1,52 @@
 <br />
+
+[![Issues](https://img.shields.io/github/issues/arthurfiorette/tinylibs?logo=github&label=Issues)](https://github.com/arthurfiorette/tinylibs/issues)
+[![Stars](https://img.shields.io/github/stars/arthurfiorette/tinylibs?logo=github&label=Stars)](https://github.com/arthurfiorette/tinylibs/stargazers)
+[![License](https://img.shields.io/github/license/arthurfiorette/tinylibs?logo=githu&label=License)](https://github.com/arthurfiorette/tinylibs/blob/main/LICENSE)
+[![Codecov](https://codecov.io/gh/arthurfiorette/tinylibs/branch/main/graph/badge.svg?token=ML0KGCU0VM)](https://codecov.io/gh/arthurfiorette/tinylibs)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Farthurfiorette%2Ftinylibs.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Farthurfiorette%2Ftinylibs?ref=badge_shield)
+[![Join the chat at https://gitter.im/tinylibs-js-org/community](https://badges.gitter.im/tinylibs-js-org/community.svg)](https://gitter.im/tinylibs-js-org/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Speed Blazing](https://img.shields.io/badge/speed-blazing%20%F0%9F%94%A5-brightgreen.svg)](https://twitter.com/acdlite/status/974390255393505280)
+
+[![Latest Version](https://img.shields.io/npm/v/cache-parser)](https://www.jsdelivr.com/package/npm/cache-parser)
+[![Downloads](https://img.shields.io/npm/dw/cache-parser)](https://www.npmjs.com/package/cache-parser)
+[![JsDelivr](https://data.jsdelivr.com/v1/package/npm/cache-parser/badge?style=rounded)](https://www.jsdelivr.com/package/npm/cache-parser)
+[![Bundlephobia](https://img.shields.io/bundlephobia/minzip/cache-parser/latest?style=flat)](https://bundlephobia.com/package/cache-parser@latest)
+[![Packagephobia](https://packagephobia.com/badge?p=cache-parser@latest)](https://packagephobia.com/result?p=cache-parser@latest)
+
+<br />
+
 <div align="center">
   <pre>
-  <br />
-  <h1>⌛
-Cache Parser</h1>
-  <br />
+  <h1>run🏃<br />Cache Parser</h1>
   </pre>
   <br />
-  <br />
-  <code
-    ><a href="https://github.com/ArthurFiorette/cache-parser/stargazers"
-      ><img
-        src="https://img.shields.io/github/stars/ArthurFiorette/cache-parser?logo=github&label=Stars"
-        target="_blank"
-        alt="Stars" /></a
-  ></code>
-  <code
-    ><a href="https://github.com/ArthurFiorette/cache-parser/blob/main/LICENSE"
-      ><img
-        src="https://img.shields.io/github/license/ArthurFiorette/cache-parser?logo=githu&label=License"
-        target="_blank"
-        alt="License" /></a
-  ></code>
-  <code
-    ><a href="https://bundlephobia.com/package/cache-parser"
-      ><img
-        src="https://img.shields.io/bundlephobia/min/cache-parser?style=flat"
-        target="_blank"
-        alt="Size" /></a
-  ></code>
-  <code
-    ><a href="https://www.npmjs.com/package/cache-parser"
-      ><img
-        src="https://img.shields.io/npm/dw/cache-parser?style=flat"
-        target="_blank"
-        alt="Downloads NPM" /></a
-  ></code>
-  <code
-    ><a href="https://app.codecov.io/gh/arthurfiorette/cache-parser/"
-      ><img
-        src="https://codecov.io/gh/arthurfiorette/cache-parser/branch/main/graph/badge.svg?token=pdslRMQDtC"
-        target="_blank"
-        alt="Coverage" /></a
-  ></code>
 </div>
 
-<h1></h1>
+<h3 align="center">
+  <code>Cache Parser</code> is a minimal parser for the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control" target="_blank">Cache-Control</a> header.
+  <br />
+  <br />
+</h3>
 
 <br />
-<br />
 
-### `cache-parser` is a minimal parser for the [Cache-Control](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control) header
+## Table of Contents
 
-<br />
-<br />
-
-## Table of contents
-
-- [Table of contents](#table-of-contents)
+- [Table of Contents](#table-of-contents)
 - [Installing](#installing)
   - [Node](#node)
   - [Browser](#browser)
+  - [Url Import](#url-import)
 - [Getting Started](#getting-started)
-  - [Some examples](#some-examples)
+  - [Usage](#usage)
 - [License](#license)
 
 <br />
 
 ## Installing
 
-#### Node
+### Node
 
 ```sh
 npm install --save cache-parser
@@ -79,73 +56,66 @@ yarn add cache-parser
 
 ```js
 const { parse, tokenize } = require('cache-parser');
-// or
 import { parse, tokenize } from 'cache-parser';
 ```
 
-#### Browser
-
-![Downloads](https://img.shields.io/npm/v/cache-parser?style=flat)
+### Browser
 
 ```html
 <script
   crossorigin
-  src="https://cdn.jsdelivr.net/npm/cache-parser@1/index.umd.js"
+  src="https://cdn.jsdelivr.net/npm/cache-parser@latest/dist/index.js"
 ></script>
-<!-- or -->
-<script crossorigin src="https://unpkg.com/cache-parser@1/dist/index.umd.js"></script>
 ```
 
 ```js
-const { parse, tokenize } = window.CacheParser;
+const { parse, tokenize } = window.cacheParser;
+```
+
+### Url Import
+
+```ts
+import { parse, tokenize } from 'https://cdn.skypack.dev/cache-parser@latest';
 ```
 
 <br />
 
 ## Getting Started
 
-This library consists of two important functions: [`parse`](src/parse.ts) and
-[`tokenize`](src/tokenize.ts).
+This package is a parser and builder for all Cache-Control directives. You can parse a
+string with [`parse()`](./src/parse.ts) and build a http ready header with
+[`tokenize()`](./src/tokenize.ts).
 
-This is a pretty straightforward library, so, every documentation needed by every piece of
-code is in form of `TSDoc` and `JSDoc` comments.
+All needed documentation is available in form of `TSDoc` comments.
 
-### Some examples
+### Usage
 
-Simple header parsing:
-
-```js
-import { parse } from 'cache-parser';
+```ts
+import { parse, CacheControl } from 'cache-parser';
 
 const rawHeader = 'public, max-age=3600';
 
-const { public, maxAge, immutable } = parse(rawHeader);
+const {
+  public, // true
+  maxAge, // 3600
+  immutable // undefined
+} = parse(rawHeader);
 
-console.log(public); // true
-console.log(maxAge); // 3600
-console.log(typeof maxAge); // number
-console.log(immutable); // undefined
-```
-
-Simple header building:
-
-```ts
-import { tokenize } from 'cache-parser';
-
-/** @type {import('cache-parser').CacheControl} */
-const cacheProperties = { public: true, maxAge: 3600 };
+const cacheProperties: CacheControl = { public: true, maxAge: 3600 };
 
 // ['public', 'max-age=3600']
 const cacheTokens = tokenize(cacheProperties);
 
 // 'public, max-age=3600'
-response.headers['Cache-Control'] = tokens.join(', ');
+const httpHeader = tokens.join(', ');
 ```
 
 <br />
 
 ## License
 
-Licensed under the **MIT**.
+Licensed under the **MIT**. See [`LICENSE`](LICENSE) for more informations.
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Farthurfiorette%2Ftinylibs.svg?type=small)](https://app.fossa.com/projects/git%2Bgithub.com%2Farthurfiorette%2Ftinylibs?ref=badge_small)
 
 <br />

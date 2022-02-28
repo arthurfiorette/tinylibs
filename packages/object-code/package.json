@@ -29,8 +29,8 @@
     "version": "npm run changelog && git add CHANGELOG.md"
   },
   "devDependencies": {
-    "microbundle": "0.14.2",
-    "auto-changelog": "2.4.0"
+    "auto-changelog": "2.4.0",
+    "microbundle": "0.14.2"
   },
   "files": [
     "dist",
@@ -38,5 +38,8 @@
     "CHANGELOG.md",
     "LICENSE",
     "README.md"
-  ]
+  ],
+  "dependencies": {
+    "benny": "^3.7.1"
+  }
 }

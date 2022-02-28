@@ -1,70 +1,45 @@
 <br />
 
+[![Issues](https://img.shields.io/github/issues/arthurfiorette/tinylibs?logo=github&label=Issues)](https://github.com/arthurfiorette/tinylibs/issues)
+[![Stars](https://img.shields.io/github/stars/arthurfiorette/tinylibs?logo=github&label=Stars)](https://github.com/arthurfiorette/tinylibs/stargazers)
+[![License](https://img.shields.io/github/license/arthurfiorette/tinylibs?logo=githu&label=License)](https://github.com/arthurfiorette/tinylibs/blob/main/LICENSE)
+[![Codecov](https://codecov.io/gh/arthurfiorette/tinylibs/branch/main/graph/badge.svg?token=ML0KGCU0VM)](https://codecov.io/gh/arthurfiorette/tinylibs)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Farthurfiorette%2Ftinylibs.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Farthurfiorette%2Ftinylibs?ref=badge_shield)
+[![Join the chat at https://gitter.im/tinylibs-js-org/community](https://badges.gitter.im/tinylibs-js-org/community.svg)](https://gitter.im/tinylibs-js-org/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Speed Blazing](https://img.shields.io/badge/speed-blazing%20%F0%9F%94%A5-brightgreen.svg)](https://twitter.com/acdlite/status/974390255393505280)
+
+[![Latest Version](https://img.shields.io/npm/v/cache-parser)](https://www.jsdelivr.com/package/npm/cache-parser)
+[![Downloads](https://img.shields.io/npm/dw/object-code)](https://www.npmjs.com/package/object-code)
+[![JsDelivr](https://data.jsdelivr.com/v1/package/npm/cache-parser/badge?style=rounded)](https://www.jsdelivr.com/package/npm/cache-parser)
+[![Bundlephobia](https://img.shields.io/bundlephobia/minzip/object-code/latest?style=flat)](https://bundlephobia.com/package/object-code@latest)
+[![Packagephobia](https://packagephobia.com/badge?p=object-code@latest)](https://packagephobia.com/result?p=object-code@latest)
+
+<br />
+
 <div align="center">
   <pre>
-  <br />
-  <h1>⛓️
-Object Code</h1>
-  <br />
+  <h1>⛓️<br />Object Code</h1>
   </pre>
   <br />
-  <br />
-  <code
-    ><a href="https://github.com/ArthurFiorette/object-code/stargazers"
-      ><img
-        src="https://img.shields.io/github/stars/ArthurFiorette/object-code?logo=github&label=Stars"
-        target="_blank"
-        alt="Stars" /></a
-  ></code>
-  <code
-    ><a href="https://github.com/ArthurFiorette/object-code/blob/main/LICENSE"
-      ><img
-        src="https://img.shields.io/github/license/ArthurFiorette/object-code?logo=githu&label=License"
-        target="_blank"
-        alt="License" /></a
-  ></code>
-  <code
-    ><a href="https://bundlephobia.com/package/object-code"
-      ><img
-        src="https://img.shields.io/bundlephobia/min/object-code?style=flat"
-        target="_blank"
-        alt="Size" /></a
-  ></code>
-  <code
-    ><a href="https://www.npmjs.com/package/object-code"
-      ><img
-        src="https://img.shields.io/npm/dw/object-code?style=flat"
-        target="_blank"
-        alt="Downloads NPM" /></a
-  ></code>
-  <code
-    ><a href="https://app.codecov.io/gh/arthurfiorette/object-code/"
-      ><img
-        src="https://codecov.io/gh/arthurfiorette/object-code/branch/main/graph/badge.svg?token=pdslRMQDtC"
-        target="_blank"
-        alt="Coverage" /></a
-  ></code>
 </div>
 
-<h1></h1>
+<h3 align="center">
+  <code>Object Code</code> is a blazing fast hash code generator that supports every possible javascript value.
+  <br />
+  <br />
+</h3>
 
 <br />
-<br />
 
-### `object-code` is a blazing fast hash code generator that supports every possible javascript value.
+## Table of Contents
 
-<br />
-<br />
-
-## Table of contents
-
-- [Table of contents](#table-of-contents)
+- [Table of Contents](#table-of-contents)
 - [Installing](#installing)
   - [Node](#node)
   - [Browser](#browser)
+  - [Url Import](#url-import)
 - [Getting Started](#getting-started)
-- [Types compatibility](#types-compatibility)
-- [Version compatibility](#version-compatibility)
+- [Compatibility](#compatibility)
 - [Benchmark](#benchmark)
 - [License](#license)
 
@@ -72,7 +47,7 @@ Object Code</h1>
 
 ## Installing
 
-#### Node
+### Node
 
 ```sh
 npm install --save object-code
@@ -81,42 +56,41 @@ yarn add object-code
 ```
 
 ```js
-const { hashCode } = require('object-code');
-// or
-import { hashCode } from 'object-code';
+const { hash } = require('object-code');
+import { hash } from 'object-code';
 ```
 
-#### Browser
-
-![Npm](https://img.shields.io/npm/v/object-code?style=flat)
+### Browser
 
 ```html
-<!-- Replace latest with the desired version -->
-
 <script
   crossorigin
-  src="https://cdn.jsdelivr.net/npm/object-code@latest/index.min.js"
+  src="https://cdn.jsdelivr.net/npm/object-code@latest/dist/index.js"
 ></script>
-<!-- or -->
-<script crossorigin src="https://unpkg.com/object-code@latest/index.min.js"></script>
 ```
 
 ```js
-const { hashCode } = window.objectCode;
+const { hash } = window.objectCode;
+```
+
+### Url Import
+
+```ts
+import { hash } from 'https://cdn.skypack.dev/object-code@latest';
 ```
 
 <br />
 
 ## Getting Started
 
-Fast hash is an blazing fast object hash code generator. It generates unique hashes for
+Object code is a blazing fast hash code generator. It generates unique signed integers for
 objects, arrays, functions, symbols and etc.
 
-You can use it to index objects in a object/array/map/set, to compare objects or to just
-generate unique ids.
+You can ise it to index object in a collection, compare objects or just generate unique
+identifiers.
 
 ```js
-import { hashCode } from 'object-code';
+import { hash } from 'object-code';
 
 const myWeirdObject = {
   name: 'Arthur',
@@ -128,61 +102,59 @@ const myWeirdObject = {
     console.log('Hello!');
   },
   id: Symbol('arthur'),
-  birth: new Date(1990, 1, 1),
+  birth: new Date(2005, 02, 27),
   tags: ['person', 'male', 'programmer']
   // etc
 };
 
-const hash = hashCode(myWeirdObject);
+const hash = hash(myWeirdObject);
 // 1230491235
 ```
 
-## Types compatibility
+## Compatibility
 
 See all unique values at [`test/values.ts`](test/values.ts)
 
-## Version compatibility
+This package is always seeking for a faster implementation. This means that we don't
+guarantee that the hash will be the same for two different versions of this package. There
+will be an warning on the release notes if the hash generation changed.
 
-This library is always seeking an faster implementation, doesn't matter if the hash code
-will change.
+You shouldn't rely on cross version compatibility, and even if so, you can run some tests
+before pushing to production :)
 
-You shouldn't rely on cross version compatibility, and even if so, run some tests before
-upgrading.
-
-I'll make an note on hash generation changes.
+<br />
 
 ## Benchmark
 
-[Simple benchmark with `object-hash` and this package.](https://github.com/arthurfiorette/object-code/blob/dd43ebb82d01b30708050fb7e3e2f917ce20cce0/test/benchmark.js)
+This is the result of a [benchmark](./benchmark/benchmark.js) between `object-hash` and
+`object-code`:
 
-```sh
-# node dist/benchmark.js
+```txt
+  Object Code:
+    103 134 ops/s, ±2.64%     | 92.24% slower
 
-Number of generated hashes per second
-Total of 100000 runs
+  Object Hash:
+    22 961 ops/s, ±0.26%      | slowest, 98.27% slower
 
-Object tests:
+  Object Code (Jsonified Object):
+    268 170 ops/s, ±0.72%     | 79.82% slower
 
-0: object-code -> 35,984 runs/s
-1: object-hash -> 11,307 runs/s
+  Object Hash (Jsonified Object):
+    116 239 ops/s, ±0.37%     | 91.25% slower
 
+  Object Code (String):
+    1 328 742 ops/s, ±0.47%   | fastest
 
-Json tests:
-
-0: object-code -> 571,429 runs/s
-1: object-hash -> 218,341 runs/s
-
-
-Raw string tests:
-
-0: object-code -> 3,448,276 runs/s
-1: object-hash -> 251,192 runs/s
+  Object Hash (String):
+    233 048 ops/s, ±0.47%     | 82.46% slower
 ```
 
 <br />
 
 ## License
 
-Licensed under the **MIT**.
+Licensed under the **MIT**. See [`LICENSE`](LICENSE) for more informations.
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Farthurfiorette%2Ftinylibs.svg?type=small)](https://app.fossa.com/projects/git%2Bgithub.com%2Farthurfiorette%2Ftinylibs?ref=badge_small)
 
 <br />

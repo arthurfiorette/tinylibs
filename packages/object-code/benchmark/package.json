@@ -1,0 +1,17 @@
+{
+  "name": "object-code-benchmark",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "prestart": "cd ../ && yarn build",
+    "start": "node benchmark.js"
+  },
+  "dependencies": {
+    "object-hash": "3.0.0"
+  },
+  "devDependencies": {
+    "@types/object-hash": "^2.2.1"
+  }
+}
