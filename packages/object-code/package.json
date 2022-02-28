@@ -24,22 +24,15 @@
   },
   "scripts": {
     "build": "microbundle --tsconfig tsconfig.build.json",
-    "changelog": "auto-changelog -p -c ../../changelog.json",
-    "test": "jest --coverage",
-    "version": "npm run changelog && git add CHANGELOG.md"
+    "test": "jest --coverage"
   },
   "devDependencies": {
-    "auto-changelog": "2.4.0",
     "microbundle": "0.14.2"
   },
   "files": [
     "dist",
     "src",
-    "CHANGELOG.md",
     "LICENSE",
     "README.md"
-  ],
-  "dependencies": {
-    "benny": "^3.7.1"
-  }
+  ]
 }

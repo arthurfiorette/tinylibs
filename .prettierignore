@@ -2,7 +2,6 @@
 /tsconfig.json
 
 # Generated files
-CHANGELOG.md
 dist
 coverage
 

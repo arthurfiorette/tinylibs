@@ -6,10 +6,6 @@
     "build": {
       "outputs": ["**/dist"]
     },
-    "changelog": {
-      "outputs": ["**/CHANGELOG.md"],
-      "cache": false
-    },
     "test": {
       "outputs": ["**/coverage"]
     }

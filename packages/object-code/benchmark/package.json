@@ -9,9 +9,8 @@
     "start": "node benchmark.js"
   },
   "dependencies": {
+    "@types/object-hash": "^2.2.1",
+    "benny": "^3.7.1",
     "object-hash": "3.0.0"
-  },
-  "devDependencies": {
-    "@types/object-hash": "^2.2.1"
   }
 }
