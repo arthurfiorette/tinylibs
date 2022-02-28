@@ -39,7 +39,7 @@ export function serialize<T>(value?: T): string {
  * @param serialized The value to be hashed
  * @returns The hashed number value
  *
- *  Inspired from [string-hash](https://www.npmjs.com/package/string-hash) package
+ *   Inspired from [string-hash](https://www.npmjs.com/package/string-hash) package
  */
 export function hashCode(val?: unknown): number {
   val = serialize(val);

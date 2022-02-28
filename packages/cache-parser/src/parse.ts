@@ -7,13 +7,10 @@ const number = Number;
 /**
  * Parses the Cache-Control header.
  *
- * You can check if a object was returned by this function with {@link isCacheControl}
-.
+ * You can check if a object was returned by this function with {@link isCacheControl} .
  *
- * @param {string}
- header The header to parse
- * @returns {CacheControl}
- The parsed cache control header
+ * @param {string} Header The header to parse
+ * @returns {CacheControl} The parsed cache control header
  */
 export function parse(headerStr?: string): CacheControl {
   const header: CacheControl = Object.defineProperty({}, cacheControlSymbol, {

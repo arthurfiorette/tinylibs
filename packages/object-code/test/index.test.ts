@@ -1,5 +1,5 @@
-import { values } from './values';
 import { hashCode, serialize } from '../src';
+import { values } from './values';
 
 describe('tests hashcode', () => {
   it('supports all values', () => {
