@@ -65,7 +65,7 @@ import { hash } from 'object-code';
 ```html
 <script
   crossorigin
-  src="https://cdn.jsdelivr.net/npm/object-code@latest/dist/index.js"
+  src="https://cdn.jsdelivr.net/npm/object-code@latest/dist/index.umd.js"
 ></script>
 ```
 

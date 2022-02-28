@@ -64,7 +64,7 @@ import { parse, tokenize } from 'cache-parser';
 ```html
 <script
   crossorigin
-  src="https://cdn.jsdelivr.net/npm/cache-parser@latest/dist/index.js"
+  src="https://cdn.jsdelivr.net/npm/cache-parser@latest/dist/index.umd.js"
 ></script>
 ```
 

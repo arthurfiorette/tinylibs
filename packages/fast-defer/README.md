@@ -64,7 +64,7 @@ import { deferred } from 'fast-defer';
 ```html
 <script
   crossorigin
-  src="https://cdn.jsdelivr.net/npm/fast-defer@latest/dist/index.js"
+  src="https://cdn.jsdelivr.net/npm/fast-defer@latest/dist/index.umd.js"
 ></script>
 ```
 
