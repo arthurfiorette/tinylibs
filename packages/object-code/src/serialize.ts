@@ -9,7 +9,7 @@
 export function serialize<T>(value?: T): string {
   const type = typeof value;
 
-  if (value && type == 'object' && !(value instanceof Date && value instanceof RegExp)) {
+  if (value && type == 'object' && !(value instanceof Date || value instanceof RegExp)) {
     const copy = (Array.isArray(value) ? [] : {}) as Record<keyof T, string>;
 
     for (const key in value) {
