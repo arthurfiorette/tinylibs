@@ -8,9 +8,9 @@
 [![Join the chat at https://gitter.im/tinylibs-js-org/community](https://badges.gitter.im/tinylibs-js-org/community.svg)](https://gitter.im/tinylibs-js-org/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Speed Blazing](https://img.shields.io/badge/speed-blazing%20%F0%9F%94%A5-brightgreen.svg)](https://twitter.com/acdlite/status/974390255393505280)
 
-[![Latest Version](https://img.shields.io/npm/v/cache-parser)](https://www.jsdelivr.com/package/npm/cache-parser)
+[![Latest Version](https://img.shields.io/npm/v/object-code)](https://www.npmjs.com/package/object-code)
 [![Downloads](https://img.shields.io/npm/dw/object-code)](https://www.npmjs.com/package/object-code)
-[![JsDelivr](https://data.jsdelivr.com/v1/package/npm/cache-parser/badge?style=rounded)](https://www.jsdelivr.com/package/npm/cache-parser)
+[![JsDelivr](https://data.jsdelivr.com/v1/package/npm/object-code/badge?style=rounded)](https://www.jsdelivr.com/package/npm/object-code)
 [![Bundlephobia](https://img.shields.io/bundlephobia/minzip/object-code/latest?style=flat)](https://bundlephobia.com/package/object-code@latest)
 [![Packagephobia](https://packagephobia.com/badge?p=object-code@latest)](https://packagephobia.com/result?p=object-code@latest)
 

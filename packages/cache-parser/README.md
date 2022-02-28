@@ -8,7 +8,7 @@
 [![Join the chat at https://gitter.im/tinylibs-js-org/community](https://badges.gitter.im/tinylibs-js-org/community.svg)](https://gitter.im/tinylibs-js-org/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Speed Blazing](https://img.shields.io/badge/speed-blazing%20%F0%9F%94%A5-brightgreen.svg)](https://twitter.com/acdlite/status/974390255393505280)
 
-[![Latest Version](https://img.shields.io/npm/v/cache-parser)](https://www.jsdelivr.com/package/npm/cache-parser)
+[![Latest Version](https://img.shields.io/npm/v/cache-parser)](https://www.npmjs.com/package/cache-parser)
 [![Downloads](https://img.shields.io/npm/dw/cache-parser)](https://www.npmjs.com/package/cache-parser)
 [![JsDelivr](https://data.jsdelivr.com/v1/package/npm/cache-parser/badge?style=rounded)](https://www.jsdelivr.com/package/npm/cache-parser)
 [![Bundlephobia](https://img.shields.io/bundlephobia/minzip/cache-parser/latest?style=flat)](https://bundlephobia.com/package/cache-parser@latest)

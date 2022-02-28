@@ -16,7 +16,7 @@
   "author": "Arthur Fiorette <npm@arthur.place>",
   "license": "MIT",
   "bugs": "https://github.com/arthurfiorette/tinylibs/issues",
-  "homepage": "https://tinylibs.js.org/#/object-code",
+  "homepage": "https://tinylibs.js.org/packages/object-code",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/arthurfiorette/tinylibs.git",
