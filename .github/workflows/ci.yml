@@ -1,0 +1,38 @@
+name: Javascript Continuous Integration
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    name: Build and test code
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup node and restore cached dependencies
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'yarn'
+
+      - name: Install packages
+        run: yarn install --prefer-offline
+
+      - name: Lint
+        run: yarn lint
+
+      - name: Test
+        run: yarn test:ci
+
+      - name: Build
+        run: yarn build
+
+      - name: Publish to Codecov
+        uses: codecov/codecov-action@v2.1.0
+        with:
+          fail_ci_if_error: true
+          token: ${{ secrets.CODECOV_TOKEN }}
