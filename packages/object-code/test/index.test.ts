@@ -1,12 +1,12 @@
-import { hashCode, serialize } from '../src';
+import { hash, serialize } from '../src';
 import { values } from './values';
 
-describe('tests hashcode', () => {
+describe('tests', () => {
   it('supports all values', () => {
     const set = new Set();
 
     for (const value of values) {
-      set.add(hashCode(value));
+      set.add(hash(value));
     }
 
     expect(set.size).toBe(values.length);
@@ -14,7 +14,7 @@ describe('tests hashcode', () => {
 
   it('tests if the return type are numbers', () => {
     for (const val of values) {
-      expect(typeof hashCode(val)).toBe('number');
+      expect(typeof hash(val)).toBe('number');
     }
 
     expect.assertions(values.length);
@@ -30,7 +30,9 @@ describe('tests hashcode', () => {
 
   it('expects the same return for the same call', () => {
     for (const val of values) {
-      expect(hashCode(val)).toBe(hashCode(val));
+      expect(hash(val)).toBe(hash(val));
     }
+
+    expect.assertions(values.length);
   });
 });
