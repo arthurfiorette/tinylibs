@@ -1,4 +1,4 @@
-name: Javascript Continuous Integration
+name: Code CI
 
 on:
   push:
