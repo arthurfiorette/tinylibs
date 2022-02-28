@@ -50,9 +50,7 @@
 ### Node
 
 ```sh
-npm install --save object-code
-# or
-yarn add object-code
+npm install object-code # or yarn add object-code
 ```
 
 ```js

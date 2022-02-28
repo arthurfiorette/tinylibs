@@ -18,7 +18,7 @@
 
 <div align="center">
   <pre>
-  <h1>run🏃<br />Cache Parser</h1>
+  <h1>⌛<br />Cache Parser</h1>
   </pre>
   <br />
 </div>
@@ -49,9 +49,7 @@
 ### Node
 
 ```sh
-npm install --save cache-parser
-# or
-yarn add cache-parser
+npm install cache-parser # or yarn add cache-parser
 ```
 
 ```js

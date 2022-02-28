@@ -49,9 +49,7 @@
 ### Node
 
 ```sh
-npm install --save fast-defer
-# or
-yarn add fast-defer
+npm install fast-defer # or yarn add fast-defer
 ```
 
 ```js
