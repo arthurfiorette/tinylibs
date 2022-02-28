@@ -18,7 +18,7 @@
 </div>
 
 <h3 align="center">
-  <code>TinyLibs</code> is a monorepo of several javascript packages.
+  <code>Tiny Libs</code> is a monorepo of several javascript related packages.
   <br />
   <br />
 </h3>
