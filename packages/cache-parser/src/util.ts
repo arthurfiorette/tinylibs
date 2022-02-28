@@ -11,19 +11,20 @@ export function isDuration(val: unknown): boolean {
 
 export function isTruthy(val: unknown): boolean {
   return (
-    typeof val === 'number' ||
     val === true ||
+    typeof val === 'number' ||
     (typeof val === 'string' && val !== 'false')
   );
 }
 
-export function parseHeadersString(headerStr: string): Record<string, string | true> {
-  const tokens = headerStr.toLowerCase().replace(/\s+/g, '').split(',');
+export function parseRawHeaders(headerStr: string): Record<string, string | true> {
   const headers: Record<string, string | true> = {};
 
+  const tokens = headerStr.toLowerCase().replace(/\s+/g, '').split(',');
+
   for (const key in tokens) {
-    const token = tokens[key]!.split('=', 2) as [string] | [string, string];
-    headers[token[0]] = token.length === 1 ? true : token[1];
+    const token = tokens[key]!.split('=', 2);
+    headers[token[0]!] = token[1] ?? true;
   }
 
   return headers;

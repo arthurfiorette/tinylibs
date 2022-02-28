@@ -32,26 +32,69 @@ export function tokenize(header?: CacheControl): string[] {
 
   const tokens: string[] = [];
 
-  isTruthy(header.immutable) && tokens.push('immutable');
+  if (isTruthy(header.immutable)) {
+    tokens.push('immutable');
+  }
 
-  isDuration(header.maxAge) && tokens.push(`max-age=${header.maxAge}`);
-  isDuration(header.maxStale) && tokens.push(`max-stale=${header.maxStale}`);
-  isDuration(header.minFresh) && tokens.push(`min-fresh=${header.minFresh}`);
+  if (isDuration(header.maxAge)) {
+    tokens.push(`max-age=${header.maxAge}`);
+  }
 
-  isTruthy(header.mustRevalidate) && tokens.push('must-revalidate');
-  isTruthy(header.mustUnderstand) && tokens.push('must-understand');
-  isTruthy(header.noCache) && tokens.push('no-cache');
-  isTruthy(header.noStore) && tokens.push('no-store');
-  isTruthy(header.noTransform) && tokens.push('no-transform');
-  isTruthy(header.onlyIfCached) && tokens.push('only-if-cached');
-  isTruthy(header.private) && tokens.push('private');
-  isTruthy(header.proxyRevalidate) && tokens.push('proxy-revalidate');
-  isTruthy(header.public) && tokens.push('public');
+  if (isDuration(header.maxStale)) {
+    tokens.push(`max-stale=${header.maxStale}`);
+  }
 
-  isDuration(header.sMaxAge) && tokens.push(`s-maxage=${header.sMaxAge}`);
-  isDuration(header.staleIfError) && tokens.push(`stale-if-error=${header.staleIfError}`);
-  isDuration(header.staleWhileRevalidate) &&
+  if (isDuration(header.minFresh)) {
+    tokens.push(`min-fresh=${header.minFresh}`);
+  }
+
+  if (isTruthy(header.mustRevalidate)) {
+    tokens.push('must-revalidate');
+  }
+
+  if (isTruthy(header.mustUnderstand)) {
+    tokens.push('must-understand');
+  }
+
+  if (isTruthy(header.noCache)) {
+    tokens.push('no-cache');
+  }
+
+  if (isTruthy(header.noStore)) {
+    tokens.push('no-store');
+  }
+
+  if (isTruthy(header.noTransform)) {
+    tokens.push('no-transform');
+  }
+
+  if (isTruthy(header.onlyIfCached)) {
+    tokens.push('only-if-cached');
+  }
+
+  if (isTruthy(header.private)) {
+    tokens.push('private');
+  }
+
+  if (isTruthy(header.proxyRevalidate)) {
+    tokens.push('proxy-revalidate');
+  }
+
+  if (isTruthy(header.public)) {
+    tokens.push('public');
+  }
+
+  if (isDuration(header.sMaxAge)) {
+    tokens.push(`s-maxage=${header.sMaxAge}`);
+  }
+
+  if (isDuration(header.staleIfError)) {
+    tokens.push(`stale-if-error=${header.staleIfError}`);
+  }
+
+  if (isDuration(header.staleWhileRevalidate)) {
     tokens.push(`stale-while-revalidate=${header.staleWhileRevalidate}`);
+  }
 
   return tokens;
 }
