@@ -59,8 +59,8 @@ Fast Defer</h1>
 
 - [Table of contents](#table-of-contents)
 - [Installing](#installing)
-    - [Node](#node)
-    - [Browser](#browser)
+  - [Node](#node)
+  - [Browser](#browser)
 - [Browser Compatibility](#browser-compatibility)
 - [Getting Started](#getting-started)
 - [License](#license)

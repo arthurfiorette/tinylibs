@@ -15,9 +15,13 @@
   "sideEffects": false,
   "author": "Arthur Fiorette <npm@arthur.place>",
   "license": "MIT",
-  "repository": "git+https://github.com/arthurfiorette/tinylibs.git",
   "bugs": "https://github.com/arthurfiorette/tinylibs/issues",
   "homepage": "https://tinylibs.js.org/#/object-code",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arthurfiorette/tinylibs.git",
+    "directory": "packages/object-code"
+  },
   "scripts": {
     "build": "microbundle --tsconfig tsconfig.build.json",
     "changelog": "auto-changelog -p -c ../../changelog.json",

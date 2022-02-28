@@ -17,6 +17,7 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "test": "turbo run test",
+    "test:ci": "turbo run test -- --ci",
     "build": "turbo run build",
     "changelog": "turbo run changelog"
   },
