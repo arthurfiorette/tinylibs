@@ -1,7 +1,7 @@
 {
   "name": "cache-parser",
   "description": "A minimal Cache-Control parser.",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "source": "src/index.ts",
   "main": "dist/index.js",
   "umd:main": "dist/index.umd.js",
@@ -29,8 +29,8 @@
     "version": "npm run changelog && git add CHANGELOG.md"
   },
   "devDependencies": {
-    "microbundle": "0.14.2",
-    "auto-changelog": "2.4.0"
+    "auto-changelog": "2.4.0",
+    "microbundle": "0.14.2"
   },
   "files": [
     "dist",
