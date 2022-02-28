@@ -23,7 +23,7 @@
     "changelog": "auto-changelog -p -c ../../changelog.json",
     "test": "jest --coverage"
   },
-  "dependencies": {
+  "devDependencies": {
     "microbundle": "^0.14.2",
     "auto-changelog": "^2.4.0"
   }
