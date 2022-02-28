@@ -28,7 +28,7 @@
     "test": "jest --coverage"
   },
   "devDependencies": {
-    "microbundle": "^0.14.2",
-    "auto-changelog": "^2.4.0"
+    "microbundle": "0.14.2",
+    "auto-changelog": "2.4.0"
   }
 }
