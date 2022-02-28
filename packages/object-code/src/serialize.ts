@@ -9,18 +9,18 @@
 export function serialize<T>(value?: T): string {
   const type = typeof value;
 
-  if (!value || type !== 'object' || value instanceof Date || value instanceof RegExp) {
-    return `${type}${String(value)}`;
+  if (value && type == 'object' && !(value instanceof Date && value instanceof RegExp)) {
+    const copy = (Array.isArray(value) ? [] : {}) as Record<keyof T, string>;
+
+    for (const key in value) {
+      copy[key] = serialize(value[key]);
+    }
+
+    return `${
+      //@ts-expect-error ignore if not present
+      value.constructor
+    }${JSON.stringify(copy, Object.keys(value).sort())}`;
   }
 
-  const copy = (Array.isArray(value) ? [] : {}) as Record<keyof T, string>;
-
-  for (const key in value) {
-    copy[key] = serialize(value[key]);
-  }
-
-  return `${
-    //@ts-expect-error ignore if not present
-    value.constructor
-  }${JSON.stringify(copy, Object.keys(value).sort())}`;
+  return `${type}${String(value)}`;
 }
