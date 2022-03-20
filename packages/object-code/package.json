@@ -7,13 +7,6 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "module": "dist/index.mjs",
-  "exports": {
-    "./*": "./*",
-    ".": {
-      "import": "./dist/index.modern.js",
-      "require": "./dist/index.js"
-    }
-  },
   "umd:main": "dist/index.umd.js",
   "unpkg": "dist/index.umd.js",
   "author": "Arthur Fiorette <npm@arthur.place>",
