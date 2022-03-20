@@ -1,7 +1,7 @@
 {
   "name": "cache-parser",
   "description": "A minimal parser for the Cache-Control header.",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "source": "src/index.ts",
   "sideEffects": false,
   "main": "dist/index.js",
