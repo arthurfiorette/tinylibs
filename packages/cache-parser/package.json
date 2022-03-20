@@ -3,16 +3,19 @@
   "description": "A minimal parser for the Cache-Control header.",
   "version": "1.2.2",
   "source": "src/index.ts",
+  "sideEffects": false,
   "main": "dist/index.js",
-  "umd:main": "dist/index.umd.js",
-  "unpkg": "dist/index.umd.js",
+  "types": "dist/index.d.ts",
   "module": "dist/index.mjs",
   "exports": {
-    "require": "./dist/index.js",
-    "default": "./dist/index.modern.js"
+    "./*": "./*",
+    ".": {
+      "import": "./dist/index.modern.js",
+      "require": "./dist/index.js"
+    }
   },
-  "types": "dist/index.d.ts",
-  "sideEffects": false,
+  "umd:main": "dist/index.umd.js",
+  "unpkg": "dist/index.umd.js",
   "author": "Arthur Fiorette <npm@arthur.place>",
   "license": "MIT",
   "bugs": "https://github.com/arthurfiorette/tinylibs/issues",
