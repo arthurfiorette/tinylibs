@@ -30,7 +30,7 @@
     "eslint-plugin-prettier": "4.0.0",
     "jest": "27.5.1",
     "prettier": "2.6.2",
-    "prettier-plugin-jsdoc": "0.3.36",
+    "prettier-plugin-jsdoc": "0.3.38",
     "prettier-plugin-organize-imports": "2.3.4",
     "ts-jest": "27.1.4",
     "tslib": "2.3.1",
