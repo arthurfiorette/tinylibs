@@ -33,6 +33,8 @@
 
 - [Cache Parser](packages/cache-parser)
 
+- [Axios Cache Hooks](packages/axios-cache-hooks)
+
 <br />
 
 ## License

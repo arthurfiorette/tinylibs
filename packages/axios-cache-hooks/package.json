@@ -1,0 +1,45 @@
+{
+  "name": "axios-cache-hooks",
+  "description": "The faster, simple and efficient way to use Axios inside React applications",
+  "version": "1.0.0",
+  "source": "src/index.ts",
+  "sideEffects": false,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "module": "dist/index.mjs",
+  "umd:main": "dist/index.umd.js",
+  "unpkg": "dist/index.umd.js",
+  "author": "Arthur Fiorette <npm@arthur.place>",
+  "license": "MIT",
+  "bugs": "https://github.com/arthurfiorette/tinylibs/issues",
+  "homepage": "https://tinylibs.js.org/packages/axios-cache-hooks",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arthurfiorette/tinylibs.git",
+    "directory": "packages/axios-cache-hooks"
+  },
+  "scripts": {
+    "build": "microbundle --tsconfig tsconfig.build.json",
+    "test": "jest --coverage"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "axios-cache-interceptor": "^0.10.2",
+    "object-code": "^1.2.2",
+    "react": "^18.1.0"
+  },
+  "devDependencies": {
+    "@testing-library/react-hooks": "^8.0.0",
+    "@types/express": "^4.17.13",
+    "@types/react": "^18.0.8",
+    "express": "^4.18.1",
+    "microbundle": "0.14.2",
+    "react-test-renderer": "^18.1.0"
+  },
+  "files": [
+    "dist",
+    "src",
+    "LICENSE",
+    "README.md"
+  ]
+}

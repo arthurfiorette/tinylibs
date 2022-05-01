@@ -6,7 +6,8 @@ module.exports = {
   globals: {
     'ts-jest': {
       tsconfig: './tsconfig.build.json',
-      useESM: true
+      useESM: true,
+      isolatedModules: true
     }
   }
 };
