@@ -23,7 +23,7 @@
     "test": "jest --coverage"
   },
   "devDependencies": {
-    "microbundle": "0.14.2"
+    "microbundle": "0.15.0"
   },
   "files": [
     "dist",
