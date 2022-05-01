@@ -1,4 +1,4 @@
-/**@jest-environment node */
+/** @jest-environment node */
 
 import Axios from 'axios';
 import { CacheRequestConfig, setupCache } from 'axios-cache-interceptor';
