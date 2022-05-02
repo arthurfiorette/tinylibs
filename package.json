@@ -10,7 +10,7 @@
   "packageManager": "yarn@1.22.18",
   "workspaces": {
     "packages": [
-      "packages/*"
+      "packages/**"
     ]
   },
   "scripts": {
@@ -22,13 +22,13 @@
   },
   "devDependencies": {
     "@arthurfiorette/prettier-config": "*",
-    "@types/jest": "27.4.1",
+    "@types/jest": "27.5.0",
     "@typescript-eslint/eslint-plugin": "5.22.0",
     "@typescript-eslint/parser": "5.22.0",
     "eslint": "8.14.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-prettier": "4.0.0",
-    "jest": "27.5.1",
+    "jest": "28.0.3",
     "prettier": "2.6.2",
     "prettier-plugin-jsdoc": "0.3.38",
     "prettier-plugin-organize-imports": "2.3.4",
