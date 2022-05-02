@@ -1,7 +1,11 @@
 /** @jest-environment node */
 
 import Axios from 'axios';
-import { CacheRequestConfig, setupCache } from 'axios-cache-interceptor';
+import {
+  buildMemoryStorage,
+  CacheRequestConfig,
+  setupCache
+} from 'axios-cache-interceptor';
 import { createAxiosCacheHooks } from '../src';
 
 export const axios = setupCache(
@@ -19,6 +23,8 @@ export function simpleMutation(name: string, extra?: CacheRequestConfig) {
   return axios.get<string>(`http://localhost:39874/${name}`, extra);
 }
 
-export const { useQuery, useMutation } = createAxiosCacheHooks(
-  (args) => (args.push({}), args.length - 1)
-);
+afterEach(() => {
+  axios.storage = buildMemoryStorage();
+});
+
+export const { useQuery, useMutation } = createAxiosCacheHooks((func) => func.length - 1);

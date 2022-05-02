@@ -22,18 +22,11 @@ export function createAxiosCacheHooks(
       const source = new AbortController();
       useEffect(() => () => source.abort(), []);
 
-      applyAbortController(configParameterIndex, args, source);
+      applyAbortController(apiCall, configParameterIndex, args, source);
       // eslint-disable-next-line @typescript-eslint/no-floating-promises
       executeApiCall(apiCall, args, setState, state);
 
-      return [
-        state.data,
-        state as DataLessState<D>,
-        (...args: A) => {
-          applyAbortController(configParameterIndex, args, source);
-          return executeApiCall(apiCall, args, setState, state);
-        }
-      ];
+      return [state.data, state as DataLessState<D>];
     },
 
     useMutation<D, A extends unknown[]>(apiCall: ApiCall<D, A>) {
@@ -47,7 +40,7 @@ export function createAxiosCacheHooks(
       return [
         state,
         (...args: A) => {
-          applyAbortController(configParameterIndex, args, source);
+          applyAbortController(apiCall, configParameterIndex, args, source);
           return executeApiCall(apiCall, args, setState, state);
         }
       ];

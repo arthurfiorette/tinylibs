@@ -32,7 +32,7 @@ export type State<T> =
       loading: false;
       data?: undefined;
       error: unknown;
-      response?: CacheAxiosResponse<unknown>;
+      response?: CacheAxiosResponse<Error>;
 
       /**
        * Last response data unique id.
@@ -44,7 +44,9 @@ export type State<T> =
 
 export type ApiCall<D, A extends any[]> = (...args: A) => Promise<CacheAxiosResponse<D>>;
 
-export type ConfigIndexFinder = number | ((args: unknown[]) => number);
+// eslint-disable-next-line @typescript-eslint/ban-types
+export type ConfigIndexFinder = (fn: Function, ...args: any[]) => number;
+
 export type DataLessState<D> = Omit<State<D>, 'data' | 'achId'>;
 
 export type AxiosCacheHooks = {
@@ -52,10 +54,10 @@ export type AxiosCacheHooks = {
     this: void,
     apiCall: ApiCall<D, A>,
     ...args: A
-  ): [D | undefined, DataLessState<D>, (...args: A) => Promise<void>];
+  ): [data: D | undefined, info: DataLessState<D>];
 
   useMutation<D, A extends unknown[]>(
     this: void,
     apiCall: ApiCall<D, A>
-  ): [State<D>, (...args: A) => Promise<void>];
+  ): [state: State<D>, refetch: (...args: A) => Promise<void>];
 };

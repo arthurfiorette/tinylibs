@@ -9,6 +9,12 @@ app.get('/:name', (req, res) => {
   });
 });
 
+app.get('/delayed', (_, res) => {
+  setTimeout(() => {
+    res.json({ status: 200 });
+  }, 50);
+});
+
 app.post('/:name', (req, res) => {
   res.json({
     name: req.params.name,

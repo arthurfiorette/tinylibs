@@ -1,15 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import type { ConfigIndexFinder } from './types';
+import type { ApiCall, ConfigIndexFinder } from './types';
 
-export function applyAbortController(
+export function applyAbortController<D, A extends unknown[]>(
+  apiCall: ApiCall<D, A>,
   configParameterIndex: ConfigIndexFinder,
-  args: unknown[],
+  args: A,
   source: AbortController
 ) {
-  const confIndex =
-    typeof configParameterIndex === 'function'
-      ? configParameterIndex(args)
-      : configParameterIndex;
+  const confIndex = configParameterIndex(apiCall, ...args);
 
   args[confIndex] ??= {};
 

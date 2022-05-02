@@ -43,7 +43,9 @@ export function executeApiCall<Data, Args extends unknown[]>(
             return;
           }
 
-          const rid = hash(error);
+          // Common error properties to avoid hashing the same object
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+          const rid = hash({ a: error.message, b: error.code, c: error.name });
 
           if (rid !== state.rid) {
             setState({

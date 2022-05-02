@@ -87,10 +87,10 @@ import { createAxiosHooks } from 'axios-cache-hooks';
 
 export const axios = setupCache(Axios);
 
-export const { useQuery, useMutation } = createAxiosHooks({
+export const { useQuery, useMutation } = createAxiosHooks(
   // This means that the additional configuration will be ALWAYS in the last parameter.
-  configParameterIndex: (...params) => params.length - 1
-});
+  (func, args) => func.length - 1
+);
 ```
 
 ```ts
