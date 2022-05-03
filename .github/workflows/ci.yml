@@ -22,11 +22,12 @@ jobs:
       - name: Install packages
         run: yarn install --prefer-offline
 
-      - name: Lint
-        run: yarn lint
-
+      # Build first to avoid broken monorepo dependencies
       - name: Build
         run: yarn build
+        
+      - name: Lint
+        run: yarn lint
 
       - name: Test
         run: yarn test:ci
