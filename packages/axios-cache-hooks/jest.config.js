@@ -1,7 +1,7 @@
 module.exports = {
   ...require('../../jest.config'),
 
-  testEnvironment: 'jest-environment-jsdom',
+  testEnvironment: 'jsdom',
   globalSetup: './test/setup.ts',
   globalTeardown: './test/teardown.ts'
 };
