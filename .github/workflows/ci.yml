@@ -25,11 +25,11 @@ jobs:
       - name: Lint
         run: yarn lint
 
-      - name: Test
-        run: yarn test:ci
-
       - name: Build
         run: yarn build
+
+      - name: Test
+        run: yarn test:ci
 
       - name: Publish to Codecov
         uses: codecov/codecov-action@v3.1.0
