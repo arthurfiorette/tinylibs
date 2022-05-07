@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { applyAbortController } from './abort-controller';
 import { executeApiCall } from './api-call';
 import {
   AxiosCacheHooksOptions,
@@ -6,12 +7,11 @@ import {
   defaultHashGenerator
 } from './options';
 import type { ApiCall, AxiosCacheHooks, DataLessState, State } from './types';
-import { applyAbortController } from './update-config';
 
 export function createAxiosCacheHooks(
-  hookOptions: Partial<AxiosCacheHooksOptions>
+  hookOptions?: Partial<AxiosCacheHooksOptions>
 ): AxiosCacheHooks {
-  const options = hookOptions as AxiosCacheHooksOptions;
+  const options = (hookOptions || {}) as AxiosCacheHooksOptions;
   options.configIndexFinder ??= defaultConfigIndexFinder;
   options.hashGenerator ??= defaultHashGenerator;
 

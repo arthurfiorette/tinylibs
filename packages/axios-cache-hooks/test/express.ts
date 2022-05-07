@@ -2,24 +2,8 @@ import express from 'express';
 import type { Server } from 'http';
 export const app = express();
 
-app.get('/:name', (req, res) => {
-  res.json({
-    name: req.params.name,
-    ach: req.header('X-Ach-Id')
-  });
-});
-
-app.get('/delayed', (_, res) => {
-  setTimeout(() => {
-    res.json({ status: 200 });
-  }, 50);
-});
-
-app.post('/:name', (req, res) => {
-  res.json({
-    name: req.params.name,
-    ach: req.header('X-Ach-Id')
-  });
+app.use('/:name', (req, res) => {
+  res.json({ name: req.params.name });
 });
 
 let server!: Server;

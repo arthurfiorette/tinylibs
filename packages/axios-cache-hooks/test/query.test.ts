@@ -1,7 +1,8 @@
 import { act, renderHook } from '@testing-library/react-hooks';
+import type { CacheRequestConfig } from 'axios-cache-interceptor';
 import { simpleQuery, useQuery } from './api';
 
-describe('Runs simple query tests', () => {
+describe('Tests useQuery hook', () => {
   it('Tests normal usage', async () => {
     const { result, waitForNextUpdate } = renderHook(() => useQuery(simpleQuery, 'A'));
 
@@ -24,15 +25,6 @@ describe('Runs simple query tests', () => {
     const { result, waitForNextUpdate, rerender } = renderHook((a?: string) =>
       useQuery(simpleQuery, a || 'Default')
     );
-
-    {
-      const [data, { loading, error, response, rid }] = result.current;
-      expect(data).toBeUndefined();
-      expect(error).toBeUndefined();
-      expect(response).toBeUndefined();
-      expect(rid).toBeUndefined();
-      expect(loading).toBe(true);
-    }
 
     await act(async () => {
       await waitForNextUpdate();
@@ -78,6 +70,29 @@ describe('Runs simple query tests', () => {
         // Different Response
         expect(rid).not.toBe(firstRid);
       }
+    });
+  });
+
+  it('A force abort should not update', async () => {
+    const abort = new AbortController();
+
+    const { result, waitForNextUpdate } = renderHook(() =>
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      useQuery(async (name: string, _ignore?: CacheRequestConfig) => {
+        await new Promise((resolve) => setTimeout(resolve, 100));
+        return simpleQuery(name, { signal: abort.signal });
+      }, 'Default')
+    );
+
+    await act(async () => {
+      result.current;
+      abort.abort();
+      result.current;
+
+      // Aborting a request should never render a new update
+      await expect(waitForNextUpdate()).rejects.toThrow(
+        'Timed out in waitForNextUpdate after 1000ms.'
+      );
     });
   });
 });

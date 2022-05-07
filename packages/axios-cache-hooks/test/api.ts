@@ -20,11 +20,11 @@ export function simpleQuery(name: string, extra?: CacheRequestConfig) {
 }
 
 export function simpleMutation(name: string, extra?: CacheRequestConfig) {
-  return axios.get<string>(`http://localhost:39874/${name}`, extra);
+  return axios.post<string>(`http://localhost:39874/${name}`, extra);
 }
 
 afterEach(() => {
   axios.storage = buildMemoryStorage();
 });
 
-export const { useQuery, useMutation } = createAxiosCacheHooks((func) => func.length - 1);
+export const { useQuery, useMutation } = createAxiosCacheHooks();

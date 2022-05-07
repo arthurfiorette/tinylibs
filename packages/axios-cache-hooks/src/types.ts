@@ -5,56 +5,41 @@ import type { CacheAxiosResponse } from 'axios-cache-interceptor';
 export type State<T> = LoadingState | ErrorState | SuccessState<T>;
 
 export type LoadingState = {
-  /** The current request is loading */
+  /** If the current request is loading */
   loading: true;
-  /** The request is loading, no data is available yet */
+  /** The returned data for this request, if present */
   data?: undefined;
-  /** The request is loading, no error was thrown until so */
+  /** The error thrown by this http request, if any */
   error?: undefined;
-  /** You'll receive a response object once the request finishes */
+  /** The complete `CacheAxiosResponse` */
   response?: undefined;
-
-  /**
-   * Last response data unique id.
-   *
-   * @internal
-   */
+  /** Last response data unique id. @internal */
   rid?: number;
 };
 
 export type ErrorState = {
-  /** The request completed its execution */
+  /** If the current request is loading */
   loading: false;
-  /** You got an error, no data is available */
+  /** The returned data for this request, if present */
   data?: undefined;
-  /** The error thrown by this request */
+  /** The error thrown by this http request, if any */
   error: unknown;
-  /** The complete axios response to help you with debugging */
+  /** The complete `CacheAxiosResponse` */
   response?: CacheAxiosResponse;
-
-  /**
-   * Last response data unique id.
-   *
-   * @internal
-   */
+  /** Last response data unique id. @internal */
   rid: number;
 };
 
 export type SuccessState<D> = {
-  /** The request completed its execution */
+  /** If the request is loading */
   loading: false;
-  /** The data you got from this http request */
+  /** The returned data for this request, if present */
   data: D;
-  /** No error was thrown by this request */
+  /** The error thrown by this http request, if any */
   error?: undefined;
-  /** The complete axios response, if needed */
+  /** The complete `CacheAxiosResponse` */
   response: CacheAxiosResponse<D>;
-
-  /**
-   * Last response data unique id.
-   *
-   * @internal
-   */
+  /** Last response data unique id. @internal */
   rid: number;
 };
 
@@ -66,6 +51,12 @@ export type SuccessState<D> = {
 export type ApiCall<D, A extends unknown[]> = (
   ...args: A
 ) => Promise<CacheAxiosResponse<D>>;
+
+/**
+ * The current request state.
+ *
+ * The response data was provided as the in the first object of this tuple.
+ */
 export type DataLessState<D> = Omit<State<D>, 'data'>;
 
 export type AxiosCacheHooks = {
