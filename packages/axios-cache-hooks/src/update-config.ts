@@ -1,19 +1,20 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import type { ApiCall, ConfigIndexFinder } from './types';
+import type { AxiosCacheHooksOptions } from './options';
+import type { ApiCall } from './types';
 
 export function applyAbortController<D, A extends unknown[]>(
   apiCall: ApiCall<D, A>,
-  configParameterIndex: ConfigIndexFinder,
+  options: AxiosCacheHooksOptions,
   args: A,
-  source: AbortController
+  abort: AbortController
 ) {
-  const confIndex = configParameterIndex(apiCall, ...args);
+  const confIndex = options.configIndexFinder(apiCall, ...args);
 
   args[confIndex] ??= {};
 
   // Overriding the axios signal opens space
   // to cancel the request if the component
   // is unmounted before the request is resolved.
-  //@ts-expect-error ignore
-  args[confIndex].signal = source.signal;
+  //@ts-expect-error - Trust the found parameter index.
+  args[confIndex].signal = abort.signal;
 }

@@ -8,11 +8,11 @@
 [![Join the chat at https://gitter.im/tinylibs-js-org/community](https://badges.gitter.im/tinylibs-js-org/community.svg)](https://gitter.im/tinylibs-js-org/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Speed Blazing](https://img.shields.io/badge/speed-blazing%20%F0%9F%94%A5-brightgreen.svg)](https://twitter.com/acdlite/status/974390255393505280)
 
-[![Latest Version](https://img.shields.io/npm/v/object-code)](https://www.npmjs.com/package/object-code)
-[![Downloads](https://img.shields.io/npm/dw/object-code)](https://www.npmjs.com/package/object-code)
-[![JsDelivr](https://data.jsdelivr.com/v1/package/npm/object-code/badge?style=rounded)](https://www.jsdelivr.com/package/npm/object-code)
-[![Bundlephobia](https://img.shields.io/bundlephobia/minzip/object-code/latest?style=flat)](https://bundlephobia.com/package/object-code@latest)
-[![Packagephobia](https://packagephobia.com/badge?p=object-code@latest)](https://packagephobia.com/result?p=object-code@latest)
+[![Latest Version](https://img.shields.io/npm/v/axios-cache-hooks)](https://www.npmjs.com/package/axios-cache-hooks)
+[![Downloads](https://img.shields.io/npm/dw/axios-cache-hooks)](https://www.npmjs.com/package/axios-cache-hooks)
+[![JsDelivr](https://data.jsdelivr.com/v1/package/npm/axios-cache-hooks/badge?style=rounded)](https://www.jsdelivr.com/package/npm/axios-cache-hooks)
+[![Bundlephobia](https://img.shields.io/bundlephobia/minzip/axios-cache-hooks/latest?style=flat)](https://bundlephobia.com/package/axios-cache-hooks@latest)
+[![Packagephobia](https://packagephobia.com/badge?p=axios-cache-hooks@latest)](https://packagephobia.com/result?p=axios-cache-hooks@latest)
 
 <br />
 
@@ -37,6 +37,7 @@
 - [Installing](#installing)
   - [Url Import](#url-import)
 - [Getting Started](#getting-started)
+- [Documentation](#documentation)
 - [How it works](#how-it-works)
 - [Compatibility](#compatibility)
 - [License](#license)
@@ -73,11 +74,11 @@ import { createAxiosHooks } from 'https://cdn.skypack.dev/axios-cache-hooks@late
 
 ## Getting Started
 
-Object code is a blazing fast hash code generator. It generates unique signed integers for
-objects, arrays, functions, symbols and etc.
-
-You can ise it to index object in a collection, compare objects or just generate unique
-identifiers.
+Axios Cache Hooks is a super effective and performant way to use Axios calls inside React
+applications. It is very performant because it deeply uses _(and only works with)_
+[Axios](https://axios-http.com) `(6.7Kb)` and
+[Axios Cache Interceptor](https://axios-cache-interceptor.js.org/) `(4.2Kb)` under the
+hood.
 
 ```ts
 // http.ts
@@ -86,26 +87,17 @@ import { setupCache } from 'axios-cache-interceptor';
 import { createAxiosHooks } from 'axios-cache-hooks';
 
 export const axios = setupCache(Axios);
+export const { useQuery, useMutation } = createAxiosHooks();
 
-export const { useQuery, useMutation } = createAxiosHooks(
-  // This means that the additional configuration will be ALWAYS in the last parameter.
-  (func, args) => func.length - 1
-);
-```
-
-```ts
-// user-api.ts
-import { axios } from './http';
-
-/** Simple function that creates an user */
-export function getUser(name: string, extraConfig: AxiosRequestConfig): Promise<User> {
-  return axios.get<User>('/user/find-by-name', { name }, extraConfig);
+/** Returns an user by his name */
+export function getUser(name: string, config?: AxiosRequestConfig): Promise<User> {
+  return axios.get<User>(`/users/find-by-name/${name}`, config);
 }
 ```
 
 ```js
-import { getUser } from './user-api';
-import { useQuery } from './http';
+// component.tsx
+import { useQuery, getUser } from './http';
 
 export const UserAge = ({ username }) => {
   // This will share cache between ALL components that uses the same query and parameters.
@@ -117,20 +109,35 @@ export const UserAge = ({ username }) => {
 
 <br />
 
+## Documentation
+
+This package is so small that every documentation is available in the form of `TSDoc`. You can start by importing `createAxiosHooks` and using the returned hooks.
+
+- [Github](https://github.com/arthurfiorette/tinylibs/tree/main/packages/axios-cache-hooks)
+
+<br />
+
 ## How it works
+
+Basically, this package calls the provided http function on every draw, this is fine
+because you can only use this hook with `axios-cache-interceptor` which caches very
+effectively axios request, only allowing needed axios request to go through network.
+
+By extracting you request functions into dedicated functions, like the `getUser` above,
+you'll enable caching requests at a component level, even for your micro-frontend setup.
+
+This works flawlessly because `Axios Cache Interceptor` has a concept of
+[`Request IDs`](https://axios-cache-interceptor.js.org/#/pages/request-id) that defines
+which requests are the same or not.
+
+If you still have any questions, please feel free to create an issue and i'll be happy to help (and improve this readme).
 
 <br />
 
 ## Compatibility
 
-See all unique values at [`test/values.ts`](test/values.ts)
-
-This package is always seeking for a faster implementation. This means that we don't
-guarantee that the hash will be the same for two different versions of this package. There
-will be an warning on the release notes if the hash generation changed.
-
-You shouldn't rely on cross version compatibility, and even if so, you can run some tests
-before pushing to production :)
+This package is dependent of `AxiosCacheInterceptor@^0.8` and `Axios@0.28`
+[Because of this PR](https://github.com/axios/axios/pull/4659).
 
 <br />
 

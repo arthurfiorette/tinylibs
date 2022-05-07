@@ -1,58 +1,41 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import Axios from 'axios';
-import { hash } from 'object-code';
-import type { SetStateAction } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
+import type { AxiosCacheHooksOptions } from './options';
 import type { ApiCall, State } from './types';
 
 export function executeApiCall<Data, Args extends unknown[]>(
   apiCall: ApiCall<Data, Args>,
   args: Args,
-  setState: (value: SetStateAction<State<Data>>) => void,
-  state: State<Data>
+  [state, setState]: [State<Data>, Dispatch<SetStateAction<State<Data>>>],
+  options: AxiosCacheHooksOptions
 ): Promise<void> {
   return (
     apiCall(...args)
       .then(
         // Successful response
         (response) => {
-          // This is everything that is needed to determine
-          // this response uniqueness.
-          const rid = hash({
-            h: response.headers,
-            b: response.status,
-            s: response.statusText
-          });
+          const rid = options.hashGenerator(response, undefined);
 
           // Request never had data before or there is new data available
-          if (state.loading || state.rid !== rid) {
-            setState({
-              loading: false,
-              data: response.data,
-              response,
-              rid
-            });
+          if (state.rid !== rid) {
+            setState({ loading: false, data: response.data, response, rid });
           }
         },
 
         // Error response
         (error) => {
           // Request was aborted because the component was unmounted
-          // Updated the state now will throw the "Called SetState()
+          // Update the state now will throw a "Called SetState()
           // on an Unmounted Component" error.
           if (Axios.isCancel(error)) {
             return;
           }
 
-          // Common error properties to avoid hashing the same object
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-          const rid = hash({ a: error.message, b: error.code, c: error.name });
+          const rid = options.hashGenerator(undefined, error);
 
           if (rid !== state.rid) {
-            setState({
-              loading: false,
-              error,
-              rid
-            });
+            setState({ loading: false, error, rid });
           }
         }
       )
