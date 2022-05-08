@@ -91,7 +91,7 @@ export const { useQuery, useMutation } = createAxiosHooks();
 
 /** Returns an user by his name */
 export function getUser(name: string, config?: AxiosRequestConfig): Promise<User> {
-  return axios.get<User>(`/users/find-by-name/${name}`, config);
+  return axios.get<User>(`users/find-by-name/${name}`, config);
 }
 ```
 
@@ -103,7 +103,11 @@ export const UserAge = ({ username }) => {
   // This will share cache between ALL components that uses the same query and parameters.
   const [user, { loading, error }] = useQuery(getUser, username);
 
-  return <div>{loading ? 'loading...' : user.age}</div>;
+  return (
+    <Layout>
+      <p>{loading ? 'loading...' : user.age}</p>
+    </Layout>
+  );
 };
 ```
 
@@ -111,7 +115,8 @@ export const UserAge = ({ username }) => {
 
 ## Documentation
 
-This package is so small that every documentation is available in the form of `TSDoc`. You can start by importing `createAxiosHooks` and using the returned hooks.
+This package is so small that every documentation is available in the form of `TSDoc`. You
+can start by importing `createAxiosHooks` and using the returned hooks.
 
 - [Github](https://github.com/arthurfiorette/tinylibs/tree/main/packages/axios-cache-hooks)
 - [Website](https://tinylibs.js.org/packages/axios-cache-hooks)
@@ -132,14 +137,15 @@ This works flawlessly because `Axios Cache Interceptor` has a concept of
 [`Request IDs`](https://axios-cache-interceptor.js.org/#/pages/request-id) that defines
 which requests are the same or not.
 
-If you still have any questions, please feel free to create an issue and i'll be happy to help (and improve this readme).
+If you still have any questions, please feel free to create an issue and i'll be happy to
+help (and even improve this readme).
 
 <br />
 
 ## Compatibility
 
-This package is dependent of `AxiosCacheInterceptor@^0.8` and `Axios@0.28`
-[Because of this PR](https://github.com/axios/axios/pull/4659).
+This package is dependent of `AxiosCacheInterceptor@>=0.8` and `Axios@>=0.28`
+[because of this PR](https://github.com/axios/axios/pull/4659).
 
 <br />
 
