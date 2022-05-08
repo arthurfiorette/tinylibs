@@ -47,14 +47,14 @@
 ## Installing
 
 ```sh
-npm install axios axios-cache-interceptor axios-cache-hooks
-yarn add axios axios-cache-interceptor axios-cache-hooks
+npm   install axios axios-cache-interceptor axios-cache-hooks
+yarn  add     axios axios-cache-interceptor axios-cache-hooks
 ```
 
 ```js
 import { createAxiosHooks } from 'axios-cache-hooks';
 const { createAxiosHooks } = require('axios-cache-hooks');
-const { hash } = window.axiosCacheHook;
+const { createAxiosHooks } = window.axiosCacheHooks;
 ```
 
 ```html
@@ -114,6 +114,8 @@ export const UserAge = ({ username }) => {
 This package is so small that every documentation is available in the form of `TSDoc`. You can start by importing `createAxiosHooks` and using the returned hooks.
 
 - [Github](https://github.com/arthurfiorette/tinylibs/tree/main/packages/axios-cache-hooks)
+- [Website](https://tinylibs.js.org/packages/axios-cache-hooks)
+- [NPM](https://npm.im/axios-cache-hooks)
 
 <br />
 
