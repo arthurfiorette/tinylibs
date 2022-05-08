@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-/* eslint-disable @typescript-eslint/no-for-in-array */
-
 export function isDuration(val: unknown): boolean {
   return (
     (typeof val === 'string' || typeof val === 'number') &&
@@ -19,12 +16,11 @@ export function isTruthy(val: unknown): boolean {
 
 export function parseRawHeaders(headerStr: string): Record<string, string | true> {
   const headers: Record<string, string | true> = {};
-
   const tokens = headerStr.toLowerCase().replace(/\s+/g, '').split(',');
 
-  for (const key in tokens) {
-    const token = tokens[key]!.split('=', 2);
-    headers[token[0]!] = token[1] ?? true;
+  for (const token of tokens) {
+    const split = token.split('=', 2) as [string, string];
+    headers[split[0]] = split[1] ?? true;
   }
 
   return headers;
