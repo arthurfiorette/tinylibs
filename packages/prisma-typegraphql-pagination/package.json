@@ -1,7 +1,7 @@
 {
   "name": "prisma-typegraphql-pagination",
   "description": "🧬 A type builder for pagination with prisma and type-graphql.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "source": "src/index.ts",
   "sideEffects": false,
   "main": "dist/index.js",
