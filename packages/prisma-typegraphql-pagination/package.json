@@ -1,0 +1,41 @@
+{
+  "name": "prisma-typegraphql-pagination",
+  "description": "🧬 A type builder for pagination with prisma and type-graphql.",
+  "version": "1.0.2",
+  "source": "src/index.ts",
+  "sideEffects": false,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "module": "dist/index.mjs",
+  "author": "Arthur Fiorette <npm@arthur.place>",
+  "license": "MIT",
+  "bugs": "https://github.com/arthurfiorette/tinylibs/issues",
+  "homepage": "https://tinylibs.js.org/packages/prisma-typegraphql-pagination",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arthurfiorette/tinylibs.git",
+    "directory": "packages/prisma-typegraphql-pagination"
+  },
+  "scripts": {
+    "build": "microbundle --tsconfig tsconfig.build.json --external class-validator,tslib --target node --compress -f esm,cjs",
+    "test": "jest --coverage"
+  },
+  "dependencies": {
+    "type-graphql": "^1.1.1",
+    "tslib": "^2.4.0"
+  },
+  "devDependencies": {
+    "graphql": "^15",
+    "microbundle": "0.15.0",
+    "class-validator": "^0.13.2"
+  },
+  "peerDependencies": {
+    "type-graphql": "^1"
+  },
+  "files": [
+    "dist",
+    "src",
+    "LICENSE",
+    "README.md"
+  ]
+}
