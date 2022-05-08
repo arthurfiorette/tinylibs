@@ -91,7 +91,7 @@ function userPagination(@Args(() => UserPagination) pag: Paginator<User>) {
 
 This package is entirely built in mind of using TSDocs, and as the possible configuration
 is very simple, you can see it in the following file.
-**[`src/options.ts`](packages/prisma-typegraphql-paginator/src/options.ts)**.
+**[`src/options.ts`](src/options.ts)**.
 
 <br />
 
