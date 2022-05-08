@@ -25,7 +25,7 @@ jobs:
       # Build first to avoid broken monorepo dependencies
       - name: Build
         run: yarn build
-        
+
       - name: Lint
         run: yarn lint
 
