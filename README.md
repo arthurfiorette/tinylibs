@@ -35,6 +35,8 @@
 
 - [Axios Cache Hooks](packages/axios-cache-hooks)
 
+- [Prisma Typegraphql Pagination](packages/prisma-typegraphql-pagination)
+
 <br />
 
 ## License
