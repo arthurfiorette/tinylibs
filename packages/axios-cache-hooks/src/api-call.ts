@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import Axios from 'axios';
 import type { Dispatch, SetStateAction } from 'react';
 import type { AxiosCacheHooksOptions } from './options';
 import type { ApiCall, State } from './types';
@@ -28,7 +27,7 @@ export function executeApiCall<Data, Args extends unknown[]>(
           // Request was aborted because the component was unmounted
           // Update the state now will throw a "Called SetState()
           // on an Unmounted Component" error.
-          if (Axios.isCancel(error)) {
+          if (isAxiosCancel(error)) {
             return;
           }
 
@@ -45,4 +44,13 @@ export function executeApiCall<Data, Args extends unknown[]>(
         console.error('Unknown error thrown by axios cache hooks', error);
       })
   );
+}
+
+/**
+ * Copied from Axios source code to avoid importing the whole library.
+ *
+ * @see https://github.com/axios/axios/blob/master/lib/cancel/isCancel.js
+ */
+function isAxiosCancel(error: unknown): boolean {
+  return !!(error && (error as Record<string, boolean>)['__CANCEL__']);
 }
