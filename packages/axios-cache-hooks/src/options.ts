@@ -83,6 +83,6 @@ export const defaultHashGenerator: HashGenerator = (res, err) => {
     ? hash({ h: res.headers, s: res.status, t: res.statusText })
     : err
     ? // eslint-disable-next-line
-      hash({ m: err.message, c: err.code, n: err.name, j: err.toJSON() })
+      hash({ m: err.message, c: err.code, n: err.name, j: err.toJSON?.() })
     : 0;
 };
