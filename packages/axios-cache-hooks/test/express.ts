@@ -2,8 +2,12 @@ import express from 'express';
 import type { Server } from 'http';
 export const app = express();
 
+app.get('/', (_, res) => {
+  res.status(404).end();
+});
+
 app.use('/:name', (req, res) => {
-  res.json({ name: req.params.name });
+  res.json({ name: req.params.name }).end();
 });
 
 let server!: Server;

@@ -19,6 +19,10 @@ export function simpleQuery(name: string, extra?: CacheRequestConfig) {
   return axios.get<string>(`http://localhost:39874/${name}`, extra);
 }
 
+export function error404Query(extra?: CacheRequestConfig) {
+  return axios.get<unknown>(`http://localhost:39874/`, extra);
+}
+
 export function simpleMutation(name: string, extra?: CacheRequestConfig) {
   return axios.post<string>(`http://localhost:39874/${name}`, extra);
 }

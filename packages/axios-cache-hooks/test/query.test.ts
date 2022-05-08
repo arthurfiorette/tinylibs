@@ -1,6 +1,7 @@
 import { act, renderHook } from '@testing-library/react-hooks';
+import Axios, { AxiosError } from 'axios';
 import type { CacheRequestConfig } from 'axios-cache-interceptor';
-import { simpleQuery, useQuery } from './api';
+import { error404Query, simpleQuery, useQuery } from './api';
 
 describe('Tests useQuery hook', () => {
   it('Tests normal usage', async () => {
@@ -93,6 +94,23 @@ describe('Tests useQuery hook', () => {
       await expect(waitForNextUpdate()).rejects.toThrow(
         'Timed out in waitForNextUpdate after 1000ms.'
       );
+    });
+  });
+
+  it('Tests receiving an 404 error', async () => {
+    const { result, waitForNextUpdate } = renderHook(() => useQuery(error404Query));
+
+    await act(async () => {
+      await waitForNextUpdate();
+
+      const [data, { loading, error, rid }] = result.current;
+      expect(data).toBeUndefined();
+      expect(loading).toBe(false);
+      expect(error).toBeDefined();
+      expect(rid).toBeDefined();
+
+      expect(Axios.isAxiosError(error)).toBe(true);
+      expect((error as AxiosError).message).toBe('Request failed with status code 404');
     });
   });
 });

@@ -41,6 +41,7 @@ export function executeApiCall<Data, Args extends unknown[]>(
       // This avoids a unhandled promise exception in case of an unhandled
       // error thrown above.
       .catch((error) => {
+        /* istanbul ignore next */
         console.error('Unknown error thrown by axios cache hooks', error);
       })
   );
