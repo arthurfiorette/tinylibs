@@ -45,7 +45,15 @@ export type SuccessState<D> = {
 /**
  * This is where you should define your custom axios request logic.
  *
- * **Note**: Remember to ALWAYS spread the {@link AxiosRequestConfig} object in the axios call.
+ * **Note**: Remember to ALWAYS spread the `CacheRequestConfig` object in the axios call.
+ *
+ * @example
+ *
+ * ```ts
+ * const [data] = useQuery((arg1: string, config?: CacheRequestConfig) => {
+ *   return api.get('/users/', { params: { arg1 }, ...config });
+ * });
+ * ```
  */
 export type ApiCall<D, A extends unknown[]> = (
   ...args: A
