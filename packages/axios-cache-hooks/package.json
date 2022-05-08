@@ -40,7 +40,8 @@
     "axios-cache-interceptor": "0.10.3"
   },
   "peerDependencies": {
-    "react": ">=16.8.0"
+    "react": ">=16.8",
+    "axios": ">=0.28"
   },
   "files": [
     "dist",
