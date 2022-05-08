@@ -25,7 +25,7 @@
     "tslib": "^2.4.0"
   },
   "devDependencies": {
-    "graphql": "^15",
+    "graphql": "16.4.0",
     "microbundle": "0.15.0",
     "class-validator": "^0.13.2"
   },
