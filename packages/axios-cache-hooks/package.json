@@ -34,7 +34,7 @@
     "express": "4.18.1",
     "microbundle": "0.15.0",
     "react-test-renderer": "18.1.0",
-    "axios-cache-interceptor": "^0.10.3"
+    "axios-cache-interceptor": "0.10.3"
   },
   "files": [
     "dist",
