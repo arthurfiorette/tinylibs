@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import type { Dispatch, SetStateAction } from 'react';
 import type { AxiosCacheHooksOptions } from './options';
 import type { ApiCall, State } from './types';
@@ -34,6 +33,7 @@ export function executeApiCall<Data, Args extends unknown[]>(
           const rid = options.hashGenerator(undefined, error);
 
           if (rid !== state.rid) {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             setState({ loading: false, error, rid });
           }
         }

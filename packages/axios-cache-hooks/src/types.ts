@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { CacheAxiosResponse } from 'axios-cache-interceptor';
 
 /** The internal axios state used by `axios-cache-hooks` */

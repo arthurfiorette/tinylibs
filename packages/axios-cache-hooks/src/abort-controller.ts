@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import type { AxiosCacheHooksOptions } from './options';
 import type { ApiCall } from './types';
 
