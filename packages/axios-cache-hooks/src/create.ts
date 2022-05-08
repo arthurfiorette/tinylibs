@@ -12,6 +12,7 @@ export function createAxiosCacheHooks(
   hookOptions?: Partial<AxiosCacheHooksOptions>
 ): AxiosCacheHooks {
   const options = (hookOptions || {}) as AxiosCacheHooksOptions;
+
   options.configIndexFinder ??= defaultConfigIndexFinder;
   options.hashGenerator ??= defaultHashGenerator;
 
