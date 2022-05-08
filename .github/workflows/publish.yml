@@ -20,21 +20,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup node
+      - name: Setup node and restore cached dependencies
         uses: actions/setup-node@v3
         with:
           node-version: '16'
           registry-url: 'https://registry.npmjs.org/'
+          cache: 'yarn'
 
       - name: Install packages
-        run: yarn install
+        run: yarn install --prefer-offline
 
       # Build first to avoid broken monorepo dependencies
       - name: Build
         run: yarn build
-
-      - name: Test
-        run: yarn test
 
       - name: Publish to NPM
         run: npm publish --access public
