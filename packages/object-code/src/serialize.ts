@@ -1,22 +1,18 @@
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
-
 /**
  * Serializes any give value into a string. Used internally by the `hash` function.
  *
  * @example
  *
  * ```ts
- * class B{}
+ * class B {}
  *
- * 'functionclass B{}'
- * const bSerialized = serialize(B);
+ * serialize(B); // functionclass B{}
  * ```
  *
  * **Note**: Symbols uniqueness are not guaranteed, as they are transformed to strings.
  *
  * @param property The property to Serialize
  * @returns A unique string representation of the property
- *
  * @see https://tinylibs.js.org/packages/object-code/
  */
 export function serialize<T>(value?: T): string {
@@ -29,6 +25,7 @@ export function serialize<T>(value?: T): string {
     let i = keys.length;
 
     while (i--) {
+      /* eslint-disable @typescript-eslint/no-non-null-assertion */
       const key = keys[i]! as keyof T;
       copy[key] = serialize(value[key]);
     }

@@ -8,6 +8,7 @@ import { serialize } from './serialize';
  * **Note**: Symbols uniqueness are not guaranteed, as they are transformed to strings.
  *
  * @example
+ *
  * ```ts
  * class B {}
  *
@@ -20,7 +21,6 @@ import { serialize } from './serialize';
  *
  * @param val The value to be hashed
  * @returns The signed integer result from the provided value
- *
  * @see https://tinylibs.js.org/packages/object-code/
  */
 export function hash(val?: unknown): number {
