@@ -1,7 +1,7 @@
 {
   "name": "object-code",
   "description": "A blazing fast hash code generator that supports every possible javascript value.",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "sideEffects": false,
   "source": "src/index.ts",
   "main": "dist/index.js",
