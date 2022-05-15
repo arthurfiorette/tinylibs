@@ -5,18 +5,24 @@ import { ValidateIfPresent } from '../utils/validator';
 
 export function applyTake<T extends InstanceType>(
   entity: Pageable<T>,
+  // eslint-disable-next-line @typescript-eslint/ban-types
   paginator: Function,
   takeLimit: number
 ) {
   __decorate(
     [
-      ValidateIfPresent((c) => [c.Min(0), c.Max(takeLimit), c.IsOptional(), c.IsNumber()]),
-    Field(() => Number, {
-      nullable: true,
-      name: 'take',
-      description: `Take \`±n\` ${entity.name.toLowerCase()}s from the position of the cursor.`,
-      simple: true
-    })
+      ValidateIfPresent((c) => [
+        c.Min(0),
+        c.Max(takeLimit),
+        c.IsOptional(),
+        c.IsNumber()
+      ]),
+      Field(() => Number, {
+        nullable: true,
+        name: 'take',
+        description: `Take \`±n\` ${entity.name.toLowerCase()}s from the position of the cursor.`,
+        simple: true
+      })
     ],
     paginator.prototype,
     'take'

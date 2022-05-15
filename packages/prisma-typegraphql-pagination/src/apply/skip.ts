@@ -5,6 +5,7 @@ import { ValidateIfPresent } from '../utils/validator';
 
 export function applySkip<T extends InstanceType>(
   entity: Pageable<T>,
+  // eslint-disable-next-line @typescript-eslint/ban-types
   paginator: Function
 ) {
   __decorate(
