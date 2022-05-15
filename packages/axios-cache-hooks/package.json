@@ -9,8 +9,8 @@
   "module": "dist/index.module.js",
   "unpkg": "dist/index.umd.js",
   "exports": {
-    "require": "./dist/index.cjs",
-    "default": "./dist/index.modern.js"
+    "require": "./dist/index.js",
+    "default": "./dist/index.modern.mjs"
   },
   "author": "Arthur Fiorette <npm@arthur.place>",
   "license": "MIT",

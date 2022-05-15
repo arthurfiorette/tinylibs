@@ -31,6 +31,9 @@
   "peerDependencies": {
     "type-graphql": "^1"
   },
+  "optionalDependencies": {
+    "class-validator": ">=0.13"
+  },
   "files": [
     "dist",
     "src",

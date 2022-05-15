@@ -2,7 +2,7 @@
 
 import Benny from 'benny';
 import objectHash from 'object-hash';
-import * as objectCode from '../dist/index.mjs';
+import * as objectCode from '../dist/index.js';
 
 const DUMMY_OBJECT = {
   string: 'some-string',
