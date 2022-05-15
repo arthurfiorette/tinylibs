@@ -106,7 +106,7 @@ const myWeirdObject = {
 };
 
 const hash = hash(myWeirdObject);
-// 1230491235
+// -1352827948
 ```
 
 ## Compatibility
@@ -129,22 +129,22 @@ This is the result of a [benchmark](./benchmark/benchmark.js) between `object-ha
 
 ```txt
   Object Code:
-    103 134 ops/s, ±2.64%     | 92.24% slower
+    98 989 ops/s, ±0.71%      | 92.94% slower
 
   Object Hash:
-    22 961 ops/s, ±0.26%      | slowest, 98.27% slower
+    25 649 ops/s, ±0.47%      | slowest, 98.17% slower
 
   Object Code (Jsonified Object):
-    268 170 ops/s, ±0.72%     | 79.82% slower
+    279 954 ops/s, ±1.35%     | 80.04% slower
 
   Object Hash (Jsonified Object):
-    116 239 ops/s, ±0.37%     | 91.25% slower
+    125 125 ops/s, ±0.43%     | 91.08% slower
 
   Object Code (String):
-    1 328 742 ops/s, ±0.47%   | fastest
+    1 402 715 ops/s, ±0.31%   | fastest
 
   Object Hash (String):
-    233 048 ops/s, ±0.47%     | 82.46% slower
+    250 241 ops/s, ±0.60%     | 82.16% slower
 ```
 
 <br />
