@@ -39,9 +39,8 @@ const UserPagination = createPaginator(User);
 
 @Resolver(() => User)
 export class UserResolver {
-
- // ...
- async friends(
+  // ...
+  async friends(
     @Ctx() { prisma }: GqlContext,
     @Args(() => UserPagination) pagination: Prisma.UserFindManyArgs
   ): Promise<User[]> {
