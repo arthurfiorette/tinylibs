@@ -31,6 +31,8 @@
 
 <br />
 
+<br />
+
 ## Table of Contents
 
 - [Table of Contents](#table-of-contents)
@@ -115,12 +117,22 @@ export const UserAge = ({ username }) => {
 
 ## Documentation
 
+> **This package is just a "bridge" between Axios with Cache and React**. Please read the
+> [`Axios Cache Interceptor`](https://github.com/arthurfiorette/axios-cache-interceptor)
+> documentation for any cache issue.
+
 This package is so small that every documentation is available in the form of `TSDoc`. You
 can start by importing `createAxiosHooks` and using the returned hooks.
 
 - [Github](https://github.com/arthurfiorette/tinylibs/tree/main/packages/axios-cache-hooks)
 - [Website](https://tinylibs.js.org/packages/axios-cache-hooks)
 - [NPM](https://npm.im/axios-cache-hooks)
+
+<hr />
+
+- [Axios Cache Interceptor Docs](https://axios-cache-interceptor.js.org/#/)
+- [React Docs](https://reactjs.org/docs/hooks-intro.html)
+- [Axios Docs](https://axios-http.com/docs/intro)
 
 <br />
 

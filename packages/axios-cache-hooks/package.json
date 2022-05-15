@@ -4,7 +4,7 @@
   "version": "1.0.2",
   "sideEffects": false,
   "source": "src/index.ts",
-  "main": "dist/index.cjs",
+  "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "module": "dist/index.module.js",
   "unpkg": "dist/index.umd.js",
@@ -41,7 +41,8 @@
   },
   "peerDependencies": {
     "react": ">=16.8",
-    "axios": ">=0.28"
+    "axios": ">=0.28",
+    "axios-cache-interceptor": ">=0.10.1"
   },
   "files": [
     "dist",
