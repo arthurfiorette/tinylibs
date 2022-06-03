@@ -1940,14 +1940,14 @@ autoprefixer@^10.1.0:
     picocolors "^1.0.0"
     postcss-value-parser "^4.2.0"
 
-axios-cache-interceptor@0.10.3:
-  version "0.10.3"
-  resolved "https://registry.yarnpkg.com/axios-cache-interceptor/-/axios-cache-interceptor-0.10.3.tgz#a7f92ad0e7afefb6b378131c8bdcfd4f349010ed"
-  integrity sha512-oyHlhmA6zzZJDk/ZMPWPNmO3z8gBU3mWIqAZy+GIUsvwpmwyPlC2XvZ3PTOZHgpWI2kEocMUhk3+w9VwMXfZ4w==
+axios-cache-interceptor@0.10.4:
+  version "0.10.4"
+  resolved "https://registry.yarnpkg.com/axios-cache-interceptor/-/axios-cache-interceptor-0.10.4.tgz#743b09ffe6bfdf4b0ccd563f1bb209d2ab4bb5dc"
+  integrity sha512-wYcdkmFe/OnaMpCMBcpkQItFmVE62m6ZJKB3tKuC0cbmRHk4O8paktFZRVtfwAF/ZLJ7Z+ZLC1IrVHjD2xHsow==
   dependencies:
     cache-parser "^1.2.4"
     fast-defer "^1.1.7"
-    object-code "^1.2.2"
+    object-code "^1.2.4"
 
 axios@0.27.2:
   version "0.27.2"
