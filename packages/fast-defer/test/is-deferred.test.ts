@@ -27,6 +27,7 @@ describe('isDeferred() tests', () => {
       ':)',
       {
         // fake deferred
+        // eslint-disable-next-line @typescript-eslint/no-misused-promises
         ...new Promise(() => void 0),
         resolve: () => void 0,
         reject: () => void 0
