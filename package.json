@@ -7,7 +7,7 @@
   "license": "MIT",
   "bugs": "https://github.com/arthurfiorette/tinylibs/issues",
   "homepage": "https://github.com/arthurfiorette/tinylibs#readme",
-  "packageManager": "yarn@1.22.18",
+  "packageManager": "yarn@1.22.19",
   "workspaces": {
     "packages": [
       "packages/**"
