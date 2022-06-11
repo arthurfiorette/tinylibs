@@ -1953,10 +1953,10 @@ autoprefixer@^10.1.0:
     picocolors "^1.0.0"
     postcss-value-parser "^4.2.0"
 
-axios-cache-interceptor@0.10.4:
-  version "0.10.4"
-  resolved "https://registry.yarnpkg.com/axios-cache-interceptor/-/axios-cache-interceptor-0.10.4.tgz#743b09ffe6bfdf4b0ccd563f1bb209d2ab4bb5dc"
-  integrity sha512-wYcdkmFe/OnaMpCMBcpkQItFmVE62m6ZJKB3tKuC0cbmRHk4O8paktFZRVtfwAF/ZLJ7Z+ZLC1IrVHjD2xHsow==
+axios-cache-interceptor@0.10.5:
+  version "0.10.5"
+  resolved "https://registry.yarnpkg.com/axios-cache-interceptor/-/axios-cache-interceptor-0.10.5.tgz#829c28ec8a20dbd4a68c53be9a2042c394b619fb"
+  integrity sha512-l722g46m70MudEnU/QMJ3IpGPhzMpMbyCXSlVzoYJee+G+lfxf6nQ7AvATpfonDUMZd+H74z2puFnXtyMQXDWQ==
   dependencies:
     cache-parser "^1.2.4"
     fast-defer "^1.1.7"
