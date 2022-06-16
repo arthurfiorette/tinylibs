@@ -32,7 +32,7 @@
     "jest-environment-jsdom": "28.1.1",
     "prettier": "2.7.0",
     "prettier-plugin-jsdoc": "0.3.38",
-    "prettier-plugin-organize-imports": "2.3.4",
+    "prettier-plugin-organize-imports": "3.0.0",
     "ts-jest": "28.0.4",
     "tslib": "2.4.0",
     "turbo": "1.2.16",
