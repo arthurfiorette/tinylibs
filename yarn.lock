@@ -5515,10 +5515,10 @@ prettier-plugin-jsdoc@0.3.38:
     comment-parser "^1.3.1"
     mdast-util-from-markdown "^1.2.0"
 
-prettier-plugin-organize-imports@3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/prettier-plugin-organize-imports/-/prettier-plugin-organize-imports-3.0.1.tgz#52e1faa57742ad36925b40ddcd7c044cb527af22"
-  integrity sha512-pdMWKtoHRQ+9y1WB3mA1wzMkjzJzB4ycfOPlfZpmzq+YFZQIpkszJJQQHQ8EYVyULlLohlOnAxSmXfaKWpRAAw==
+prettier-plugin-organize-imports@3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/prettier-plugin-organize-imports/-/prettier-plugin-organize-imports-3.0.2.tgz#104f9c9f238569e2a9fbdf2ec5eb6b8e95fdbe68"
+  integrity sha512-cA+Hh8EPNQSLG4hrAzcCwM2PmTjxbWNP3ZRT/Cub7cMHNH1lVaUyNLIHqtiqit6l0T1a0ugjYoRdXa9qpJFYuw==
 
 prettier@2.7.1:
   version "2.7.1"
