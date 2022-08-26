@@ -35,7 +35,7 @@
     "axios": "0.27.2",
     "express": "4.18.1",
     "react": "18.2.0",
-    "microbundle": "0.15.0",
+    "microbundle": "0.15.1",
     "react-test-renderer": "18.2.0",
     "axios-cache-interceptor": "0.10.7"
   },
