@@ -15,7 +15,7 @@
  * @returns A unique string representation of the property
  * @see https://tinylibs.js.org/packages/object-code/
  */
-export function serialize<T>(value?: T): string {
+ export function serialize<T>(value?: T): string {
   const type = typeof value;
 
   if (value && type === 'object' && !(value instanceof Date || value instanceof RegExp)) {
@@ -30,10 +30,7 @@ export function serialize<T>(value?: T): string {
       copy[key] = serialize(value[key]);
     }
 
-    return (
-      //@ts-expect-error ignore if not present
-      String(value.constructor) + JSON.stringify(copy, keys)
-    );
+    return String(value.constructor) + JSON.stringify(copy, keys);
   }
 
   return type + String(value);
