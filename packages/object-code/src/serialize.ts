@@ -30,10 +30,7 @@ export function serialize<T>(value?: T): string {
       copy[key] = serialize(value[key]);
     }
 
-    return (
-      //@ts-expect-error ignore if not present
-      String(value.constructor) + JSON.stringify(copy, keys)
-    );
+    return String(value.constructor) + JSON.stringify(copy, keys);
   }
 
   return type + String(value);
