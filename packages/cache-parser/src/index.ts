@@ -16,7 +16,8 @@ export function isCacheControl(obj?: unknown): obj is CacheControl {
 
 /**
  * The Cache-Control HTTP header field holds directives (instructions) — in both requests
- * and responses — that control caching in browsers and shared caches (e.g. Proxies, CDNs).
+ * and responses — that control caching in browsers and shared caches (e.g. Proxies,
+ * CDNs).
  *
  * @link https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control
  */
@@ -149,7 +150,8 @@ export declare type CacheControl = {
    *
    * Note that no-cache does not mean "don't cache". no-cache allows caches to store a
    * response, but requires them to revalidate it before reuse. If the sense of "don't
-   * cache" that you want is actually "don't store", then no-store is the directive to use.
+   * cache" that you want is actually "don't store", then no-store is the directive to
+   * use.
    *
    * @link https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control#no-cache
    */
@@ -167,7 +169,8 @@ export declare type CacheControl = {
   noStore?: true;
   /**
    * Some intermediaries transform content for various reasons. For example, some convert
-   * images to reduce transfer size. In some cases, this is undesirable for the content provider.
+   * images to reduce transfer size. In some cases, this is undesirable for the content
+   * provider.
    *
    * No-transform indicates that any intermediary (regardless of whether it implements a
    * cache) shouldn't transform the response contents.
@@ -275,7 +278,8 @@ export declare type CacheControl = {
    *
    * In the example above, the response is fresh for 7 days (604800s). After 7 days, it
    * becomes stale but the cache is allowed to reuse it for any requests that are made in
-   * the following day (86400s) — provided that they revalidate the response in the background.
+   * the following day (86400s) — provided that they revalidate the response in the
+   * background.
    *
    * Revalidation will make the cache be fresh again, so it appears to clients that it was
    * always fresh during that period — effectively hiding the latency penalty of

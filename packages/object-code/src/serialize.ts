@@ -15,7 +15,7 @@
  * @returns A unique string representation of the property
  * @see https://tinylibs.js.org/packages/object-code/
  */
- export function serialize<T>(value?: T): string {
+export function serialize<T>(value?: T): string {
   const type = typeof value;
 
   if (value && type === 'object' && !(value instanceof Date || value instanceof RegExp)) {
