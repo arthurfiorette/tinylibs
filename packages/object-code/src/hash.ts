@@ -3,7 +3,8 @@ import { serialize } from './serialize';
 /**
  * Hashes a given value into a unique number.
  *
- * This function accepts **ANY** kind of value, like `functions`, `classes`, `objects` and so on.
+ * This function accepts **ANY** kind of value, like `functions`, `classes`, `objects` and
+ * so on.
  *
  * **Note**: Symbols uniqueness are not guaranteed, as they are transformed to strings.
  *

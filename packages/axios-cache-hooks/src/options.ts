@@ -9,7 +9,8 @@ import { hash } from 'object-code';
  */
 export type AxiosCacheHooksOptions = {
   /**
-   * A function that must return parameter index that accepts a `CacheRequestConfig` object.
+   * A function that must return parameter index that accepts a `CacheRequestConfig`
+   * object.
    *
    * **Tip**: You can use `function.length` to find the number of available parameters.
    *
