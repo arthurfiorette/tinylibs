@@ -21,7 +21,7 @@
     "build": "turbo run build"
   },
   "devDependencies": {
-    "@arthurfiorette/prettier-config": "*",
+    "@arthurfiorette/prettier-config": "1.0.7",
     "@types/jest": "29.1.2",
     "@typescript-eslint/eslint-plugin": "5.40.1",
     "@typescript-eslint/parser": "5.40.1",
