@@ -37,7 +37,7 @@
     "react": "18.2.0",
     "microbundle": "0.15.1",
     "react-test-renderer": "18.2.0",
-    "axios-cache-interceptor": "0.10.7"
+    "axios-cache-interceptor": "1.0.0"
   },
   "peerDependencies": {
     "react": ">=16.8",
