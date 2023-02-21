@@ -31,7 +31,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org/'
 
       - name: Install packages
-        run: pnpm install --prefer-offline
+        run: pnpm install --frozen-lockfile
 
       # Build first to avoid broken monorepo dependencies
       - name: Build
