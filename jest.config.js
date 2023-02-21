@@ -3,11 +3,14 @@ module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
   roots: ['<rootDir>/src', '<rootDir>/test'],
-  globals: {
-    'ts-jest': {
-      tsconfig: './tsconfig.build.json',
-      useESM: true,
-      isolatedModules: true
-    }
+  transform: {
+    '^.+\\.m?[tj]sx?$': [
+      'ts-jest',
+      {
+        tsconfig: require.resolve('./tsconfig.build.json'),
+        useESM: true,
+        isolatedModules: true
+      }
+    ]
   }
 };

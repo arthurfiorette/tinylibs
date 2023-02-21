@@ -17,7 +17,7 @@
     "directory": "packages/prisma-typegraphql-pagination"
   },
   "scripts": {
-    "build": "microbundle --tsconfig tsconfig.build.json --external class-validator,tslib --target node --compress -f esm,cjs"
+    "build": "microbundle --tsconfig tsconfig.build.json --target node --compress -f esm,cjs"
   },
   "dependencies": {
     "tslib": "^2.4.0"
