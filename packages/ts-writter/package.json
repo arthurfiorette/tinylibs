@@ -1,0 +1,42 @@
+{
+  "name": "ts-writer",
+  "description": "A simple yet powerful typescript source code writer and collector",
+  "version": "1.0.0",
+  "source": "src/index.ts",
+  "sideEffects": false,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "module": "dist/index.mjs",
+  "umd:main": "dist/index.umd.js",
+  "unpkg": "dist/index.umd.js",
+  "author": "Arthur Fiorette <npm@arthur.place>",
+  "license": "MIT",
+  "bugs": "https://github.com/arthurfiorette/tinylibs/issues",
+  "homepage": "https://tinylibs.js.org/packages/ts-writer",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arthurfiorette/tinylibs.git",
+    "directory": "packages/ts-writer"
+  },
+  "scripts": {
+    "build": "microbundle --tsconfig tsconfig.build.json",
+    "test": "jest --coverage"
+  },
+  "dependencies": {
+    "javascript-stringify": "^2.1.0",
+    "typed-emitter": "^2.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.31",
+    "microbundle": "0.15.1"
+  },
+  "peerDependencies": {
+    "typescript": ">=3.8.0"
+  },
+  "files": [
+    "dist",
+    "src",
+    "LICENSE",
+    "README.md"
+  ]
+}
