@@ -1,7 +1,7 @@
 {
   "name": "axios-cache-hooks",
   "description": "The faster, simplest and most efficient way to use Axios inside React applications",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "sideEffects": false,
   "source": "src/index.ts",
   "main": "dist/index.js",

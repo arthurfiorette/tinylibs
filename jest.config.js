@@ -7,7 +7,7 @@ module.exports = {
     '^.+\\.m?[tj]sx?$': [
       'ts-jest',
       {
-        tsconfig: require.resolve('./tsconfig.build.json'),
+        tsconfig: './tsconfig.build.json',
         useESM: true,
         isolatedModules: true
       }

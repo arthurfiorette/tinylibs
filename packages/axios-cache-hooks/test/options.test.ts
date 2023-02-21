@@ -1,3 +1,4 @@
+import { AxiosHeaders } from 'axios';
 import { defaultHashGenerator } from '../src/options';
 
 describe('tests default options', () => {
@@ -7,7 +8,7 @@ describe('tests default options', () => {
     expect(
       defaultHashGenerator({
         cached: false,
-        config: {},
+        config: { headers: new AxiosHeaders() },
         data: null,
         headers: {},
         id: 'custom-id',

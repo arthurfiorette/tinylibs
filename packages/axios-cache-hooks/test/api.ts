@@ -1,5 +1,3 @@
-/** @jest-environment node */
-
 import Axios from 'axios';
 import {
   buildMemoryStorage,
@@ -8,14 +6,9 @@ import {
 } from 'axios-cache-interceptor';
 import { createAxiosCacheHooks } from '../src';
 
-export const axios = setupCache(
-  Axios.create({
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    adapter: require('axios/lib/adapters/http')
-  })
-);
+export const axios = setupCache(Axios.create({ adapter: 'http' }));
 
-export function simpleQuery(name: string, extra?: CacheRequestConfig) {
+export async function simpleQuery(name: string, extra?: CacheRequestConfig) {
   return axios.get<string>(`http://localhost:39874/${name}`, extra);
 }
 

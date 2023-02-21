@@ -13,11 +13,11 @@ export function executeApiCall<Data, Args extends unknown[]>(
       .then(
         // Successful response
         (response) => {
-          const rid = options.hashGenerator(response, undefined);
+          const requestId = options.hashGenerator(response, undefined);
 
           // Request never had data before or there is new data available
-          if (state.rid !== rid) {
-            setState({ loading: false, data: response.data, response, rid });
+          if (state.rid !== requestId) {
+            setState({ loading: false, data: response.data, response, rid: requestId });
           }
         },
 
@@ -30,11 +30,11 @@ export function executeApiCall<Data, Args extends unknown[]>(
             return;
           }
 
-          const rid = options.hashGenerator(undefined, error);
+          const requestId = options.hashGenerator(undefined, error);
 
-          if (rid !== state.rid) {
+          if (requestId !== state.rid) {
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            setState({ loading: false, error, rid });
+            setState({ loading: false, error, rid: requestId });
           }
         }
       )

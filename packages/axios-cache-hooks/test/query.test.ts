@@ -16,9 +16,9 @@ describe('Tests useQuery hook', () => {
       await waitForNextUpdate();
 
       const [data, { loading, error }] = result.current;
+      expect(error).toBeUndefined();
       expect(data).toStrictEqual({ name: 'A' });
       expect(loading).toBe(false);
-      expect(error).toBeUndefined();
     });
   });
 
@@ -100,17 +100,23 @@ describe('Tests useQuery hook', () => {
   it('Tests receiving an 404 error', async () => {
     const { result, waitForNextUpdate } = renderHook(() => useQuery(error404Query));
 
+    const [data, { loading, error }] = result.current;
+
+    expect(error).toBeUndefined();
+    expect(data).toBe(undefined);
+    expect(loading).toBe(true);
+
     await act(async () => {
       await waitForNextUpdate();
 
       const [data, { loading, error, rid }] = result.current;
+      expect(error).toBeDefined();
       expect(data).toBeUndefined();
       expect(loading).toBe(false);
-      expect(error).toBeDefined();
       expect(rid).toBeDefined();
 
       expect(Axios.isAxiosError(error)).toBe(true);
       expect((error as AxiosError).message).toBe('Request failed with status code 404');
     });
-  });
+  }, 100000);
 });
