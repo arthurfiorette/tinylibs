@@ -4,6 +4,3 @@
 # Generated files
 dist
 coverage
-
-# Yarn
-.yarn
