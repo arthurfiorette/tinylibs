@@ -27,7 +27,7 @@
     "typed-emitter": "^2.1.0"
   },
   "devDependencies": {
-    "@types/node": "^17.0.31",
+    "@types/node": "^18.0.0",
     "microbundle": "0.15.1"
   },
   "peerDependencies": {
