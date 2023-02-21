@@ -24,7 +24,7 @@
 </div>
 
 <h3 align="center">
-  <code>TS Writer</code> is a simple yet powerful typescript source code writer and collector.
+  <code>TS Writer</code> is 1Kb a simple yet powerful typescript source code writer and collector.
   <br />
   <br />
 </h3>
@@ -39,6 +39,7 @@
   - [Browser](#browser)
   - [Url Import](#url-import)
 - [Getting Started](#getting-started)
+- [Api](#api)
 - [License](#license)
 
 <br />
@@ -79,9 +80,9 @@ import { TsWriter } from 'https://cdn.skypack.dev/ts-writer@latest';
 
 ## Getting Started
 
-A deferred is nothing more than a promise with `.resolve()` and a `.reject()` method. You
-can use it to create a promise that will be resolved or rejected at some point in the
-future and, probably, in another scope.
+You can use **ts-writer** to generate javascript source code at runtime anywhere in your
+code by writing typescript! Simply create an instance of `TsWriter` and use the `write`
+method to write anywhere you want, just passing the filename of each piece of code.
 
 ```js
 import { TsWriter } from 'ts-writer';
@@ -138,6 +139,26 @@ const files = writer.transpile();
 files['index.js']; // js code
 files['index.ts']; // d.ts code
 ```
+
+<br />
+
+## Api
+
+- `writer.template` - Simple template function that combines its arguments and the result
+  can be used inside `write` and `writeHeader` method.
+
+- `writer.write` - Generates the code to be written in the provided file. The first
+  argument is an object with the variables to be used in the template, as well the
+  filename. The rest of the arguments are the templates to be written in the file.
+
+- `writer.write` - Generates the code to be written in the **BEGINNING** provided file.
+  The first argument is an object with the variables to be used in the template, as well
+  the filename. The rest of the arguments are the templates to be written in the file.
+
+- `writer.clear` - Clears all collected source and outputs
+
+- `writer.transpile` - Collects all sources created by `write` and `writeHeader` and
+  transpile them to javascript and d.ts files. Returns a `Record<filename, content>`
 
 <br />
 

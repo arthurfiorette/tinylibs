@@ -3,7 +3,7 @@
 
 import { TsWriter } from '../src';
 
-describe('tests ts writter', () => {
+describe('tests ts writer', () => {
   it('tests events', () => {
     const writer = new TsWriter({});
 

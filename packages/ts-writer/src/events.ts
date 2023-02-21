@@ -1,4 +1,4 @@
-import { EventEmitter } from 'events';
+import { EventEmitter } from 'node:events';
 import type { default as TypedEmitter } from 'typed-emitter';
 import type ts from 'typescript';
 import type { SourceTemplate } from './source-template';

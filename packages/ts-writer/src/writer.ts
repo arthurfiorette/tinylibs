@@ -1,5 +1,5 @@
 import { stringify } from 'javascript-stringify';
-import path from 'path';
+import path from 'node:path';
 import ts from 'typescript';
 import { TsWriterEmitter } from './events';
 import { SourceTemplate } from './source-template';

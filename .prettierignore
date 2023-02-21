@@ -2,5 +2,5 @@
 /tsconfig.json
 
 # Generated files
-dist
+# dist
 coverage
