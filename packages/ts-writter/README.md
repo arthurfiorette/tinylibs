@@ -88,19 +88,49 @@ import { TsWriter } from 'ts-writer';
 
 const writer = new TsWriter(require.resolve('../tsconfig.json'));
 
-writer.write`
-${{
+const MyComment = writer.template`${{
+  comment: 'this will be a comment'
+}} /* ${'comment'} */`;
+
+writer.write`${{
   // first object is the variables to be used in the template, as well the filename
   filename: 'index.ts',
   property: 'hello',
   deep: {
     property: ['ignore', 'world']
+  },
+  object: {
+    a: 1,
+    b: '2',
+    c: true,
+    d: null
+  },
+  double(a: number) {
+    return a * 2;
+  },
+  myGeneratedClass: class myGeneratedClass {
+    constructor() {
+      console.log('hello world');
+    }
+    hello() {
+      console.log('hello');
+    }
   }
 }}
 
 // Type checked and auto-completed!
 export const ${'property'} = '${'deep.property.1'}}';
 
+// Json stringifies the object
+export const object = ${'object'};
+
+// You can also send classes, functions and etc (they will lose their types)
+export function ${'double'};
+export class ${'myGeneratedClass'};
+
+// You can map over arrays and pre-parse some code
+${MyComment}
+${[1, 2, 3].map((item) => writer.template`${{ item }} // ${'item'}`)}
 `;
 
 const files = writer.transpile();

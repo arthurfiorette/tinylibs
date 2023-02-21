@@ -100,14 +100,14 @@ export class TsWriter extends TsWriterEmitter {
 
         // Checks for array of template results
         if (Array.isArray(argName) && argName.every(SourceTemplate.match)) {
-          codeblock += `\n${argName.join('\n')}\n`;
+          codeblock += argName.join('\n');
           return codeblock;
         }
 
         // Checks for template result
         if (SourceTemplate.match(argName)) {
           // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-          codeblock += `\n${argName}\n`;
+          codeblock += argName;
           return codeblock;
         }
 
