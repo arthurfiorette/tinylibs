@@ -18,7 +18,7 @@
   },
   "scripts": {
     "build": "microbundle --tsconfig tsconfig.build.json --target node --compress -f esm,cjs",
-    "test": "jest --coverage"
+    "test": "jest --verbose --coverage"
   },
   "dependencies": {
     "javascript-stringify": "^2.1.0",
@@ -26,7 +26,8 @@
   },
   "devDependencies": {
     "@types/node": "^18.0.0",
-    "microbundle": "0.15.1"
+    "microbundle": "0.15.1",
+    "source-map-support": "^0.5.21"
   },
   "peerDependencies": {
     "typescript": ">=3.8.0"
