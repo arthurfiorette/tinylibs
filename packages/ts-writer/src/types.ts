@@ -1,6 +1,9 @@
 /** The generic type a template can have as its input. */
 export type TemplateData = Record<string, unknown>;
 
+/** The generic type a template can have as its text used to write files */
+export type SourceTemplateData = TemplateData & { filename: `${string}.${'ts' | 'tsx'}` };
+
 /** The parameters you can provide a template with */
 export type Commands<Arg extends string = string> =
   | Arg

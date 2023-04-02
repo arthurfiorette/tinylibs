@@ -5,7 +5,7 @@ export function t<D extends TemplateData, P extends KeysOf<D>[]>(
   _template: TemplateStringsArray,
   data: D,
   ...keys: Commands<P[number]>[]
-) {
+): string {
   const template = Array.from(_template);
 
   // This removes the first item from the template array,
@@ -17,6 +17,16 @@ export function t<D extends TemplateData, P extends KeysOf<D>[]>(
     if (prefix?.trim().length) {
       throw new Error(`Cannot have text before data "${prefix}"`);
     }
+  }
+
+  // Trims the start of the code
+  if (template[0]) {
+    template[0] = template[0].trim();
+  }
+
+  // Trims the end of the code
+  if (template[template.length - 1]) {
+    template[template.length - 1] = template[template.length - 1]!.trim();
   }
 
   // Runs consume with the whole template range
