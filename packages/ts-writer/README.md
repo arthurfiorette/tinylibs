@@ -24,7 +24,7 @@
 </div>
 
 <h3 align="center">
-  <code>TS Writer</code> is 1Kb a simple yet powerful typescript source code writer and collector.
+  <code>TS Writer</code> is a 1.5Kb simple yet powerful typescript source code writer and collector.
   <br />
   <br />
 </h3>

@@ -1,7 +1,7 @@
 {
   "name": "ts-writer",
   "version": "1.0.0",
-  "description": "A 1Kb simple yet powerful typescript source code writer and collector",
+  "description": "A 1.5Kb simple yet powerful typescript source code writer and collector",
   "homepage": "https://tinylibs.js.org/packages/ts-writer",
   "bugs": "https://github.com/arthurfiorette/tinylibs/issues",
   "repository": {

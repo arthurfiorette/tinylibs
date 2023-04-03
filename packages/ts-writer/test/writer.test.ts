@@ -123,7 +123,6 @@ describe(TsWriter, () => {
     w.head`${{ filename: 'b.ts' }} function e(f: number) { return f * 2 }`;
 
     result = w.transpile();
-    
 
     expect(result['a.js']).toBe(
       `function b(c) { return c * 2; }\nfunction a(b) { return b * 2; }\n`

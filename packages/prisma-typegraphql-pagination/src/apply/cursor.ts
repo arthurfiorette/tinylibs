@@ -5,7 +5,7 @@ import { createCursor } from '../create/cursor';
 import type { Options } from '../options';
 import { cursorName } from '../utils/names';
 import type { InstanceType, Pageable } from '../utils/types';
-import { createSingleFieldValidator, ValidateIfPresent } from '../utils/validator';
+import { ValidateIfPresent, createSingleFieldValidator } from '../utils/validator';
 
 export function applyCursor<T extends InstanceType>(
   entity: Pageable<T>,

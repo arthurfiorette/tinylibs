@@ -6,24 +6,24 @@ import ts from 'typescript';
  * following extends.
  */
 export function readCompilerOptions(tsconfigPath: string) {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const { config, error } = ts.readConfigFile(tsconfigPath, (p) => ts.sys.readFile(p));
+  let res: ReturnType<typeof ts.readConfigFile> | ts.ParsedCommandLine =
+    ts.readConfigFile(tsconfigPath, (p) => ts.sys.readFile(p));
 
-  if (error) {
+  if (res.error) {
     throw new Error(`Failed to read tsconfig file.`);
   }
 
-  const { options, errors } = ts.parseJsonConfigFileContent(
-    config,
+  res = ts.parseJsonConfigFileContent(
+    res.config,
     ts.sys,
     path.dirname(tsconfigPath),
     undefined,
     tsconfigPath
   );
 
-  if (errors.length) {
+  if (res.errors.length) {
     throw new Error(`Failed to parse tsconfig file.`);
   }
 
-  return options;
+  return res.options;
 }

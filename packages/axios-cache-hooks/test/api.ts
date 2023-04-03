@@ -1,8 +1,8 @@
 import Axios from 'axios';
 import {
   buildMemoryStorage,
-  type CacheRequestConfig,
-  setupCache
+  setupCache,
+  type CacheRequestConfig
 } from 'axios-cache-interceptor';
 import { createAxiosCacheHooks } from '../src';
 

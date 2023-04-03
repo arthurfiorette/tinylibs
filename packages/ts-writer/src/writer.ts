@@ -16,7 +16,6 @@ export class TsWriter {
   private compilerOptions: ts.CompilerOptions;
 
   constructor(optionsOrTsconfigPath: ts.CompilerOptions | string) {
-    // let host : ts.CompilerHost;
     this.compilerOptions =
       typeof optionsOrTsconfigPath === 'string'
         ? readCompilerOptions(optionsOrTsconfigPath)

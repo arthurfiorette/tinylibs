@@ -1,4 +1,4 @@
-import { type KeysOf, replaceArrayIndexes } from '../../src';
+import { replaceArrayIndexes, type KeysOf } from '../../src';
 
 describe(replaceArrayIndexes, () => {
   it('should replace array indexes', () => {
