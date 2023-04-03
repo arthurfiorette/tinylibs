@@ -1,23 +1,23 @@
 {
   "name": "tinylibs",
-  "private": true,
   "version": "1.0.0",
-  "repository": "https://github.com/arthurfiorette/tinylibs.git",
-  "author": "Arthur Fiorette <npm@arthur.place>",
-  "license": "MIT",
-  "bugs": "https://github.com/arthurfiorette/tinylibs/issues",
+  "private": true,
   "homepage": "https://github.com/arthurfiorette/tinylibs#readme",
+  "bugs": "https://github.com/arthurfiorette/tinylibs/issues",
+  "repository": "https://github.com/arthurfiorette/tinylibs.git",
+  "license": "MIT",
+  "author": "Arthur Fiorette <npm@arthur.place>",
   "workspaces": {
     "packages": [
       "packages/**"
     ]
   },
   "scripts": {
-    "lint": "eslint .",
-    "format": "prettier --write .",
-    "test": "pnpm -r --parallel test",
     "build": "pnpm -r --parallel build",
-    "preinstall": "npx only-allow pnpm"
+    "format": "prettier --write .",
+    "preinstall": "npx only-allow pnpm",
+    "lint": "eslint .",
+    "test": "pnpm -r --parallel test"
   },
   "devDependencies": {
     "@arthurfiorette/prettier-config": "1.0.9",

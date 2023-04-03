@@ -2,8 +2,8 @@
   "name": "object-code-benchmark",
   "version": "1.0.0",
   "private": true,
-  "type": "module",
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "prestart": "cd ../ && pnpm build",
     "start": "node benchmark.js"
