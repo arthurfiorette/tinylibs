@@ -26,6 +26,7 @@ export function t<D extends TemplateData, P extends KeysOf<D>[]>(
 
   // Trims the end of the code
   if (template[template.length - 1]) {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     template[template.length - 1] = template[template.length - 1]!.trim();
   }
 
