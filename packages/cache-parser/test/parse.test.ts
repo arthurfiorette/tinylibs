@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { CacheControl, parse, tokenize } from '../src';
+import { type CacheControl, parse, tokenize } from '../src';
 
 describe('parse() tests', () => {
   it('tests unknown arguments', () => {

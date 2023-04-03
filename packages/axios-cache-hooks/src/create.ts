@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { applyAbortController } from './abort-controller';
 import { executeApiCall } from './api-call';
 import {
-  AxiosCacheHooksOptions,
+  type AxiosCacheHooksOptions,
   defaultConfigIndexFinder,
   defaultHashGenerator
 } from './options';

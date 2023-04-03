@@ -7,7 +7,7 @@ import { applyTake } from './apply/take';
 import type { Cursor } from './create/cursor';
 import type { FieldsEnum } from './create/fields-enum';
 import type { OrderBy } from './create/order-by';
-import { DefaultOptions, Options } from './options';
+import { DefaultOptions, type Options } from './options';
 import { findMetadataFields as findDecoratedFields } from './utils/metadata';
 import { paginatorName } from './utils/names';
 import type { InstanceType, Pageable } from './utils/types';
