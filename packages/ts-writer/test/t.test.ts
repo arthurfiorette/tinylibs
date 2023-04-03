@@ -14,4 +14,18 @@ describe(t, () => {
     // eslint-disable-next-line @typescript-eslint/ban-types
     expect(consume<{}, []>(-1, 999, [], {}, [])).toBe('');
   });
+
+  it('works with deep arrays', () => {
+    expect(
+      t`${{
+        array: [
+          [1, 2, 3],
+          [4, 5, 6],
+          [7, 8, 9]
+        ]
+      }}${['each', 'array']}[${['each', 'array.@']}>${'array.@.@'}<${['/each']}]${[
+        '/each'
+      ]}`
+    ).toBe('[>1<>2<>3<][>4<>5<>6<][>7<>8<>9<]');
+  });
 });

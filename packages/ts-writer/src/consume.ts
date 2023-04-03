@@ -18,7 +18,7 @@ export function consume<D extends TemplateData, P extends KeysOf<D>[]>(
   // Jumps on each nextIndex until it reaches the end of the template
   while (index <= end) {
     const result = consumeStep(templates, data, keys, index);
-
+    // console.log(result);
     // Has code to append
     if (result.code !== undefined) {
       code += result.code;
@@ -30,7 +30,7 @@ export function consume<D extends TemplateData, P extends KeysOf<D>[]>(
     }
 
     // Jumps to the next index
-    index += result.nextIndex;
+    index = result.nextIndex;
   }
 
   return code;
@@ -46,7 +46,7 @@ export function consumeStep<D extends TemplateData, P extends KeysOf<D>[]>(
   code?: string;
   nextIndex?: number;
 } {
-  const template = templates[index];
+  let template = templates[index];
   const key = keys[index];
 
   // index out of bounds
@@ -87,21 +87,15 @@ export function consumeStep<D extends TemplateData, P extends KeysOf<D>[]>(
       }
 
       const eachEndIndex = index + findCommandEnd('each', keys.slice(index));
-      let bodyCode = '';
 
       for (let arrayIndex = 0; arrayIndex < array.length; arrayIndex++) {
         const replacedKeys = replaceArrayIndexes(keys, argument, arrayIndex);
 
-        bodyCode +=
-          consume(index + 1, eachEndIndex, templates, data, replacedKeys) +
-          // Appends the [/each]s template tag on each iteration instead
-          // of appending it once at the end
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          templates[eachEndIndex]!;
+        template += consume(index + 1, eachEndIndex, templates, data, replacedKeys);
       }
 
       return {
-        code: template + bodyCode,
+        code: template,
         nextIndex: eachEndIndex + 1
       };
     }
@@ -109,27 +103,16 @@ export function consumeStep<D extends TemplateData, P extends KeysOf<D>[]>(
     case 'if': {
       const argument = key[1];
       const condition = !!indexObject(argument, data);
-      const ifEndIndex = index + findCommandEnd('each', keys.slice(index));
+      const ifEndIndex = index + findCommandEnd('if', keys.slice(index));
 
-      // If the condition is true, parse the template
-      if (!condition) {
-        return {
-          code: template,
-          // Jumps to the [/if] tag to void ignoring its template
-          nextIndex: ifEndIndex - 1
-        };
+      if (condition) {
+        // Appends the if body, if the condition is true
+        template += consume(index + 1, ifEndIndex, templates, data, keys);
       }
 
       return {
-        code:
-          // Starts with the template
-          template +
-          // Appends the if body
-          consume(index + 1, ifEndIndex, templates, data, keys) +
-          // Appends the [/if]s template tag only if the condition is true
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          templates[ifEndIndex]!,
-        nextIndex: ifEndIndex + 1
+        nextIndex: ifEndIndex + 1,
+        code: template
       };
     }
 

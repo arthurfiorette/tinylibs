@@ -15,6 +15,12 @@ export class TsWriter {
   private host: ts.CompilerHost;
   private compilerOptions: ts.CompilerOptions;
 
+  /**
+   * Constructs a new TsWriter instance.
+   *
+   * @param optionsOrTsconfigPath Either the compiler options or the path to a tsconfig
+   *   file.
+   */
   constructor(optionsOrTsconfigPath: ts.CompilerOptions | string) {
     this.compilerOptions =
       typeof optionsOrTsconfigPath === 'string'
@@ -41,6 +47,11 @@ export class TsWriter {
       ] = content);
   }
 
+  /**
+   * Collects all the written files and uses typescript to transpile them.
+   *
+   * @returns The result of the transpilation from typescript.
+   */
   transpile() {
     // Flush the outputs before transpiling (maybe) again
     this.outputs = {};
@@ -55,6 +66,11 @@ export class TsWriter {
     return this.outputs;
   }
 
+  /**
+   * Generates the code to be written in the provided file. The first argument is an
+   * object with the variables to be used in the template, as well the filename. The rest
+   * of the arguments are the templates to be written in the file.
+   */
   write<D extends SourceTemplateData, P extends KeysOf<D>[]>(
     template: TemplateStringsArray,
     data: D,
@@ -63,7 +79,11 @@ export class TsWriter {
     (this.sources[data.filename] ??= []).push(t<D, P>(template, data, ...keys));
   }
 
-  /** Write on top of the file */
+  /**
+   * Generates the code to be written **ON TOP** in the provided file. The first argument
+   * is an object with the variables to be used in the template, as well the filename. The
+   * rest of the arguments are the templates to be written in the file.
+   */
   head<D extends SourceTemplateData, P extends KeysOf<D>[]>(
     template: TemplateStringsArray,
     data: D,
@@ -72,6 +92,12 @@ export class TsWriter {
     (this.sources[data.filename] ??= []).unshift(t<D, P>(template, data, ...keys));
   }
 
+  /**
+   * Generates the code to be written in the provided file **ONLY IF NOT ALREADY
+   * WRITTEN**. The first argument is an object with the variables to be used in the
+   * template, as well the filename. The rest of the arguments are the templates to be
+   * written in the file.
+   */
   writeUnique<D extends SourceTemplateData, P extends KeysOf<D>[]>(
     template: TemplateStringsArray,
     data: D,
@@ -85,7 +111,12 @@ export class TsWriter {
     }
   }
 
-  /** Write on top of the file */
+  /**
+   * Generates the code to be written **ON TOP** in the provided file **ONLY IF NOT
+   * ALREADY WRITTEN**. The first argument is an object with the variables to be used in
+   * the template, as well the filename. The rest of the arguments are the templates to be
+   * written in the file.
+   */
   headUnique<D extends SourceTemplateData, P extends KeysOf<D>[]>(
     template: TemplateStringsArray,
     data: D,

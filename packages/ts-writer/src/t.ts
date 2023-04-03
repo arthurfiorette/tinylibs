@@ -1,6 +1,12 @@
 import { consume } from './consume';
 import type { Commands, KeysOf, TemplateData } from './types';
 
+/**
+ * The generic template string template engine function, it does not have any special
+ * features, it just fills the provided template with your data.
+ *
+ * @returns The generated string
+ */
 export function t<D extends TemplateData, P extends KeysOf<D>[]>(
   _template: TemplateStringsArray,
   data: D,
@@ -19,12 +25,12 @@ export function t<D extends TemplateData, P extends KeysOf<D>[]>(
     }
   }
 
-  // Trims the start of the code
+  // Trims the start of the code, if there's any
   if (template[0]) {
     template[0] = template[0].trimStart();
   }
 
-  // Trims the end of the code
+  // Trims the end of the code, if there's any
   if (template[template.length - 1]) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     template[template.length - 1] = template[template.length - 1]!.trimEnd();
