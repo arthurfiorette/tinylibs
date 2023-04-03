@@ -110,7 +110,7 @@ describe(TsWriter, () => {
     w.write`${{ filename: 'a.ts' }} function a(b: number) { return b * 2 }`;
     w.head`${{ filename: 'a.ts' }} function b(c: number) { return c * 2 }`;
 
-    const result = w.transpile();
+    let result = w.transpile();
 
     expect(result['a.js']).toBe(
       `function b(c) { return c * 2; }\nfunction a(b) { return b * 2; }\n`
@@ -122,7 +122,8 @@ describe(TsWriter, () => {
     w.write`${{ filename: 'b.ts' }} function c(d: number) { return d * 2 }`;
     w.head`${{ filename: 'b.ts' }} function e(f: number) { return f * 2 }`;
 
-    w.transpile();
+    result = w.transpile();
+    
 
     expect(result['a.js']).toBe(
       `function b(c) { return c * 2; }\nfunction a(b) { return b * 2; }\n`
