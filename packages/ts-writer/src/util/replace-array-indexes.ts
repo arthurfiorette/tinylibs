@@ -6,12 +6,13 @@ export function replaceArrayIndexes<D extends TemplateData, P extends KeysOf<D>[
   index: number,
   symbol = '@'
 ): typeof keys {
-  const mappedKeys = Array<Commands<P[number]>>(keys.length) as any as typeof keys;
+  const mappedKeys = Array<Commands<P[number]>>(keys.length);
 
   for (let i = 0; i < keys.length; i++) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const key = keys[i]!;
 
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     let path = typeof key === 'string' ? key : key[1]!;
 
     if (

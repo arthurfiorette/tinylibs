@@ -11,7 +11,7 @@ it('runs the readme example', () => {
     numbers: [[1], [2], [3], [4], [5]],
     func: () => 'return',
     b: class {
-      public num: number = 1;
+      public num = 1;
     }
   }}
 
