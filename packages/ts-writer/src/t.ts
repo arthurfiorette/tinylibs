@@ -12,12 +12,13 @@ export function t<D extends TemplateData, P extends KeysOf<D>[]>(
   data: D,
   ...keys: Commands<P[number]>[]
 ): string {
-  const template = Array.from(_template);
+  /** Copies array into mutable */
+  const template = _template.slice();
 
   // This removes the first item from the template array,
   // allowing us have matching values for the same index at parameters and template
   {
-    const prefix = template.shift();
+    const prefix = (template as unknown as string[]).shift();
 
     // If theres text before the data.
     if (prefix?.trim().length) {

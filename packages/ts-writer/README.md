@@ -155,7 +155,7 @@ feature with caution.
 
 ## Api
 
-Every property is commented in the source code with tsdoc, so you can check it out there.
+Every property is commented in the source code with TsDoc, so you can check it out there.
 
 - `t` - The generic template string template engine function, it does not have any special
   features, it just fills the provided template with your data.

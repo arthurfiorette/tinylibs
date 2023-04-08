@@ -20,7 +20,7 @@ export function findCommandEnd(command: string, keys: Commands[]) {
       case command:
         deep++;
         break;
-      case `/${command}`:
+      case '/' + command:
         deep--;
         break;
     }

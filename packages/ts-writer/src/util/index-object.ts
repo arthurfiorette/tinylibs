@@ -1,32 +1,29 @@
 import type { TemplateData } from '../types';
 
 /** Indexes an object using a dotted string path */
-export function indexObject<R>(key: string, data: TemplateData): R {
-  const keys = key.split('.');
+export function indexObject<R>(path: string, data: TemplateData): R {
+  const paths = path.split('.');
 
-  while (keys.length) {
+  for (let index = 0; index < paths.length; index++) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const currKey = keys.shift()!;
+    const p = paths[index]!;
 
-    if (currKey === '@') {
+    if (p === '@') {
       throw new Error(
-        `Cannot use "@" as a key, have you forget to wrap it in a \${['each']}?`
+        'Cannot use "@" as a key, have you forget to wrap it in a ${[\'each\']}?'
       );
     }
 
     if (
-      // Avoids `cannot use 'in' operator to search` error on primitive types
-      typeof data === 'object' ? currKey in data : !!data[currKey]
+      // Avoids `cannot use 'in' operator to search` error when data is primitive
+      typeof data === 'object' ? p in data : data[p]
     ) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-      data = data[currKey] as TemplateData;
+      data = data[p] as typeof data;
       continue;
     }
 
     throw new Error(
-      `Key "${currKey}" ${
-        key.startsWith(currKey) ? '' : `in "${key}" `
-      }does not exist inside data`
+      `Key "${p}" ${path.startsWith(p) ? '' : `in "${path}" `}does not exist inside data`
     );
   }
 
