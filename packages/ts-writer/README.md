@@ -95,16 +95,18 @@ _(deep)_ key of the previous object or an [command](#commands).
 ```ts
 import { t } from 'ts-writer';
 
-t`${{
-    some: 'data',
-    deep: { property: 'property value' },
-    condition: true,
-    numbers: [[1], [2], [3], [4], [5]],
-    func: () => 'return',
-    b: class {
-      public num: number = 1;
-    }
-  }}
+const context = {
+  some: 'data',
+  deep: { property: 'property value' },
+  condition: true,
+  numbers: [[1], [2], [3], [4], [5]],
+  func: () => 'return',
+  b: class {
+    public num: number | undefined = 1;
+  }
+} as const;
+
+t`${context}
 
 (All spaces before the first non-space character gets trimmed out)
 
@@ -147,8 +149,7 @@ NOTE: Types are not preserved for runtime variables, so you must use this
 feature with caution.
 
 (All spaces after the last non-space character gets trimmed out);
-
-`
+`;
 ```
 
 <br />
