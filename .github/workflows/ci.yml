@@ -33,7 +33,7 @@ jobs:
         run: pnpm lint
 
       - name: Test
-        run: pnpm test -- --ci
+        run: pnpm test
 
       - name: Publish to Codecov
         uses: codecov/codecov-action@v3.1.1
