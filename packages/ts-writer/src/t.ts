@@ -1,13 +1,6 @@
 import { consume } from './consume';
 import type { Commands, KeysOf, TemplateData } from './types';
 
-export enum T {
-  Each = 'each',
-  EndEach = '/each',
-  If = 'if',
-  EndIf = '/if'
-}
-
 /**
  * The generic template string template engine function, it does not have any special
  * features, it just fills the provided template with your data.

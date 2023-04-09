@@ -9,11 +9,11 @@ export function replaceArrayIndexes<
   index: number,
   symbol = '@'
 ): typeof keys {
-  const mappedKeys = Array<Commands<P[number], D>>(keys.length);
+  const mappedKeys = Array(keys.length);
 
   for (let i = 0; i < keys.length; i++) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const key = keys[i]!;
+    const key = keys[i]! as string | [string, string];
 
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     let path = typeof key === 'string' ? key : key[1]!;
@@ -30,8 +30,7 @@ export function replaceArrayIndexes<
     }
 
     // Replaces the key with the new path
-    path = (`${argument}.${index}` +
-      path.slice(argument.length + symbol.length + 1)) as typeof path;
+    path = `${argument}.${index}` + path.slice(argument.length + symbol.length + 1);
 
     mappedKeys[i] =
       typeof key === 'string'
@@ -40,5 +39,5 @@ export function replaceArrayIndexes<
           [key[0] as 'if', path];
   }
 
-  return mappedKeys;
+  return mappedKeys as Commands<P[number], D>[];
 }

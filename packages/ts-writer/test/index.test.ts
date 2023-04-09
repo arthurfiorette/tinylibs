@@ -22,6 +22,17 @@ describe(t, () => {
     ).toBe('[1-2-3-4-]');
   });
 
+  it('works with if/else', () => {
+    expect(
+      t`${{ truthy: true, falsy: false }}
+      ${['if', 'truthy']}
+      
+      ${['else']}
+      
+      ${['/if']}`
+    ).toBe('[1-2-3-4-]');
+  });
+
   it('throws when each is not an array', () => {
     expect(() => t`${{ array: 1 }}[${['each', 'array']}1${['/each']}]`).toThrowError(
       'Key "array" is not an array'
