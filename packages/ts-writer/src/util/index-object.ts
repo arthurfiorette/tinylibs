@@ -1,7 +1,5 @@
-import type { TemplateData } from '../types';
-
 /** Indexes an object using a dotted string path */
-export function indexObject<R>(path: string, data: TemplateData): R {
+export function indexObject<R>(path: string, data: unknown): R {
   const paths = path.split('.');
 
   for (let index = 0; index < paths.length; index++) {
@@ -16,9 +14,10 @@ export function indexObject<R>(path: string, data: TemplateData): R {
 
     if (
       // Avoids `cannot use 'in' operator to search` error when data is primitive
-      typeof data === 'object' ? p in data : data[p]
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      typeof data === 'object' && data ? p in data : (data as never)[p]
     ) {
-      data = data[p] as typeof data;
+      data = (data as never)[p];
       continue;
     }
 

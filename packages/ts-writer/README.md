@@ -38,6 +38,7 @@
   - [Node](#node)
   - [Url Import](#url-import)
 - [Getting Started](#getting-started)
+- [Generating code](#generating-code)
 - [Template syntax](#template-syntax)
 - [Api](#api)
 - [License](#license)
@@ -73,7 +74,7 @@ import { TsWriter } from 'https://cdn.skypack.dev/ts-writer@latest';
 
 Ts Writer is a JIC _(Just in Time)_ **template string template engine** designated to
 generate typescript code at runtime. It is very simple to use and has a very small
-footprint.
+footprint, perfect designed to be used in CLIs and Code generation tools.
 
 There's numerous reasons why code generation increases performance even as javascript is a
 JIC interpreted language, this library helps you to generate the code you need at runtime
@@ -82,6 +83,80 @@ JIC interpreted language, this library helps you to generate the code you need a
 Simply create your `TsWriter` instance and you are ready to go!
 
 <br />
+
+## Generating code
+
+> If you want to directly generate javascript code, just the `t` function is good enough.
+
+This guide will show you how to generate typescript code using the `TsWriter` class.
+
+```ts
+import { TsWriter, indexObject } from 'ts-writer';
+import path from 'node:path';
+
+const writer = new TsWriter({}, [
+  // adjusts imports and paths
+  [
+    'relative',
+    (key, data) => {
+      if (!key) {
+        throw new Error('relative helper requires a key');
+      }
+
+      // removes extension and formats
+      const parsed = path.parse(String(indexObject(key, data)));
+      return parsed.dir + parsed.name;
+    }
+  ]
+] as const);
+
+// Image you have the following property
+declare let functions: Array<{
+  filepath: string;
+  name: string;
+  returnType: string;
+  comment?: string;
+  args: { name: string; type: string }[];
+}>;
+
+// You can generate the following code
+for (const func of functions) {
+  // adds file's export on index.ts
+  // headUnique -> top of file and avoid duplicates
+  writer.headUnique`${{
+    filename: 'index.ts',
+    name: func.name,
+    path: func.filepath
+  }}
+  export { ${'name'} } from './${/* calls a helper */ ['$relative', 'path']}';
+  `;
+
+  // adds function on path
+  writer.write`${{
+    filename: func.filepath,
+    ...func
+  }}
+
+  ${['if', 'comment']} /** ${'comment'} */ ${['/if']}
+  export function ${'name'}(
+    ${['each', 'args']}${'args.@.name'}: ${'args.@.type'},${['/each']}
+  ): ${'returnType'} {
+    return [${['each', 'args']}${'args.@.name'},${['/each']}];
+  }
+  `;
+}
+
+// After writing everything you need, just call writer.transpile()
+
+const code = writer.transpile();
+
+code['index.js']; // code
+code['index.d.ts']; // types
+
+code['path/to/func1.js']; // code
+code['path/to/func1.d.ts']; // types
+// and so on!
+```
 
 ## Template syntax
 
@@ -96,7 +171,9 @@ _(deep)_ key of the previous object or an [command](#commands).
 import { t } from 'ts-writer';
 
 const context = {
-  some: 'data',
+  // special property!
+  helpers: [['lower', (path, data) => String(indexObject(path, data)).toLowerCase()]]
+  some: 'Data',
   deep: { property: 'property value' },
   condition: true,
   numbers: [[1], [2], [3], [4], [5]],
@@ -114,7 +191,7 @@ Anything inside here already is part of the template.
 
 ---
 
-You can use ${'some'} to access the data.
+You can use ${'some'} to access the Data.
 NOTE: You can ONLY pass string properties of the first argument,
 you shall use the dot notation to access deeper properties.
 ${'deep.property'} will access the value 'property value'.
@@ -123,6 +200,9 @@ ${'deep.property'} will access the value 'property value'.
 
 You can also use \${['command', ...arguments]} syntax to execute commands.
 Currently, there are only 2 commands: if and each.
+
+Every item on the helpers special property will be mapped as an $helper.
+${['$lower', 'some']} will access the 'some' property and lower case it.
 
 ${['if', 'condition']}
   This will only be in the generated string if the 'condition' property is truthy.

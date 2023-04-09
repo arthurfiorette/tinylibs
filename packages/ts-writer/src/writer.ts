@@ -1,19 +1,21 @@
 import path from 'node:path';
 import ts from 'typescript';
 import { t } from './t';
-import type { Commands, KeysOf, SourceTemplateData } from './types';
+import type { Commands, KeysOf, SourceTemplateData, TemplateHelper } from './types';
 import { readCompilerOptions } from './util/read-compiler-options';
 
-export class TsWriter {
+export class TsWriter<
+  H extends readonly TemplateHelper[] | undefined = readonly TemplateHelper[] | undefined
+> {
   /**
    * A simple map of all the sources that have been written.
    *
    * The string array represents the result of each write call, **not each written line**.
    */
-  private sources: Record<string, string[]> = {};
+  readonly sources: Record<string, string[]> = {};
   private outputs: Record<string, string> = {};
-  private host: ts.CompilerHost;
-  private compilerOptions: ts.CompilerOptions;
+  readonly host: ts.CompilerHost;
+  readonly compilerOptions: ts.CompilerOptions;
 
   /**
    * Constructs a new TsWriter instance.
@@ -21,7 +23,7 @@ export class TsWriter {
    * @param optionsOrTsconfigPath Either the compiler options or the path to a tsconfig
    *   file.
    */
-  constructor(optionsOrTsconfigPath: ts.CompilerOptions | string) {
+  constructor(optionsOrTsconfigPath: ts.CompilerOptions | string, readonly helpers: H) {
     this.compilerOptions =
       typeof optionsOrTsconfigPath === 'string'
         ? readCompilerOptions(optionsOrTsconfigPath)
@@ -71,12 +73,16 @@ export class TsWriter {
    * object with the variables to be used in the template, as well the filename. The rest
    * of the arguments are the templates to be written in the file.
    */
-  write<D extends SourceTemplateData, P extends KeysOf<D>[]>(
+  write<D extends SourceTemplateData<H>, P extends KeysOf<Omit<D, 'helpers'>>[]>(
     template: TemplateStringsArray,
     data: D,
-    ...keys: Commands<P[number]>[]
+    ...keys: Commands<P[number], D & { helpers: H }>[]
   ) {
-    (this.sources[data.filename] ??= []).push(t<D, P>(template, data, ...keys));
+    data.helpers ??= this.helpers;
+
+    (this.sources[data.filename] ??= []).push(
+      t(template, data as D & { helpers: H }, ...keys)
+    );
   }
 
   /**
@@ -84,12 +90,16 @@ export class TsWriter {
    * is an object with the variables to be used in the template, as well the filename. The
    * rest of the arguments are the templates to be written in the file.
    */
-  head<D extends SourceTemplateData, P extends KeysOf<D>[]>(
+  head<D extends SourceTemplateData<H>, P extends KeysOf<Omit<D, 'helpers'>>[]>(
     template: TemplateStringsArray,
     data: D,
-    ...keys: Commands<P[number]>[]
+    ...keys: Commands<P[number], D & { helpers: H }>[]
   ) {
-    (this.sources[data.filename] ??= []).unshift(t<D, P>(template, data, ...keys));
+    data.helpers ??= this.helpers;
+
+    (this.sources[data.filename] ??= []).unshift(
+      t(template, data as D & { helpers: H }, ...keys)
+    );
   }
 
   /**
@@ -98,12 +108,14 @@ export class TsWriter {
    * template, as well the filename. The rest of the arguments are the templates to be
    * written in the file.
    */
-  writeUnique<D extends SourceTemplateData, P extends KeysOf<D>[]>(
+  writeUnique<D extends SourceTemplateData<H>, P extends KeysOf<Omit<D, 'helpers'>>[]>(
     template: TemplateStringsArray,
     data: D,
-    ...keys: Commands<P[number]>[]
+    ...keys: Commands<P[number], D & { helpers: H }>[]
   ) {
-    const str = t<D, P>(template, data, ...keys);
+    data.helpers ??= this.helpers;
+
+    const str = t(template, data as D & { helpers: H }, ...keys);
     const file = (this.sources[data.filename] ??= []);
 
     if (!file.includes(str)) {
@@ -117,12 +129,14 @@ export class TsWriter {
    * the template, as well the filename. The rest of the arguments are the templates to be
    * written in the file.
    */
-  headUnique<D extends SourceTemplateData, P extends KeysOf<D>[]>(
+  headUnique<D extends SourceTemplateData<H>, P extends KeysOf<Omit<D, 'helpers'>>[]>(
     template: TemplateStringsArray,
     data: D,
-    ...keys: Commands<P[number]>[]
+    ...keys: Commands<P[number], D & { helpers: H }>[]
   ) {
-    const str = t<D, P>(template, data, ...keys);
+    data.helpers ??= this.helpers;
+
+    const str = t(template, data as D & { helpers: H }, ...keys);
     const file = (this.sources[data.filename] ??= []);
 
     if (!file.includes(str)) {

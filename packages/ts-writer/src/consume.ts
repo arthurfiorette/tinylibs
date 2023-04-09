@@ -1,16 +1,16 @@
-import { stringify } from 'javascript-stringify';
-import type { Commands, KeysOf, TemplateData } from './types';
+import type { Commands, KeysOf, TemplateData, TemplateHelper } from './types';
 import { findCommandEnd } from './util/find-command-end';
 import { indexObject } from './util/index-object';
 import { replaceArrayIndexes } from './util/replace-array-indexes';
+import { stringify } from './util/stringify';
 
 /** Parses and evaluates a template string. */
-export function consume<D extends TemplateData, P extends KeysOf<D>[]>(
+export function consume<D extends TemplateData, P extends KeysOf<Omit<D, 'helpers'>>[]>(
   start: number,
   end: number,
   templates: string[],
   data: D,
-  keys: Commands<P[number]>[]
+  keys: Commands<P[number], D>[]
 ): string {
   let code = '';
   let index = start;
@@ -18,7 +18,7 @@ export function consume<D extends TemplateData, P extends KeysOf<D>[]>(
   // Jumps on each nextIndex until it reaches the end of the template
   while (index <= end) {
     const result = consumeStep(templates, data, keys, index);
-    // console.log(result);
+
     // Has code to append
     if (result.code !== undefined) {
       code += result.code;
@@ -37,10 +37,13 @@ export function consume<D extends TemplateData, P extends KeysOf<D>[]>(
 }
 
 /** Parses and evaluates a single template and key of a template string. */
-export function consumeStep<D extends TemplateData, P extends KeysOf<D>[]>(
+export function consumeStep<
+  D extends TemplateData,
+  P extends KeysOf<Omit<D, 'helpers'>>[]
+>(
   templates: string[],
   data: D,
-  keys: Commands<P[number]>[],
+  keys: Commands<P[number], D>[],
   index: number
 ): {
   code?: string;
@@ -74,6 +77,34 @@ export function consumeStep<D extends TemplateData, P extends KeysOf<D>[]>(
     // The end command template, if needed, should've been appended on the previous iteration
     return {
       code: template,
+      nextIndex: index + 1
+    };
+  }
+
+  // It is a helper
+  if (key[0][0] === '$') {
+    const helperName = key[0].slice(1);
+
+    if (!data.helpers) {
+      throw new Error(`Helper "${helperName}" not found`);
+    }
+
+    let helper: TemplateHelper[1] | undefined;
+
+    for (const h of data.helpers) {
+      if (h[0] === helperName) {
+        helper = h[1];
+        break;
+      }
+    }
+
+    if (!helper) {
+      throw new Error(`Helper "${helperName}" not found`);
+    }
+
+    return {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      code: template + stringify(helper(key[1], data))!,
       nextIndex: index + 1
     };
   }

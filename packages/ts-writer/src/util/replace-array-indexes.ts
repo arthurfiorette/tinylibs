@@ -1,12 +1,15 @@
 import type { Commands, KeysOf, TemplateData } from '../types';
 
-export function replaceArrayIndexes<D extends TemplateData, P extends KeysOf<D>[]>(
-  keys: Commands<P[number]>[],
+export function replaceArrayIndexes<
+  D extends TemplateData,
+  P extends KeysOf<Omit<D, 'helpers'>>[]
+>(
+  keys: Commands<P[number], D>[],
   argument: string,
   index: number,
   symbol = '@'
 ): typeof keys {
-  const mappedKeys = Array<Commands<P[number]>>(keys.length);
+  const mappedKeys = Array<Commands<P[number], D>>(keys.length);
 
   for (let i = 0; i < keys.length; i++) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

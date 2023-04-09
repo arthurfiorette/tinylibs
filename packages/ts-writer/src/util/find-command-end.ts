@@ -1,4 +1,4 @@
-import type { Commands } from '../types';
+import type { Commands, TemplateData } from '../types';
 
 /**
  * Returns the amount of keys that are part of a command
@@ -6,13 +6,16 @@ import type { Commands } from '../types';
  * @param keys Keys must start with the cmd
  * @returns 1, if the command is `each` and the next key is `/each`
  */
-export function findCommandEnd(command: string, keys: Commands[]) {
+export function findCommandEnd<
+  Arg extends string = string,
+  T extends TemplateData = TemplateData
+>(command: string, keys: Commands<Arg, T>[]) {
   for (let index = 0, deep = 0; index < keys.length; index++) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const key = keys[index]!;
 
     // Skips simple keys
-    if (typeof key === 'string') {
+    if (!key || typeof key === 'string') {
       continue;
     }
 

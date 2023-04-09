@@ -1,19 +1,26 @@
 /* eslint-disable no-global-assign */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 
-import { t } from '../src';
+import path from 'node:path';
+import { indexObject, t, TsWriter } from '../src';
 
 it('runs the readme example', () => {
-  expect(t`${{
-    some: 'data',
-    deep: { property: 'property value' },
-    condition: true,
-    numbers: [[1], [2], [3], [4], [5]],
-    func: () => 'return',
-    b: class {
-      public num = 1;
-    }
-  }}
+  expect(t`${
+    {
+      helpers: [
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        ['lower', (path, data) => String(indexObject(path!, data)).toLowerCase()]
+      ],
+      some: 'data',
+      deep: { property: 'property value' },
+      condition: true,
+      numbers: [[1], [2], [3], [4], [5]],
+      func: () => 'return',
+      b: class {
+        public num = 1;
+      }
+    } as const
+  }
 
 (All spaces before the first non-space character gets trimmed out)
 
@@ -30,6 +37,9 @@ ${'deep.property'} will access the value 'property value'.
 
 You can also use \${['command', ...arguments]} syntax to execute commands.
 Currently, there are only 2 commands: if and each.
+
+Every item on the helpers special property will be mapped as an $helper.
+${['$lower', 'some']} will access the 'some' property and lower case it.
 
 ${['if', 'condition']}
   This will only be in the generated string if the 'condition' property is truthy.
@@ -64,15 +74,18 @@ feature with caution.
       '\n' +
       '---\n' +
       '\n' +
-      "You can use 'data' to access the data.\n" +
+      'You can use data to access the data.\n' +
       'NOTE: You can ONLY pass string properties of the first argument,\n' +
       'you shall use the dot notation to access deeper properties.\n' +
-      "'property value' will access the value 'property value'.\n" +
+      "property value will access the value 'property value'.\n" +
       '\n' +
       '---\n' +
       '\n' +
       "You can also use ${['command', ...arguments]} syntax to execute commands.\n" +
       'Currently, there are only 2 commands: if and each.\n' +
+      '\n' +
+      'Every item on the helpers special property will be mapped as an $helper.\n' +
+      "data will access the 'some' property and lower case it.\n" +
       '\n' +
       '\n' +
       "  This will only be in the generated string if the 'condition' property is truthy.\n" +
@@ -130,4 +143,95 @@ feature with caution.
       '\n' +
       '(All spaces after the last non-space character gets trimmed out)'
   );
+});
+
+it('runs the second readme example', () => {
+  const writer = new TsWriter({}, [
+    // adjusts imports and paths
+    [
+      'relative',
+      (key, data) => {
+        if (!key) {
+          throw new Error('relative helper requires a key');
+        }
+
+        // removes extension and formats
+        const parsed = path.parse(String(indexObject(key, data)));
+        return parsed.dir + parsed.name;
+      }
+    ]
+  ] as const);
+
+  // Image you have the following property
+  const functions: Array<{
+    filepath: `${string}.ts`;
+    name: string;
+    returnType: string;
+    comment?: string;
+    args: { name: string; type: string }[];
+  }> = [
+    {
+      filepath: 'my-file.ts',
+      name: 'myFunction',
+      returnType: 'string',
+      comment: 'This is my function',
+      args: [
+        { name: 'arg1', type: 'string' },
+        { name: 'arg2', type: 'number' }
+      ]
+    }
+  ];
+
+  // You can generate the following code
+  for (const func of functions) {
+    // adds file import on index.ts
+    // headUnique -> top of file and avoid duplicates
+    writer.headUnique`${{
+      filename: 'index.ts',
+      name: func.name,
+      path: func.filepath
+    }}
+  export { ${'name'} } from './${/* calls a helper */ ['$relative', 'path']}';
+  `;
+
+    // adds function on path
+    writer.write`${{
+      filename: func.filepath,
+      ...func
+    }}
+
+  ${['if', 'comment']} /** ${'comment'} */ ${['/if']}
+  export function ${'name'}(
+    ${['each', 'args']}${'args.@.name'}: ${'args.@.type'},${['/each']}
+  ): ${'returnType'} {
+    return [${['each', 'args']}${'args.@.name'},${['/each']}];
+  }
+  `;
+  }
+
+  // After writing everything you need, just call writer.transpile()
+
+  const code = writer.transpile();
+
+  expect(code).toStrictEqual({
+    'index.js':
+      '"use strict";\n' +
+      'Object.defineProperty(exports, "__esModule", { value: true });\n' +
+      'exports.myFunction = void 0;\n' +
+      'var my_file_1 = require("./my-file");\n' +
+      'Object.defineProperty(exports, "myFunction", { enumerable: true, get: function () { return my_file_1.myFunction; } });\n',
+    'index.d.ts': "export { myFunction } from './my-file';\n",
+    'my-file.js':
+      '"use strict";\n' +
+      'Object.defineProperty(exports, "__esModule", { value: true });\n' +
+      'exports.myFunction = void 0;\n' +
+      '/** This is my function */\n' +
+      'function myFunction(arg1, arg2) {\n' +
+      '    return [arg1, arg2,];\n' +
+      '}\n' +
+      'exports.myFunction = myFunction;\n',
+    'my-file.d.ts':
+      '/** This is my function */\n' +
+      'export declare function myFunction(arg1: string, arg2: number): string;\n'
+  });
 });
