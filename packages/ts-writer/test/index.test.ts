@@ -24,13 +24,21 @@ describe(t, () => {
 
   it('works with if/else', () => {
     expect(
-      t`${{ truthy: true, falsy: false }}
-      ${['if', 'truthy']}
-      
-      ${['else']}
-      
-      ${['/if']}`
-    ).toBe('[1-2-3-4-]');
+      t`${{ truthy: true, falsy: false }}${['if', 'truthy']}1${['else']}2${['/if']}${[
+        'if',
+        'falsy'
+      ]}3${['else']}4${['/if']}${['if', 'truthy']}5${['/if']}${['if', 'falsy']}6${[
+        '/if'
+      ]}`
+    ).toBe('145');
+  });
+
+  it('works with deep if/else', () => {
+    expect(
+      t`${{ truthy: true, falsy: false }}${['if', 'truthy']}1${['if', 'falsy']}2${[
+        'else'
+      ]}3${['/if']}4${['else']}5${['if', 'truthy']}6${['else']}7${['/if']}8${['/if']}`
+    ).toBe('134');
   });
 
   it('throws when each is not an array', () => {

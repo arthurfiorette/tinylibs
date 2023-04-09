@@ -43,6 +43,8 @@ ${['$lower', 'some']} will access the 'some' property and lower case it.
 
 ${['if', 'condition']}
   This will only be in the generated string if the 'condition' property is truthy.
+${['else']}
+  This will only be in the generated string if the 'condition' property is falsy.
 ${['/if']}
 
 ${['each', 'numbers']}

@@ -1,5 +1,5 @@
 import type { Commands, KeysOf, TemplateData, TemplateHelper } from './types';
-import { findCommandEnd } from './util/find-command-end';
+import { findCommandEnd, findElseClause } from './util/find-command-end';
 import { indexObject } from './util/index-object';
 import { replaceArrayIndexes } from './util/replace-array-indexes';
 import { stringify } from './util/stringify';
@@ -73,7 +73,7 @@ export function consumeStep<
   }
 
   // The ending of a command template, like /if
-  if (key[0][0] === '/') {
+  if (key[0][0] === '/' || key[0] === 'else') {
     // The end command template, if needed, should've been appended on the previous iteration
     return {
       code: template,
@@ -136,11 +136,24 @@ export function consumeStep<
   if (key[0] === 'if') {
     const argument = key[1];
     const condition = !!indexObject(argument, data);
-    const ifEndIndex = index + findCommandEnd('if', keys.slice(index));
 
-    if (condition) {
-      // Appends the if body, if the condition is true
-      template += consume(index + 1, ifEndIndex, templates, data, keys);
+    // Reduces the amount of keys to be parsed
+    const slicedKeys = keys.slice(index);
+
+    const ifEndIndex = index + findCommandEnd('if', slicedKeys);
+    const elseRelativeIndex = findElseClause(slicedKeys.slice(0, ifEndIndex));
+
+    if (condition || elseRelativeIndex) {
+      // Appends the if body, if the condition is truthy or there's an else clause
+      template += consume(
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        condition ? index + 1 : index + elseRelativeIndex! + 1,
+        // Until the else clause, if it exists
+        condition && elseRelativeIndex ? index + elseRelativeIndex : ifEndIndex,
+        templates,
+        data,
+        keys
+      );
     }
 
     return {

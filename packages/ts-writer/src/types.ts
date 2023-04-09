@@ -28,6 +28,7 @@ export type Commands<
   | [cmd: 'each', arg: Arg]
   | [cmd: '/each']
   | [cmd: 'if', arg: Arg]
+  | [cmd: 'else']
   | [cmd: '/if']
   | (undefined extends T['helpers']
       ? void
