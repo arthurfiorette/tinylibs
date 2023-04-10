@@ -37,7 +37,7 @@
     "tslib": "2.5.0",
     "typescript": "5.0.4"
   },
-  "packageManager": "pnpm@8.1.1",
+  "packageManager": "pnpm@8.2.0",
   "engines": {
     "node": ">=18.0.0",
     "pnpm": ">=7.27.0"
