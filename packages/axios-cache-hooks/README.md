@@ -39,8 +39,8 @@
 - [Installing](#installing)
   - [Url Import](#url-import)
 - [Getting Started](#getting-started)
-- [Documentation](#documentation)
 - [How it works](#how-it-works)
+- [Documentation](#documentation)
 - [Compatibility](#compatibility)
 - [License](#license)
 
@@ -77,7 +77,7 @@ import { createAxiosHooks } from 'https://cdn.skypack.dev/axios-cache-hooks@late
 ## Getting Started
 
 Axios Cache Hooks is a super effective and performant way to use Axios calls inside React
-applications. It is very performant because it deeply uses _(and only works with)_
+applications. That is because it heavily uses _(and only works with)_
 [Axios](https://axios-http.com) `(6.7Kb)` and
 [Axios Cache Interceptor](https://axios-cache-interceptor.js.org/) `(4.2Kb)` under the
 hood.
@@ -113,17 +113,56 @@ export const UserAge = ({ username }) => {
 };
 ```
 
+## How it works
+
+Basically, this package works by ignoring any `useEffect` to save state and calling axios
+on every draw. As we have axios-cache-interceptor working as an interceptor, this is fine
+as most of them will be resolved with in-memory data, in the same way as a `useEffect` +
+`useState` combination.
+
+By extracting your requests into dedicated functions, like the `getUser` above, we can
+enable caching requests at each component level, and even share cache between your
+micro-frontend setup.
+
+This works flawlessly because `Axios Cache Interceptor` has a concept of
+[`Request IDs`](https://axios-cache-interceptor.js.org/#/pages/request-id) that defines
+which requests should be treated as the same and reused.
+
 <br />
 
 ## Documentation
 
 > **This package is just a "bridge" between Axios with Cache and React**. Please read the
 > [`Axios Cache Interceptor`](https://github.com/arthurfiorette/axios-cache-interceptor)
-> documentation for any cache issue.
+> documentation for any cache issues.
 
-This package is so small that every documentation is available in the form of `TSDoc`. You
-can start by importing `createAxiosHooks` and using the returned hooks.
+Start by creating your requests functions, in the same way as `getUser` in the above
+example, and then use the returned hooks created by `createAxiosHooks`, which can be
+called in a top-level file and imported anywhere.
 
+It will create a `useQuery` and `useMutation`. Both of them accepts the same parameters,
+and works in the same way.
+
+```tsx
+// Calls and starts immediately
+const [user, { loading, error }] = useQuery(getUser, username);
+
+<div>{loading ? 'loading' : user.name}</div>;
+
+// Calls and only works after calling the `request` function
+const [{ data: user, loading, error }, request] = useMutation(getUser);
+
+<MyFormComponent
+  onSubmit={(data) => {
+    request(data.name);
+  }}
+/>;
+```
+
+Every documentation is available in the form of `TSDoc`. You can start by importing
+`createAxiosHooks` and using the returned hooks.
+
+- [A good article to read about state and cache](https://arthur.place/implications-of-cache-or-state)
 - [Github](https://github.com/arthurfiorette/tinylibs/tree/main/packages/axios-cache-hooks)
 - [Website](https://tinylibs.js.org/packages/axios-cache-hooks)
 - [NPM](https://npm.im/axios-cache-hooks)
@@ -135,22 +174,6 @@ can start by importing `createAxiosHooks` and using the returned hooks.
 - [Axios Docs](https://axios-http.com/docs/intro)
 
 <br />
-
-## How it works
-
-Basically, this package calls the provided http function on every draw, this is fine
-because you can only use this hook with `axios-cache-interceptor` which caches very
-effectively axios request, only allowing needed axios request to go through network.
-
-By extracting you request functions into dedicated functions, like the `getUser` above,
-you'll enable caching requests at a component level, even for your micro-frontend setup.
-
-This works flawlessly because `Axios Cache Interceptor` has a concept of
-[`Request IDs`](https://axios-cache-interceptor.js.org/#/pages/request-id) that defines
-which requests are the same or not.
-
-If you still have any questions, please feel free to create an issue and i'll be happy to
-help (and even improve this readme).
 
 <br />
 
