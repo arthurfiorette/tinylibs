@@ -1,6 +1,6 @@
 {
   "name": "ts-writer",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A 1.5Kb template string template engine designated to generate code at runtime.",
   "homepage": "https://tinylibs.js.org/packages/ts-writer",
   "bugs": "https://github.com/arthurfiorette/tinylibs/issues",
