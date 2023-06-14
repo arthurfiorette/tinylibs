@@ -7,15 +7,18 @@ describe('types', () => {
   } as const;
 
   it('tests', () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const c: KeysOf<{ f: ' asd'; a: 1; b: { c: 2 }; d: [1, 2, 3] }> = 'd.@';
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const d: KeysOf<[[1], [2], [3]]> = '@.0';
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const e: KeysOf<typeof a> = 'numbers.@.@';
+    const f: KeysOf<{ f: { a: 1 } | undefined }> = 'f.a';
+    const g: KeysOf<{ f: { a: 1 } | [{ b: 2 }] }> = 'f.a';
+    const h: KeysOf<{ f: { a: 1 } | [{ b: 2 }] | undefined }> = 'f';
 
     expect(c).toBe(c);
     expect(d).toBe(d);
     expect(e).toBe(e);
+    expect(f).toBe(f);
+    expect(g).toBe(g);
+    expect(h).toBe(h);
   });
 });

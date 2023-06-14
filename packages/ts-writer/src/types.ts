@@ -37,15 +37,22 @@ export type Commands<
 /** Returns a deep keyof for an object, joined by dots. */
 export type KeysOf<
   T extends Record<string, unknown> | readonly unknown[],
-  Key extends keyof T = keyof T
+  Key extends KeysOfUnion<T> = KeysOfUnion<T>
 > = Key extends string | number
-  ? T[Key] extends Record<string, unknown> | readonly unknown[]
+  ? NonNullable<T[Key]> extends Record<string, unknown> | readonly unknown[]
     ?
         | (Key & string)
-        | `${T extends readonly unknown[]
-            ? Key | '@'
-            : Key}.${T[Key] extends readonly unknown[]
-            ? KeysOf<T[Key]> | '@'
-            : KeysOf<T[Key]>}`
-    : `${T extends readonly unknown[] ? Exclude<Key, keyof []> | '@' : Key}`
+        | `${CommercialArray<T, Key>}.${CommercialArray<NonNullable<T[Key]>>}`
+    : `${CommercialArray<T, Key>}`
   : never;
+
+type KeysOfUnion<T> = T extends T
+  ? T extends readonly unknown[]
+    ? Exclude<keyof T, keyof []>
+    : keyof T
+  : never;
+
+type CommercialArray<
+  T extends Record<string, unknown> | readonly unknown[],
+  Key = KeysOf<T>
+> = T extends readonly unknown[] ? Exclude<Key, keyof []> | '@' : Key;
