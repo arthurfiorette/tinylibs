@@ -34,25 +34,19 @@ export type Commands<
       ? void
       : [cmd: `$${Exclude<T['helpers'], undefined>[number][0]}`, args?: Arg]);
 
-/** Returns a deep keyof for an object, joined by dots. */
 export type KeysOf<
   T extends Record<string, unknown> | readonly unknown[],
-  Key extends KeysOfUnion<T> = KeysOfUnion<T>
+  Key extends keyof T = KeysOfUnion<T>
 > = Key extends string | number
   ? NonNullable<T[Key]> extends Record<string, unknown> | readonly unknown[]
     ?
         | (Key & string)
-        | `${CommercialArray<T, Key>}.${CommercialArray<NonNullable<T[Key]>>}`
-    : `${CommercialArray<T, Key>}`
+        | `${T extends readonly unknown[] ? Key | '@' : Key}.${NonNullable<
+            T[Key]
+          > extends readonly unknown[]
+            ? KeysOf<NonNullable<T[Key]>> | '@'
+            : KeysOf<NonNullable<T[Key]>>}`
+    : `${T extends readonly unknown[] ? Exclude<Key, keyof []> | '@' : Key}`
   : never;
 
-type KeysOfUnion<T> = T extends T
-  ? T extends readonly unknown[]
-    ? Exclude<keyof T, keyof []>
-    : keyof T
-  : never;
-
-type CommercialArray<
-  T extends Record<string, unknown> | readonly unknown[],
-  Key = KeysOf<T>
-> = T extends readonly unknown[] ? Exclude<Key, keyof []> | '@' : Key;
+type KeysOfUnion<T> = T extends T ? keyof T : never;
