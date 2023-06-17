@@ -14,7 +14,7 @@ export interface TemplateData<
 
 /** The generic type a template can have as its text used to write files */
 export interface SourceTemplateData<H extends readonly TemplateHelper[] | undefined> {
-  filename: `${string}.${'ts' | 'tsx'}`;
+  filename: string;
   helpers?: H;
   [key: string]: unknown;
 }
