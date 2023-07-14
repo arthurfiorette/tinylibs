@@ -45,8 +45,8 @@ importers:
         specifier: 0.4.2
         version: 0.4.2(prettier@3.0.0)
       prettier-plugin-organize-imports:
-        specifier: 3.2.2
-        version: 3.2.2(prettier@3.0.0)(typescript@5.1.6)
+        specifier: 3.2.3
+        version: 3.2.3(prettier@3.0.0)(typescript@5.1.6)
       ts-jest:
         specifier: 29.1.1
         version: 29.1.1(@babel/core@7.21.4)(jest@29.6.1)(typescript@5.1.6)
@@ -168,7 +168,7 @@ packages:
     dependencies:
       '@types/prettier': 2.7.2
       prettier-plugin-jsdoc: 0.4.2(prettier@3.0.0)
-      prettier-plugin-organize-imports: 3.2.2(prettier@3.0.0)(typescript@5.1.6)
+      prettier-plugin-organize-imports: 3.2.3(prettier@3.0.0)(typescript@5.1.6)
       prettier-plugin-packagejson: 2.4.3(prettier@3.0.0)
       typescript: 5.1.6
     transitivePeerDependencies:
@@ -6158,8 +6158,8 @@ packages:
       - supports-color
     dev: true
 
-  /prettier-plugin-organize-imports@3.2.2(prettier@3.0.0)(typescript@5.1.6):
-    resolution: {integrity: sha512-e97lE6odGSiHonHJMTYC0q0iLXQyw0u5z/PJpvP/3vRy6/Zi9kLBwFAbEGjDzIowpjQv8b+J04PDamoUSQbzGA==}
+  /prettier-plugin-organize-imports@3.2.3(prettier@3.0.0)(typescript@5.1.6):
+    resolution: {integrity: sha512-KFvk8C/zGyvUaE3RvxN2MhCLwzV6OBbFSkwZ2OamCrs9ZY4i5L77jQ/w4UmUr+lqX8qbaqVq6bZZkApn+IgJSg==}
     peerDependencies:
       '@volar/vue-language-plugin-pug': ^1.0.4
       '@volar/vue-typescript': ^1.0.4
