@@ -23,7 +23,10 @@ export class TsWriter<
    * @param optionsOrTsconfigPath Either the compiler options or the path to a tsconfig
    *   file.
    */
-  constructor(optionsOrTsconfigPath: ts.CompilerOptions | string, readonly helpers?: H) {
+  constructor(
+    optionsOrTsconfigPath: ts.CompilerOptions | string,
+    readonly helpers?: H
+  ) {
     this.compilerOptions =
       typeof optionsOrTsconfigPath === 'string'
         ? readCompilerOptions(optionsOrTsconfigPath)
