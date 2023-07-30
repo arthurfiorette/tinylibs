@@ -15,7 +15,7 @@
  * @returns A unique string representation of the property
  * @see https://tinylibs.js.org/packages/object-code/
  */
-export function serialize<T>(value?: T): string {
+export function serialize<T>(value?: T, seen = new WeakMap()): string {
   const type = typeof value;
 
   if (value && type === 'object' && !(value instanceof Date || value instanceof RegExp)) {
@@ -27,7 +27,25 @@ export function serialize<T>(value?: T): string {
     while (i--) {
       /* eslint-disable @typescript-eslint/no-non-null-assertion */
       const key = keys[i]! as keyof T;
-      copy[key] = serialize(value[key]);
+      const val = value[key]!;
+
+      // Uses an internal WeakMap to keep track of previous seen values
+      // and avoid circular references serializations which would cause
+      // an infinite loop.
+      if (
+        typeof val === 'object' &&
+        val !== null &&
+        !(val instanceof Date || val instanceof RegExp)
+      ) {
+        if (seen.has(val)) {
+          continue;
+        }
+
+        // Only add the value to the seen list if it's an object
+        seen.set(val, true);
+      }
+
+      copy[key] = serialize(val, seen);
     }
 
     return String(value.constructor) + JSON.stringify(copy, keys);

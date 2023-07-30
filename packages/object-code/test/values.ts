@@ -142,8 +142,11 @@ export const values = [
 
   // Bigint
   BigInt('9007199254740991'),
-  9007199254740991
+  9007199254740991,
 ];
+
+// Adds self reference
+values.push(values);
 
 // Also adds its own serialized versions
 for (const val of [...values]) {

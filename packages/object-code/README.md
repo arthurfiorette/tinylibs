@@ -102,6 +102,7 @@ const myWeirdObject = {
   id: Symbol('arthur'),
   birth: new Date(2005, 02, 27),
   tags: ['person', 'male', 'programmer']
+  recursive: myWeirdObject,
   // etc
 };
 
@@ -129,22 +130,22 @@ This is the result of a [benchmark](./benchmark/benchmark.js) between `object-ha
 
 ```txt
   Object Code:
-    98 989 ops/s, ±0.71%      | 92.94% slower
+    103 694 ops/s, ±1.73%     | 93.55% slower
 
   Object Hash:
-    25 649 ops/s, ±0.47%      | slowest, 98.17% slower
+    26 845 ops/s, ±1.99%      | slowest, 98.33% slower
 
   Object Code (Jsonified Object):
-    279 954 ops/s, ±1.35%     | 80.04% slower
+    310 979 ops/s, ±0.76%     | 80.67% slower
 
   Object Hash (Jsonified Object):
-    125 125 ops/s, ±0.43%     | 91.08% slower
+    127 352 ops/s, ±0.76%     | 92.08% slower
 
   Object Code (String):
-    1 402 715 ops/s, ±0.31%   | fastest
+    1 608 518 ops/s, ±1.37%   | fastest
 
   Object Hash (String):
-    250 241 ops/s, ±0.60%     | 82.16% slower
+    239 228 ops/s, ±0.82%     | 85.13% slower
 ```
 
 <br />

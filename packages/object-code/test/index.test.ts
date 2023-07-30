@@ -35,4 +35,11 @@ describe('tests', () => {
 
     expect.assertions(values.length);
   });
+
+  it('tests for circular references', () => {
+    const obj = {} as { a: unknown };
+    obj.a = obj;
+
+    expect(hash(obj)).toBe(hash(obj));
+  });
 });
