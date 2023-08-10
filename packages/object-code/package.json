@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "microbundle": "0.15.1",
-    "@types/object-hash": "3.0.2",
+    "@types/object-hash": "3.0.3",
     "benny": "3.7.1",
     "object-hash": "3.0.0"
   }

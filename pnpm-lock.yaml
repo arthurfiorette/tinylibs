@@ -106,8 +106,8 @@ importers:
   packages/object-code:
     devDependencies:
       '@types/object-hash':
-        specifier: 3.0.2
-        version: 3.0.2
+        specifier: 3.0.3
+        version: 3.0.3
       benny:
         specifier: 3.7.1
         version: 3.7.1
@@ -2168,8 +2168,8 @@ packages:
   /@types/node@18.15.11:
     resolution: {integrity: sha512-E5Kwq2n4SbMzQOn6wnmBjuK9ouqlURrcZDVfbo9ftDDTFt3nk7ZKK4GMOzoYgnpQJKcxwQw+lGaBvvlMo0qN/Q==}
 
-  /@types/object-hash@3.0.2:
-    resolution: {integrity: sha512-tfyXl1JPCf2hzIDK29gO7qGqJjThKBzg/Cn3bA68R9NmWdOx+f7k5mm4to/n43BHspCwcoUC6FU4NpUoK/h9bQ==}
+  /@types/object-hash@3.0.3:
+    resolution: {integrity: sha512-Mb0SDIhjhBAz4/rDNU0cYcQR4lSJIwy+kFlm0whXLkx+o0pXwEszwyrWD6gXWumxVbAS6XZ9gXK82LR+Uk+cKQ==}
     dev: true
 
   /@types/parse-json@4.0.0:
