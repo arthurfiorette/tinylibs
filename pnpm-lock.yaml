@@ -42,8 +42,8 @@ importers:
         specifier: 3.0.3
         version: 3.0.3
       prettier-plugin-jsdoc:
-        specifier: 1.0.1
-        version: 1.0.1(prettier@3.0.3)
+        specifier: 1.0.2
+        version: 1.0.2(prettier@3.0.3)
       prettier-plugin-organize-imports:
         specifier: 3.2.3
         version: 3.2.3(prettier@3.0.3)(typescript@5.2.2)
@@ -205,7 +205,7 @@ packages:
     hasBin: true
     dependencies:
       '@types/prettier': 2.7.2
-      prettier-plugin-jsdoc: 1.0.1(prettier@3.0.3)
+      prettier-plugin-jsdoc: 1.0.2(prettier@3.0.3)
       prettier-plugin-organize-imports: 3.2.3(prettier@3.0.3)(typescript@5.2.2)
       prettier-plugin-packagejson: 2.4.3(prettier@3.0.3)
       typescript: 5.2.2
@@ -2982,8 +2982,8 @@ packages:
     engines: {node: '>= 10'}
     dev: true
 
-  /comment-parser@1.3.1:
-    resolution: {integrity: sha512-B52sN2VNghyq5ofvUsqZjmk6YkihBX5vMSChmSK9v4ShjKf3Vk5Xcmgpw4o+iIgtrnM/u5FiMpz9VKb8lpBveA==}
+  /comment-parser@1.4.0:
+    resolution: {integrity: sha512-QLyTNiZ2KDOibvFPlZ6ZngVsZ/0gYnE6uTXi5aoDg8ed3AkJAz4sEje3Y8a29hQ1s6A99MZXe47fLAXQ1rTqaw==}
     engines: {node: '>= 12.0.0'}
     dev: true
 
@@ -6295,14 +6295,14 @@ packages:
       fast-diff: 1.2.0
     dev: true
 
-  /prettier-plugin-jsdoc@1.0.1(prettier@3.0.3):
-    resolution: {integrity: sha512-07q74MfX9m+xHK2+Lr4c+igiEzAKVDWhqkvlm65WoYJUlRiaV6STXcEtcZMhrPPYgNeQRgb9FJmgE/n+OI4MpQ==}
+  /prettier-plugin-jsdoc@1.0.2(prettier@3.0.3):
+    resolution: {integrity: sha512-mhLT3qiSmfzjOEDvgLntX3XmSJaiDrgoN7WmOp4IH2mZ6LhbvZAnPDJH3Rs0k1O6WR7HcmM92fU1ArB0ALLG+A==}
     engines: {node: '>=14.13.1 || >=16.0.0'}
     peerDependencies:
       prettier: ^3.0.0
     dependencies:
       binary-searching: 2.0.5
-      comment-parser: 1.3.1
+      comment-parser: 1.4.0
       mdast-util-from-markdown: 1.3.0
       prettier: 3.0.3
     transitivePeerDependencies:
