@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       '@arthurfiorette/prettier-config':
-        specifier: 1.0.9
-        version: 1.0.9(prettier@3.0.3)
+        specifier: 1.0.11
+        version: 1.0.11(prettier@3.0.3)(typescript@5.2.2)
       '@types/jest':
         specifier: 29.5.5
         version: 29.5.5
@@ -200,20 +200,21 @@ packages:
       fast-deep-equal: 3.1.3
     dev: true
 
-  /@arthurfiorette/prettier-config@1.0.9(prettier@3.0.3):
-    resolution: {integrity: sha512-wL7Ky01CmLMdCgtx6dKMCjNqKp6robmRo5gYNQlxi3lGPmqWCFatksIzKcSTOEeMtylV6ozqUjf1dTw5tKH00A==}
+  /@arthurfiorette/prettier-config@1.0.11(prettier@3.0.3)(typescript@5.2.2):
+    resolution: {integrity: sha512-GyLSQopqd/0HY7SmZX/LrXmNZQGeAHBiIoewR81RLrnAInSXl2HLuhh+GxBj10MFoH+46kYytbYT0Z6Y+sOOfw==}
     hasBin: true
+    peerDependencies:
+      prettier: '>=3.0.0'
     dependencies:
-      '@types/prettier': 2.7.2
+      prettier: 3.0.3
       prettier-plugin-jsdoc: 1.0.2(prettier@3.0.3)
       prettier-plugin-organize-imports: 3.2.3(prettier@3.0.3)(typescript@5.2.2)
       prettier-plugin-packagejson: 2.4.3(prettier@3.0.3)
-      typescript: 5.2.2
     transitivePeerDependencies:
       - '@volar/vue-language-plugin-pug'
       - '@volar/vue-typescript'
-      - prettier
       - supports-color
+      - typescript
     dev: true
 
   /@babel/code-frame@7.21.4:
@@ -2167,10 +2168,6 @@ packages:
 
   /@types/parse-json@4.0.0:
     resolution: {integrity: sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==}
-    dev: true
-
-  /@types/prettier@2.7.2:
-    resolution: {integrity: sha512-KufADq8uQqo1pYKVIYzfKbJfBAc0sOeXqGbFaSpv8MRmC/zXgowNZmFcbngndGk922QDmOASEXUZCaY48gs4cg==}
     dev: true
 
   /@types/prop-types@15.7.5:
