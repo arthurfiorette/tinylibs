@@ -42,8 +42,8 @@ importers:
         specifier: 3.0.3
         version: 3.0.3
       prettier-plugin-jsdoc:
-        specifier: 1.0.2
-        version: 1.0.2(prettier@3.0.3)
+        specifier: 1.0.3
+        version: 1.0.3(prettier@3.0.3)
       prettier-plugin-organize-imports:
         specifier: 3.2.3
         version: 3.2.3(prettier@3.0.3)(typescript@5.2.2)
@@ -207,7 +207,7 @@ packages:
       prettier: '>=3.0.0'
     dependencies:
       prettier: 3.0.3
-      prettier-plugin-jsdoc: 1.0.2(prettier@3.0.3)
+      prettier-plugin-jsdoc: 1.0.3(prettier@3.0.3)
       prettier-plugin-organize-imports: 3.2.3(prettier@3.0.3)(typescript@5.2.2)
       prettier-plugin-packagejson: 2.4.3(prettier@3.0.3)
     transitivePeerDependencies:
@@ -6272,8 +6272,8 @@ packages:
       fast-diff: 1.2.0
     dev: true
 
-  /prettier-plugin-jsdoc@1.0.2(prettier@3.0.3):
-    resolution: {integrity: sha512-mhLT3qiSmfzjOEDvgLntX3XmSJaiDrgoN7WmOp4IH2mZ6LhbvZAnPDJH3Rs0k1O6WR7HcmM92fU1ArB0ALLG+A==}
+  /prettier-plugin-jsdoc@1.0.3(prettier@3.0.3):
+    resolution: {integrity: sha512-pRUKfIeYAefIs0+FZEs2BZCa++1SA80MwjWws8tepXdYUVSFF9dhEnYkD+mv991cCMFZizxHPuAD1gVl8N5ETQ==}
     engines: {node: '>=14.13.1 || >=16.0.0'}
     peerDependencies:
       prettier: ^3.0.0
