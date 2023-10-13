@@ -71,7 +71,7 @@ export function hash(val: unknown, seen?: WeakSet<WeakKey>): number {
     return h;
   }
 
-  const toHash = typeof val + String(val);
+  const toHash = typeof val + (val instanceof Date ? val.getTime() : String(val));
 
   for (let i = 0; i < toHash.length; i++) {
     h = (h * 33) ^ toHash.charCodeAt(i);

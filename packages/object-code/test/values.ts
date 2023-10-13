@@ -106,9 +106,14 @@ export const values = [
   { 0: 0, 1: 1, 2: 2, 3: 3, length: 5 },
 
   // Dates
-  new Date(),
+  new Date(1),
+  new Date(2),
+  new Date(3),
   new Date(2019, 5, 28),
   new Date(1988, 5, 9),
+  { a: new Date(1) },
+  { a: new Date(2) },
+  { a: new Date(3) },
 
   // Regex
   /some-regex/,
