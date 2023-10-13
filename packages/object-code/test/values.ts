@@ -1,7 +1,7 @@
 /* eslint-disable */
 /* istanbul ignore file */
 
-import { serialize } from '../src';
+import { hash } from '../src';
 
 /** All values in this array MUST return an different hashcode. */
 export const values = [
@@ -142,7 +142,7 @@ export const values = [
 
   // Bigint
   BigInt('9007199254740991'),
-  9007199254740991,
+  9007199254740991
 ];
 
 // Adds self reference
@@ -150,5 +150,5 @@ values.push(values);
 
 // Also adds its own serialized versions
 for (const val of [...values]) {
-  values.push(serialize(val));
+  values.push(hash(val));
 }

@@ -1,4 +1,4 @@
-import { serialize } from './serialize';
+import { sortNumbers } from './util';
 
 /**
  * Hashes a given value into a unique number.
@@ -24,15 +24,58 @@ import { serialize } from './serialize';
  * @returns The signed integer result from the provided value
  * @see https://tinylibs.js.org/packages/object-code/
  */
-export function hash(val?: unknown): number {
-  val = serialize(val);
+export function hash(val: unknown, seen?: WeakSet<WeakKey>): number {
+  let h = 5381;
 
-  let hash = 5381;
-  let index = 0;
+  // Objects should be recursively hashed
+  if (
+    typeof val === 'object' &&
+    val !== null &&
+    !(val instanceof Date || val instanceof RegExp)
+  ) {
+    if (!seen) {
+      seen = new WeakSet();
+    }
 
-  while (index < (val as string).length) {
-    hash = (hash * 33) ^ (val as string).charCodeAt(index++);
+    // Sort keys to keep the hash consistent
+    const keys = Object.keys(val).sort(sortNumbers);
+
+    for (let i = 0; i < keys.length; i++) {
+      const key = keys[i];
+      const value = val[key as keyof typeof val] as WeakKey;
+
+      h = (h * 33) ^ hash(key, seen);
+
+      // Uses an internal WeakMap to keep track of previous seen values
+      // and avoid circular references serializations which would cause
+      // an infinite loop.
+      if (
+        typeof value === 'object' &&
+        value !== null &&
+        !(value instanceof Date || value instanceof RegExp)
+      ) {
+        if (seen.has(value)) {
+          continue;
+        }
+
+        seen.add(value);
+      }
+
+      // Hashes the value
+      h = (h * 33) ^ hash(value, seen);
+    }
+
+    // Also hashes the constructor
+    h = (h * 33) ^ hash(val.constructor, seen);
+
+    return h;
   }
 
-  return hash;
+  const toHash = typeof val + String(val);
+
+  for (let i = 0; i < toHash.length; i++) {
+    h = (h * 33) ^ toHash.charCodeAt(i);
+  }
+
+  return h;
 }
