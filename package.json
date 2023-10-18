@@ -20,7 +20,7 @@
     "test": "pnpm -r --parallel test"
   },
   "devDependencies": {
-    "@arthurfiorette/prettier-config": "1.0.11",
+    "@arthurfiorette/prettier-config": "1.0.12",
     "@types/jest": "29.5.6",
     "@types/node": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "6.8.0",
