@@ -30,7 +30,7 @@
     "javascript-stringify": "^2.1.0"
   },
   "devDependencies": {
-    "@types/node": "^18.0.0",
+    "@types/node": "^20.0.0",
     "microbundle": "0.15.1",
     "source-map-support": "^0.5.21"
   },
