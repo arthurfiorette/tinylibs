@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "@arthurfiorette/prettier-config": "1.0.12",
-    "@types/jest": "29.5.6",
+    "@types/jest": "29.5.7",
     "@types/node": "^20.0.0",
     "@typescript-eslint/eslint-plugin": "6.9.1",
     "@typescript-eslint/parser": "6.9.1",
