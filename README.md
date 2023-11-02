@@ -37,8 +37,6 @@
 
 - [Prisma TypeGraphql Pagination](packages/prisma-typegraphql-pagination)
 
-- [Ts Writer](packages/ts-writer)
-
 <br />
 
 ## License
