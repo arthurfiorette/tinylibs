@@ -106,8 +106,8 @@ importers:
   packages/object-code:
     devDependencies:
       '@types/object-hash':
-        specifier: 3.0.5
-        version: 3.0.5
+        specifier: 3.0.6
+        version: 3.0.6
       benny:
         specifier: 3.7.1
         version: 3.7.1
@@ -2145,8 +2145,8 @@ packages:
     dependencies:
       undici-types: 5.25.3
 
-  /@types/object-hash@3.0.5:
-    resolution: {integrity: sha512-WFGeSazfL5BWbEh5ACaAIs5RT6sbVIwBs1rgHUp+kZzX/gub41LEEYWTWbYnE/sKb7hDdPEsGa1Vmcaay2fS5g==}
+  /@types/object-hash@3.0.6:
+    resolution: {integrity: sha512-fOBV8C1FIu2ELinoILQ+ApxcUKz4ngq+IWUYrxSGjXzzjUALijilampwkMgEtJ+h2njAW3pi853QpzNVCHB73w==}
     dev: true
 
   /@types/parse-json@4.0.0:

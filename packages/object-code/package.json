@@ -30,7 +30,7 @@
     "test": "jest --coverage"
   },
   "devDependencies": {
-    "@types/object-hash": "3.0.5",
+    "@types/object-hash": "3.0.6",
     "benny": "3.7.1",
     "microbundle": "0.15.1",
     "object-hash": "3.0.0"
