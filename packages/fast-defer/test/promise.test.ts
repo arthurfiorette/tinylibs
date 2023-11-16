@@ -8,6 +8,40 @@ describe('tests promise compatibility', () => {
     expect(d).resolves.toBe(1);
 
     d.resolve(1);
+
+    expect.assertions(1);
+  });
+
+  it('test bound resolve method', async () => {
+    const d = deferred();
+
+    setImmediate(
+      d.resolve.bind(
+        //@ts-expect-error - Testing with invalid promise
+        { notAPromise: true }
+      ),
+      1
+    );
+
+    await expect(d).resolves.toBe(1);
+
+    expect.assertions(1);
+  });
+
+  it('test bound reject method', async () => {
+    const d = deferred();
+
+    setImmediate(
+      d.reject.bind(
+        //@ts-expect-error - Testing with invalid promise
+        { notAPromise: true }
+      ),
+      2
+    );
+
+    await expect(d).rejects.toBe(2);
+
+    expect.assertions(1);
   });
 
   it('test reject method', () => {
@@ -55,6 +89,8 @@ describe('tests promise compatibility', () => {
     });
 
     d.resolve(1);
+
+    expect.assertions(1);
   });
 
   it('test with try catch', () => {
@@ -63,5 +99,7 @@ describe('tests promise compatibility', () => {
     process.nextTick(d.resolve, 1);
 
     expect(async () => await d).not.toThrow();
+
+    expect.assertions(1);
   });
 });

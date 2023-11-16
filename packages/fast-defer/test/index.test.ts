@@ -33,5 +33,7 @@ describe('tests deferred', () => {
     def.resolve(1);
     def2.reject(3);
     def1.resolve(2);
+
+    expect.assertions(4);
   });
 });
