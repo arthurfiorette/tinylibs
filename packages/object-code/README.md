@@ -130,22 +130,22 @@ This is the result of a [benchmark](./benchmark/benchmark.js) between `object-ha
 
 ```txt
   Object Code:
-    287 970 ops/s, ±0.33%     | 91.35% slower
+    492 919 ops/s, ±0.90%     | 84.72% slower
 
   Object Hash:
-    52 045 ops/s, ±0.30%      | slowest, 98.44% slower
+    48 311 ops/s, ±0.89%      | slowest, 98.5% slower
 
   Object Code (Jsonified Object):
-    406 813 ops/s, ±0.23%     | 87.78% slower
+    401 901 ops/s, ±0.75%     | 87.54% slower
 
   Object Hash (Jsonified Object):
-    221 757 ops/s, ±0.30%     | 93.34% slower
+    213 819 ops/s, ±0.48%     | 93.37% slower
 
   Object Code (String):
-    3 328 770 ops/s, ±0.21%   | fastest
+    3 225 590 ops/s, ±1.94%   | fastest
 
   Object Hash (String):
-    456 392 ops/s, ±0.43%     | 86.29% slower
+    424 569 ops/s, ±2.88%     | 86.84% slower
 ```
 
 <br />
