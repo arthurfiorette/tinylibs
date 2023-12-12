@@ -31,7 +31,8 @@ export function hash(val: unknown, seen?: WeakSet<WeakKey>): number {
   if (
     typeof val === 'object' &&
     val !== null &&
-    !(val instanceof Date || val instanceof RegExp)
+    (val.toString === Object.prototype.toString ||
+      val.toString === Array.prototype.toString)
   ) {
     if (!seen) {
       seen = new WeakSet();
