@@ -1,6 +1,7 @@
 /* eslint-disable */
 /* istanbul ignore file */
 
+import { URLSearchParams } from 'url';
 import { hash } from '../src';
 
 /** All values in this array MUST return an different hashcode. */
@@ -147,7 +148,14 @@ export const values = [
 
   // Bigint
   BigInt('9007199254740991'),
-  9007199254740991
+  9007199254740991,
+
+  // Objects
+  new URLSearchParams({a: '1'}),
+  new URLSearchParams({b: '1'}),
+  new URLSearchParams({a: '1', b: '1'}),
+  Buffer.from('asd'),	
+  Buffer.from('asd1'),
 ];
 
 // Adds self reference

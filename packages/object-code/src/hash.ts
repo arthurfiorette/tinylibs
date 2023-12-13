@@ -53,7 +53,8 @@ export function hash(val: unknown, seen?: WeakSet<WeakKey>): number {
       if (
         typeof value === 'object' &&
         value !== null &&
-        !(value instanceof Date || value instanceof RegExp)
+        (val.toString === Object.prototype.toString ||
+          val.toString === Array.prototype.toString)
       ) {
         if (seen.has(value)) {
           continue;
@@ -72,7 +73,17 @@ export function hash(val: unknown, seen?: WeakSet<WeakKey>): number {
     return h;
   }
 
-  const toHash = typeof val + (val instanceof Date ? val.getTime() : String(val));
+  let toHash = typeof val;
+
+  try {
+    if (val instanceof Date) {
+      toHash += val.getTime();
+    } else {
+      toHash += String(val);
+    }
+  } catch (error) {
+    toHash += String(Object.assign({}, val));
+  }
 
   for (let i = 0; i < toHash.length; i++) {
     h = (h * 33) ^ toHash.charCodeAt(i);
