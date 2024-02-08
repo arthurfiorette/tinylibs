@@ -24,7 +24,7 @@ import { sortNumbers } from './util';
  * @returns The signed integer result from the provided value
  * @see https://tinylibs.js.org/packages/object-code/
  */
-export function hash(val: unknown, seen?: WeakSet<WeakKey>): number {
+export function hash(val: unknown, seen?: WeakSet<object>): number {
   let h = 5381;
 
   // Objects should be recursively hashed
@@ -43,7 +43,7 @@ export function hash(val: unknown, seen?: WeakSet<WeakKey>): number {
 
     for (let i = 0; i < keys.length; i++) {
       const key = keys[i];
-      const value = val[key as keyof typeof val] as WeakKey;
+      const value = val[key as keyof typeof val] as object;
 
       h = (h * 33) ^ hash(key, seen);
 
