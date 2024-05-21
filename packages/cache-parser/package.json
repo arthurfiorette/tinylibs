@@ -1,6 +1,6 @@
 {
   "name": "cache-parser",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "A minimal parser for the Cache-Control header.",
   "homepage": "https://tinylibs.js.org/packages/cache-parser",
   "bugs": "https://github.com/arthurfiorette/tinylibs/issues",
