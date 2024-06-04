@@ -52,7 +52,7 @@ importers:
         version: 29.1.4(@babel/core@7.21.4)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.21.4))(jest@29.7.0(@types/node@20.14.1)(babel-plugin-macros@3.1.0))(typescript@5.4.5)
       tslib:
         specifier: 2.6.2
-        version: 2.6.2
+        version: 2.6.3
       typescript:
         specifier: 5.4.5
         version: 5.4.5
@@ -125,7 +125,7 @@ importers:
         version: 0.14.0
       tslib:
         specifier: ^2.4.0
-        version: 2.6.2
+        version: 2.6.3
       type-graphql:
         specifier: ^1
         version: 1.1.1(class-validator@0.14.0)(graphql@16.8.1)
@@ -3816,6 +3816,9 @@ packages:
   tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
 
+  tslib@2.6.3:
+    resolution: {integrity: sha512-xNvxJEOUiWPGhUuUdQgAJPKOOJfGnIyKySOc09XkKsgdUV/3E2zvwZYdejjmRgPCgcym1juLH3226yA7sEFJKQ==}
+
   type-check@0.3.2:
     resolution: {integrity: sha512-ZCmOJdvOWDBYJlzAoFkC+Q0+bUyEOS1ltgp1MGU03fqHG+dbi9tBFU2Rd9QKiDZFAYrhPh2JUf7rZRIuHRKtOg==}
     engines: {node: '>= 0.8.0'}
@@ -5119,7 +5122,7 @@ snapshots:
       open: 8.4.2
       picocolors: 1.0.0
       tiny-glob: 0.2.9
-      tslib: 2.6.2
+      tslib: 2.6.3
 
   '@pkgr/utils@2.4.2':
     dependencies:
@@ -5128,7 +5131,7 @@ snapshots:
       is-glob: 4.0.3
       open: 9.1.0
       picocolors: 1.0.0
-      tslib: 2.6.2
+      tslib: 2.6.3
 
   '@rollup/plugin-alias@3.1.9(rollup@2.79.1)':
     dependencies:
@@ -7354,7 +7357,7 @@ snapshots:
       sade: 1.8.1
       terser: 5.16.8
       tiny-glob: 0.2.9
-      tslib: 2.6.2
+      tslib: 2.6.3
       typescript: 4.9.5
     transitivePeerDependencies:
       - '@types/babel__core'
@@ -8106,7 +8109,7 @@ snapshots:
       fs-extra: 10.1.0
       resolve: 1.22.1
       rollup: 2.79.1
-      tslib: 2.6.2
+      tslib: 2.6.3
       typescript: 4.9.5
 
   rollup-plugin-visualizer@5.9.0(rollup@2.79.1):
@@ -8364,12 +8367,12 @@ snapshots:
   synckit@0.8.5:
     dependencies:
       '@pkgr/utils': 2.3.1
-      tslib: 2.6.2
+      tslib: 2.6.3
 
   synckit@0.8.6:
     dependencies:
       '@pkgr/utils': 2.4.2
-      tslib: 2.6.2
+      tslib: 2.6.3
 
   terser@5.16.8:
     dependencies:
@@ -8437,6 +8440,8 @@ snapshots:
       babel-jest: 29.7.0(@babel/core@7.21.4)
 
   tslib@2.6.2: {}
+
+  tslib@2.6.3: {}
 
   type-check@0.3.2:
     dependencies:
