@@ -29,7 +29,7 @@
     "tslib": "^2.4.0"
   },
   "devDependencies": {
-    "graphql": "16.8.2",
+    "graphql": "16.9.0",
     "microbundle": "0.15.1"
   },
   "peerDependencies": {
