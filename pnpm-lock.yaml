@@ -74,7 +74,7 @@ importers:
     devDependencies:
       '@testing-library/react-hooks':
         specifier: 8.0.1
-        version: 8.0.1(@types/react@18.3.4)(react-test-renderer@18.3.1(react@18.2.0))(react@18.2.0)
+        version: 8.0.1(@types/react@18.3.4)(react-test-renderer@18.3.1)
       '@types/express':
         specifier: 4.17.21
         version: 4.17.21
@@ -89,7 +89,7 @@ importers:
         version: 0.15.1(@types/babel__core@7.20.0)
       react-test-renderer:
         specifier: 18.3.1
-        version: 18.3.1(react@18.2.0)
+        version: 18.3.1
 
   packages/cache-parser:
     devDependencies:
@@ -125,7 +125,7 @@ importers:
         version: 0.14.0
       tslib:
         specifier: ^2.4.0
-        version: 2.6.3
+        version: 2.7.0
       type-graphql:
         specifier: ^1
         version: 1.1.1(class-validator@0.14.0)(graphql@16.9.0)
@@ -3760,9 +3760,6 @@ packages:
       esbuild:
         optional: true
 
-  tslib@2.6.3:
-    resolution: {integrity: sha512-xNvxJEOUiWPGhUuUdQgAJPKOOJfGnIyKySOc09XkKsgdUV/3E2zvwZYdejjmRgPCgcym1juLH3226yA7sEFJKQ==}
-
   tslib@2.7.0:
     resolution: {integrity: sha512-gLXCKdN1/j47AiHiOkJN69hJmcbGTHI0ImLmbYLHykhgeN0jVGola9yVjFgzCUklsZQMW55o+dW7IXv3RCXDzA==}
 
@@ -5141,14 +5138,13 @@ snapshots:
       magic-string: 0.25.9
       string.prototype.matchall: 4.0.8
 
-  '@testing-library/react-hooks@8.0.1(@types/react@18.3.4)(react-test-renderer@18.3.1(react@18.2.0))(react@18.2.0)':
+  '@testing-library/react-hooks@8.0.1(@types/react@18.3.4)(react-test-renderer@18.3.1)':
     dependencies:
       '@babel/runtime': 7.21.0
-      react: 18.2.0
-      react-error-boundary: 3.1.4(react@18.2.0)
+      react-error-boundary: 3.1.4
     optionalDependencies:
       '@types/react': 18.3.4
-      react-test-renderer: 18.3.1(react@18.2.0)
+      react-test-renderer: 18.3.1
 
   '@tootallnate/once@2.0.0': {}
 
@@ -7873,26 +7869,23 @@ snapshots:
       iconv-lite: 0.4.24
       unpipe: 1.0.0
 
-  react-error-boundary@3.1.4(react@18.2.0):
+  react-error-boundary@3.1.4:
     dependencies:
       '@babel/runtime': 7.21.0
-      react: 18.2.0
 
   react-is@18.2.0: {}
 
   react-is@18.3.1: {}
 
-  react-shallow-renderer@16.15.0(react@18.2.0):
+  react-shallow-renderer@16.15.0:
     dependencies:
       object-assign: 4.1.1
-      react: 18.2.0
       react-is: 18.3.1
 
-  react-test-renderer@18.3.1(react@18.2.0):
+  react-test-renderer@18.3.1:
     dependencies:
-      react: 18.2.0
       react-is: 18.3.1
-      react-shallow-renderer: 16.15.0(react@18.2.0)
+      react-shallow-renderer: 16.15.0
       scheduler: 0.23.2
 
   react@18.2.0:
@@ -8320,8 +8313,6 @@ snapshots:
       '@jest/transform': 29.7.0
       '@jest/types': 29.6.3
       babel-jest: 29.7.0(@babel/core@7.21.4)
-
-  tslib@2.6.3: {}
 
   tslib@2.7.0: {}
 
