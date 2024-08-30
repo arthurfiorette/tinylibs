@@ -74,13 +74,13 @@ importers:
     devDependencies:
       '@testing-library/react-hooks':
         specifier: 8.0.1
-        version: 8.0.1(@types/react@18.3.4)(react-test-renderer@18.3.1)
+        version: 8.0.1(@types/react@18.3.5)(react-test-renderer@18.3.1(react@18.2.0))(react@18.2.0)
       '@types/express':
         specifier: 4.17.21
         version: 4.17.21
       '@types/react':
-        specifier: 18.3.4
-        version: 18.3.4
+        specifier: 18.3.5
+        version: 18.3.5
       express:
         specifier: 4.19.2
         version: 4.19.2
@@ -89,7 +89,7 @@ importers:
         version: 0.15.1(@types/babel__core@7.20.0)
       react-test-renderer:
         specifier: 18.3.1
-        version: 18.3.1
+        version: 18.3.1(react@18.2.0)
 
   packages/cache-parser:
     devDependencies:
@@ -1125,8 +1125,8 @@ packages:
   '@types/range-parser@1.2.4':
     resolution: {integrity: sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw==}
 
-  '@types/react@18.3.4':
-    resolution: {integrity: sha512-J7W30FTdfCxDDjmfRM+/JqLHBIyl7xUIp9kwK637FGmY7+mkSFSe6L4jpZzhj5QMfLssSDP4/i75AKkrdC7/Jw==}
+  '@types/react@18.3.5':
+    resolution: {integrity: sha512-WeqMfGJLGuLCqHGYRGHxnKrXcTitc6L/nBUWfWPcTarG3t9PsquqUMuVeXZeca+mglY4Vo5GZjCi0A3Or2lnxA==}
 
   '@types/resolve@1.17.1':
     resolution: {integrity: sha512-yy7HuzQhj0dhGpD8RLXSZWEkLsV9ibvxvi6EiJ3bkqLAO1RGo0WbkWQiwpRlSFymTJRz0d3k5LM3kkx8ArDbLw==}
@@ -5130,13 +5130,14 @@ snapshots:
       magic-string: 0.25.9
       string.prototype.matchall: 4.0.8
 
-  '@testing-library/react-hooks@8.0.1(@types/react@18.3.4)(react-test-renderer@18.3.1)':
+  '@testing-library/react-hooks@8.0.1(@types/react@18.3.5)(react-test-renderer@18.3.1(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@babel/runtime': 7.21.0
-      react-error-boundary: 3.1.4
+      react: 18.2.0
+      react-error-boundary: 3.1.4(react@18.2.0)
     optionalDependencies:
-      '@types/react': 18.3.4
-      react-test-renderer: 18.3.1
+      '@types/react': 18.3.5
+      react-test-renderer: 18.3.1(react@18.2.0)
 
   '@tootallnate/once@2.0.0': {}
 
@@ -5259,7 +5260,7 @@ snapshots:
 
   '@types/range-parser@1.2.4': {}
 
-  '@types/react@18.3.4':
+  '@types/react@18.3.5':
     dependencies:
       '@types/prop-types': 15.7.5
       csstype: 3.1.2
@@ -7850,23 +7851,26 @@ snapshots:
       iconv-lite: 0.4.24
       unpipe: 1.0.0
 
-  react-error-boundary@3.1.4:
+  react-error-boundary@3.1.4(react@18.2.0):
     dependencies:
       '@babel/runtime': 7.21.0
+      react: 18.2.0
 
   react-is@18.2.0: {}
 
   react-is@18.3.1: {}
 
-  react-shallow-renderer@16.15.0:
+  react-shallow-renderer@16.15.0(react@18.2.0):
     dependencies:
       object-assign: 4.1.1
+      react: 18.2.0
       react-is: 18.3.1
 
-  react-test-renderer@18.3.1:
+  react-test-renderer@18.3.1(react@18.2.0):
     dependencies:
+      react: 18.2.0
       react-is: 18.3.1
-      react-shallow-renderer: 16.15.0
+      react-shallow-renderer: 16.15.0(react@18.2.0)
       scheduler: 0.23.2
 
   react@18.2.0:
