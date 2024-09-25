@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "@testing-library/react-hooks": "8.0.1",
-    "@types/express": "4.17.21",
+    "@types/express": "5.0.0",
     "@types/react": "18.3.5",
     "express": "4.21.0",
     "microbundle": "0.15.1",
