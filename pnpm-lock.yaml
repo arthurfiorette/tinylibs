@@ -137,6 +137,12 @@ importers:
         specifier: 0.15.1
         version: 0.15.1(@types/babel__core@7.20.0)
 
+  packages/ubimap:
+    devDependencies:
+      microbundle:
+        specifier: 0.15.1
+        version: 0.15.1(@types/babel__core@7.20.0)
+
 packages:
 
   '@aashutoshrathi/word-wrap@1.2.6':
@@ -1442,9 +1448,6 @@ packages:
   cache-parser@1.2.4:
     resolution: {integrity: sha512-O0KwuHuJnbHUrghHi2kGp0SxnWSIBXTYt7M8WVhW0kbPRUNUKoE/Of6e1rRD6AAxmfxFunKnt90yEK09D+sc5g==}
 
-  call-bind@1.0.2:
-    resolution: {integrity: sha512-7O+FbCihrB5WGbFYesctwmTKae6rOiIzmz1icreWJ+0aA7LJfuqhEso2T9ncpcFtzMQtzXf2QGGueWJGTYsqrA==}
-
   call-bind@1.0.7:
     resolution: {integrity: sha512-GHTSNSYICQ7scH7sZ+M2rFopRoLh8t2bLSW6BbgrtLsahOIB5iyAVJf9GjWK3cYTDaMj4XdBpM1cA6pIS0Kv2w==}
     engines: {node: '>= 0.4'}
@@ -2055,9 +2058,6 @@ packages:
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
 
-  function-bind@1.1.1:
-    resolution: {integrity: sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==}
-
   function-bind@1.1.2:
     resolution: {integrity: sha512-7XHNxH7qX9xG5mIwxkhumTox/MIRNcOgDrxWsMt2pAr23WHp6MrRlN7FBSFpCpr+oVO0F744iUgR82nJMfG2SA==}
 
@@ -2078,9 +2078,6 @@ packages:
   get-caller-file@2.0.5:
     resolution: {integrity: sha512-DyFP3BM/3YHTQOCUL/w0OZHR0lpKeGrxotcHWcqNEdnltqFwXVfhEBQ94eIo34AfQpo0rGki4cyIiftY06h2Fg==}
     engines: {node: 6.* || 8.* || >= 10.*}
-
-  get-intrinsic@1.2.0:
-    resolution: {integrity: sha512-L049y6nFOuom5wGyRc3/gdTLO94dySVKRACj1RmJZBQXlbTMhtNIgkWkUHq+jYmZvKf14EW1EoJnnjbmoHij0Q==}
 
   get-intrinsic@1.2.4:
     resolution: {integrity: sha512-5uYhsJH8VJBTv7oslg4BznJYhDoRI6waYCxMmCdnTrcCrHA/fCFKoTFz2JKKE0HdDFUF7/oQuhzumXJK7paBRQ==}
@@ -2184,9 +2181,6 @@ packages:
   has-flag@4.0.0:
     resolution: {integrity: sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==}
     engines: {node: '>=8'}
-
-  has-property-descriptors@1.0.0:
-    resolution: {integrity: sha512-62DVLZGoiEBDHQyqG4w9xCuZ7eJEwNmJRWw2VY84Oedb7WFcA27fiEVe8oUQx9hAUJ4ekurquucTGwsyO1XGdQ==}
 
   has-property-descriptors@1.0.2:
     resolution: {integrity: sha512-55JNKuIW+vq4Ke1BjOTjM2YctQIvCT7GFzHwmfZPGo5wnrgkid0YQtnAleFSqumZm4az3n2BS+erby5ipJdgrg==}
@@ -5315,7 +5309,7 @@ snapshots:
 
   '@types/resolve@1.17.1':
     dependencies:
-      '@types/node': 22.5.4
+      '@types/node': 20.16.5
 
   '@types/semver@7.3.13': {}
 
@@ -5696,11 +5690,6 @@ snapshots:
 
   cache-parser@1.2.4: {}
 
-  call-bind@1.0.2:
-    dependencies:
-      function-bind: 1.1.1
-      get-intrinsic: 1.2.4
-
   call-bind@1.0.7:
     dependencies:
       es-define-property: 1.0.0
@@ -5971,7 +5960,7 @@ snapshots:
 
   define-properties@1.2.0:
     dependencies:
-      has-property-descriptors: 1.0.0
+      has-property-descriptors: 1.0.2
       object-keys: 1.1.1
 
   delayed-stream@1.0.0: {}
@@ -6061,7 +6050,7 @@ snapshots:
       globalthis: 1.0.3
       gopd: 1.0.1
       has: 1.0.3
-      has-property-descriptors: 1.0.0
+      has-property-descriptors: 1.0.2
       has-proto: 1.0.1
       has-symbols: 1.0.3
       internal-slot: 1.0.5
@@ -6380,8 +6369,6 @@ snapshots:
   fsevents@2.3.3:
     optional: true
 
-  function-bind@1.1.1: {}
-
   function-bind@1.1.2: {}
 
   function.prototype.name@1.1.5:
@@ -6400,12 +6387,6 @@ snapshots:
   gensync@1.0.0-beta.2: {}
 
   get-caller-file@2.0.5: {}
-
-  get-intrinsic@1.2.0:
-    dependencies:
-      function-bind: 1.1.1
-      has: 1.0.3
-      has-symbols: 1.0.3
 
   get-intrinsic@1.2.4:
     dependencies:
@@ -6502,10 +6483,6 @@ snapshots:
   has-flag@3.0.0: {}
 
   has-flag@4.0.0: {}
-
-  has-property-descriptors@1.0.0:
-    dependencies:
-      get-intrinsic: 1.2.4
 
   has-property-descriptors@1.0.2:
     dependencies:
@@ -7061,7 +7038,7 @@ snapshots:
 
   jest-worker@26.6.2:
     dependencies:
-      '@types/node': 22.5.4
+      '@types/node': 20.16.5
       merge-stream: 2.0.0
       supports-color: 7.2.0
 
@@ -8246,10 +8223,10 @@ snapshots:
 
   string.prototype.matchall@4.0.8:
     dependencies:
-      call-bind: 1.0.2
+      call-bind: 1.0.7
       define-properties: 1.2.0
       es-abstract: 1.21.2
-      get-intrinsic: 1.2.0
+      get-intrinsic: 1.2.4
       has-symbols: 1.0.3
       internal-slot: 1.0.5
       regexp.prototype.flags: 1.4.3
