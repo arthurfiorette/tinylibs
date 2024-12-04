@@ -3,10 +3,12 @@
     {
       "path": "../packages/object-code",
       "name": "Object Code"
-    },{
+    },
+    {
       "path": "../packages/fast-defer",
       "name": "Fast Defer"
-    },{
+    },
+    {
       "path": "../packages/cache-parser",
       "name": "Cache Parser"
     },

@@ -29,6 +29,8 @@
 
 - [Fast Defer](packages/fast-defer)
 
+- [Ubimap](packages/ubimap)
+
 - [Object Code](packages/object-code)
 
 - [Cache Parser](packages/cache-parser)

@@ -151,11 +151,11 @@ export const values = [
   9007199254740991,
 
   // Objects
-  new URLSearchParams({a: '1'}),
-  new URLSearchParams({b: '1'}),
-  new URLSearchParams({a: '1', b: '1'}),
-  Buffer.from('asd'),	
-  Buffer.from('asd1'),
+  new URLSearchParams({ a: '1' }),
+  new URLSearchParams({ b: '1' }),
+  new URLSearchParams({ a: '1', b: '1' }),
+  Buffer.from('asd'),
+  Buffer.from('asd1')
 ];
 
 // Adds self reference

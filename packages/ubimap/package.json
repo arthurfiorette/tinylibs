@@ -1,7 +1,7 @@
 {
   "name": "ubimap",
   "version": "1.0.0",
-  "description": "Enumerable safe bidirectional map with unique values",
+  "description": "A safe, typed, enumerable bidirectional map that ensures unique values and supports compound keys.",
   "homepage": "https://tinylibs.js.org/packages/ubimap",
   "bugs": "https://github.com/arthurfiorette/tinylibs/issues",
   "repository": {
