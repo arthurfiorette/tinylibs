@@ -31,7 +31,7 @@ export class UbiMap<
    */
   constructor(
     data?: Record<Join<K, S>, V>,
-    private readonly separator: S = ' ' as S
+    readonly separator: S = ' ' as S
   ) {
     if (data) {
       for (const [key, value] of Object.entries<V>(data)) {
