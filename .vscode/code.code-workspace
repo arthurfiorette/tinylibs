@@ -13,6 +13,10 @@
       "name": "Cache Parser"
     },
     {
+      "path": "../packages/ubimap",
+      "name": "Ubimap"
+    },
+    {
       "path": "..",
       "name": "Root"
     }
