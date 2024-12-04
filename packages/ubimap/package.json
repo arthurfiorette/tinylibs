@@ -1,6 +1,6 @@
 {
   "name": "ubimap",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A safe, typed, enumerable bidirectional map that ensures unique values and supports compound keys.",
   "homepage": "https://tinylibs.js.org/packages/ubimap",
   "bugs": "https://github.com/arthurfiorette/tinylibs/issues",
@@ -12,12 +12,8 @@
   "license": "MIT",
   "author": "Arthur Fiorette <npm@arthur.place>",
   "sideEffects": false,
+  "type": "commonjs",
   "main": "dist/index.js",
-  "umd:main": "dist/index.umd.js",
-  "unpkg": "dist/index.umd.js",
-  "module": "dist/index.mjs",
-  "source": "src/index.ts",
-  "types": "dist/index.d.ts",
   "files": [
     "dist",
     "src",
@@ -25,10 +21,13 @@
     "README.md"
   ],
   "scripts": {
-    "build": "microbundle --tsconfig tsconfig.build.json",
+    "build": "tsc -p tsconfig.build.json",
     "test": "jest --coverage"
   },
+  "dependencies": {
+    "tslib": "^2.8.1"
+  },
   "devDependencies": {
-    "microbundle": "0.15.1"
+    "typescript": "^5.6.2"
   }
 }
