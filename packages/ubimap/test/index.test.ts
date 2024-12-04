@@ -59,6 +59,31 @@ describe('UbiMap', () => {
     expect(ubimap.getKey('value')).toBe('key1 key2');
   });
 
+  it('ensures filter works', () => {
+    const ubimap = new UbiMap<[string, string]>();
+    ubimap.set('key1', 'key2', 'value1');
+    ubimap.set('key3', 'key', 'value2');
+    ubimap.set('key1', 'key3', 'value3');
+
+    expect(ubimap.filter('key1')).toEqual([
+      ['key1', 'key2', 'value1'],
+      ['key1', 'key3', 'value3']
+    ]);
+
+    expect(ubimap.filter('key1', 'key2')).toEqual([['key1', 'key2', 'value1']]);
+    expect(ubimap.filter('key1 key2')).toEqual([['key1', 'key2', 'value1']]);
+
+    expect(ubimap.filter('key3')).toEqual([['key3', 'key', 'value2']]);
+
+    expect(ubimap.filter('key4')).toEqual([]);
+
+    expect(ubimap.filter()).toEqual([
+      ['key1', 'key2', 'value1'],
+      ['key3', 'key', 'value2'],
+      ['key1', 'key3', 'value3']
+    ]);
+  });
+
   it('should return undefined for non-existing value', () => {
     const ubimap = new UbiMap<[string, string]>();
     expect(ubimap.getKey('nonexistent')).toBeUndefined();

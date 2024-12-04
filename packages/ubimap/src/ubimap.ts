@@ -155,15 +155,19 @@ export class UbiMap<
    * @param prefixes - A partial tuple representing the key prefix to filter by.
    * @returns An array of keys matching the prefix.
    */
-  keys<P extends PartialTuple<K>>(
-    ...prefixes: PartialTuple<K> | [Join<PartialTuple<K>, S>]
-  ): Extract<Join<K, S>, Join<P, S>>[] {
+  keys(...prefixes: PartialTuple<K> | [Join<PartialTuple<K>, S>]): Join<K, S>[] {
     const prefix = prefixes.join(this.separator);
+    const result: string[] = [];
 
-    return Object.keys(this.kmap).filter((key) => key.startsWith(prefix)) as Extract<
-      Join<K, S>,
-      Join<P, S>
-    >[];
+    for (const key of Object.keys(this.kmap)) {
+      if (!key.startsWith(prefix)) {
+        continue;
+      }
+
+      result.push(key);
+    }
+
+    return result as Join<K, S>[];
   }
 
   /**
@@ -188,7 +192,54 @@ export class UbiMap<
    * @returns An array of values corresponding to the matching keys.
    */
   values(...prefixes: PartialTuple<K> | [Join<PartialTuple<K>, S>]): V[] {
-    return this.keys(...prefixes).map((key) => this.kmap[key]);
+    const prefix = prefixes.join(this.separator);
+    const result: V[] = [];
+
+    for (const key of Object.keys(this.kmap)) {
+      if (!key.startsWith(prefix)) {
+        continue;
+      }
+
+      result.push(this.kmap[key as Join<K, S>]);
+    }
+
+    return result;
+  }
+
+  /**
+   * Returns an array of key-value pairs whose keys start with the specified prefixes.
+   *
+   * @example
+   *
+   * ```ts
+   * const ubimap = new UbiMap<[string, string]>();
+   *
+   * ubimap.set('a', 'b', 'value1');
+   * ubimap.set('a', 'c', 'value2');
+   * ubimap.set('b', 'c', 'value3');
+   *
+   * console.log(ubimap.filter('a b')); // [['a b', 'value1']]
+   * console.log(ubimap.filter('a', 'b')); // [['a b', 'value1']]
+   * console.log(ubimap.filter('a')); // [['a b', 'value1'], ['a c', 'value2']]
+   * console.log(ubimap.filter()); // [['a b', 'value1'], ['a c', 'value2'], ['b c', 'value3']]
+   * console.log(ubimap.filter(['a', 'b'])); // [['a b', 'value1']]
+   * ```
+   */
+  filter(...prefixes: PartialTuple<K> | [Join<PartialTuple<K>, S>]): [...K, V][] {
+    const prefix = prefixes.join(this.separator);
+    const result: [...K, V][] = [];
+
+    for (const [key, value] of Object.entries<V>(this.kmap)) {
+      if (!key.startsWith(prefix)) {
+        continue;
+      }
+
+      const keys = key.split(this.separator) as [...K, V];
+      keys.push(value);
+      result.push(keys);
+    }
+
+    return result;
   }
 
   /** Iterates over all key-value pairs in the map. */
