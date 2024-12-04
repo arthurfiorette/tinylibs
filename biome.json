@@ -1,0 +1,14 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.9.0/schema.json",
+  "extends": ["@arthurfiorette/biomejs-config"],
+  "files": {
+    "ignore": [
+      "packages/axios-cache-hooks",
+      "packages/object-code/test/values.ts",
+      "packages/prisma-typegraphql-pagination"
+    ]
+  },
+  "formatter": {
+    "enabled": false
+  }
+}

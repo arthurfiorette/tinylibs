@@ -8,7 +8,7 @@ describe('utils tests', () => {
 
     expect(isDuration('A')).toBe(false);
     expect(isDuration({})).toBe(false);
-    expect(isDuration(Infinity)).toBe(false);
+    expect(isDuration(Number.POSITIVE_INFINITY)).toBe(false);
     expect(isDuration(-1)).toBe(false);
     expect(isDuration(true)).toBe(false);
     expect(isDuration(false)).toBe(false);
@@ -25,7 +25,7 @@ describe('utils tests', () => {
     expect(isTruthy(1)).toBe(true);
     expect(isTruthy('A')).toBe(true);
     expect(isTruthy(-1)).toBe(true);
-    expect(isTruthy(Infinity)).toBe(true);
+    expect(isTruthy(Number.POSITIVE_INFINITY)).toBe(true);
     expect(isTruthy(true)).toBe(true);
 
     expect(isTruthy({})).toBe(false);

@@ -1,5 +1,5 @@
 import { act, renderHook } from '@testing-library/react-hooks';
-import Axios, { AxiosError } from 'axios';
+import Axios, { type AxiosError } from 'axios';
 import type { CacheRequestConfig } from 'axios-cache-interceptor';
 import { error404Query, simpleQuery, useQuery } from './api';
 

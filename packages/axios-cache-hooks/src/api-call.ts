@@ -53,5 +53,5 @@ export function executeApiCall<Data, Args extends unknown[]>(
  * @see https://github.com/axios/axios/blob/master/lib/cancel/isCancel.js
  */
 function isAxiosCancel(error: unknown): boolean {
-  return !!(error && (error as Record<string, boolean>)['__CANCEL__']);
+  return !!(error && (error as Record<string, boolean>).__CANCEL__);
 }

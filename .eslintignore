@@ -1,8 +1,0 @@
-# Built code
-dist
-
-# Coverage
-coverage
-
-# Javascript files
-*.js
