@@ -31,7 +31,7 @@ export function parse(headerStr?: string): CacheControl {
   const staleIfError = headers['stale-if-error'];
   const staleWhileRevalidate = headers['stale-while-revalidate'];
 
-  if (isTruthy(headers['immutable'])) {
+  if (isTruthy(headers.immutable)) {
     header.immutable = true;
   }
 
@@ -71,7 +71,7 @@ export function parse(headerStr?: string): CacheControl {
     header.onlyIfCached = true;
   }
 
-  if (isTruthy(headers['private'])) {
+  if (isTruthy(headers.private)) {
     header.private = true;
   }
 
@@ -79,7 +79,7 @@ export function parse(headerStr?: string): CacheControl {
     header.proxyRevalidate = true;
   }
 
-  if (isTruthy(headers['public'])) {
+  if (isTruthy(headers.public)) {
     header.public = true;
   }
 

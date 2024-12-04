@@ -21,9 +21,7 @@ describe('isDeferred() tests', () => {
       new Promise(() => void 0),
       () => 0,
       () => void 0,
-      function () {
-        return 123;
-      },
+      () => 123,
       ':)',
       {
         // fake deferred

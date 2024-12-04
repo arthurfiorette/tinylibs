@@ -52,7 +52,7 @@ describe('tokenize() tests', () => {
     const negative = tokenize({ sMaxAge: -123 });
     expect(negative).toHaveLength(0);
 
-    const infinity = tokenize({ sMaxAge: Infinity });
+    const infinity = tokenize({ sMaxAge: Number.POSITIVE_INFINITY });
     expect(infinity).toHaveLength(0);
   });
 
@@ -83,7 +83,7 @@ describe('tokenize() tests', () => {
       immutable: true,
       //@ts-expect-error
       noStore: false,
-      sMaxAge: Infinity
+      sMaxAge: Number.POSITIVE_INFINITY
     });
     expect(test3).toHaveLength(2);
     expect(test3).toContain('max-age=1');
@@ -95,7 +95,7 @@ describe('tokenize() tests', () => {
       immutable: true,
       //@ts-expect-error
       noStore: false,
-      sMaxAge: Infinity
+      sMaxAge: Number.POSITIVE_INFINITY
     });
     expect(test4).toHaveLength(3);
     expect(test4).toContain('stale-while-revalidate=1');

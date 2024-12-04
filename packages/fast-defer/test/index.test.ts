@@ -11,10 +11,12 @@ describe('tests deferred', () => {
   it('needs a Promise polyfill', () => {
     const old = Promise;
     //@ts-expect-error ignore
+    // biome-ignore lint/suspicious/noGlobalAssign: <explanation>
     Promise = null;
 
     expect(() => deferred()).toThrowError('Promise is not a constructor');
 
+    // biome-ignore lint/suspicious/noGlobalAssign: <explanation>
     Promise = old;
   });
 

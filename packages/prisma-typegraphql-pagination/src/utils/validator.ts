@@ -35,7 +35,7 @@ export const createSingleFieldValidator = (
       },
 
       defaultMessage: c.buildMessage(
-        (eachPrefix) => eachPrefix + `${entityName} must contain only one field.`
+        (eachPrefix) => `${eachPrefix}${entityName} must contain only one field.`
       )
     }
   });

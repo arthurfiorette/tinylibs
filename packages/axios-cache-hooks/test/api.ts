@@ -1,8 +1,8 @@
 import Axios from 'axios';
 import {
+  type CacheRequestConfig,
   buildMemoryStorage,
-  setupCache,
-  type CacheRequestConfig
+  setupCache
 } from 'axios-cache-interceptor';
 import { createAxiosCacheHooks } from '../src';
 
@@ -13,7 +13,7 @@ export async function simpleQuery(name: string, extra?: CacheRequestConfig) {
 }
 
 export function error404Query(extra?: CacheRequestConfig) {
-  return axios.get<unknown>(`http://localhost:39874/`, extra);
+  return axios.get<unknown>('http://localhost:39874/', extra);
 }
 
 export function simpleMutation(name: string, extra?: CacheRequestConfig) {

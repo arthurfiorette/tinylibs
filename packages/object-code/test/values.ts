@@ -1,7 +1,7 @@
 /* eslint-disable */
 /* istanbul ignore file */
 
-import { URLSearchParams } from 'url';
+import { URLSearchParams } from 'node:url';
 import { hash } from '../src';
 
 /** All values in this array MUST return an different hashcode. */
@@ -35,30 +35,26 @@ export const values = [
   false,
   -123,
   true,
-  -Infinity,
-  NaN,
+  Number.NEGATIVE_INFINITY,
+  Number.NaN,
   0,
   void 0, // undefined
   1,
-  Infinity,
+  Number.POSITIVE_INFINITY,
   3479865453234234234234234287654246345634563454523452345e252,
   -3479865453234234234234234287654246345634563454523452345e252,
 
   // Functions
 
-  { a: function () {} },
-  { b: function () {} },
-  { b: function (_b: any) {} },
-  function (_c: any) {},
-  function (_b: any) {},
-  function (a: any) {
-    return a;
-  },
-  function (b: any) {
-    return b;
-  },
+  { a: () => {} },
+  { b: () => {} },
+  { b: (_b: any) => {} },
+  (_c: any) => {},
+  (_b: any) => {},
+  (a: any) => a,
+  (b: any) => b,
   function withName() {},
-  function () {},
+  () => {},
   { lambda: () => {} },
   { lam2da: () => {} },
 
@@ -151,11 +147,11 @@ export const values = [
   9007199254740991,
 
   // Objects
-  new URLSearchParams({a: '1'}),
-  new URLSearchParams({b: '1'}),
-  new URLSearchParams({a: '1', b: '1'}),
-  Buffer.from('asd'),	
-  Buffer.from('asd1'),
+  new URLSearchParams({ a: '1' }),
+  new URLSearchParams({ b: '1' }),
+  new URLSearchParams({ a: '1', b: '1' }),
+  Buffer.from('asd'),
+  Buffer.from('asd1')
 ];
 
 // Adds self reference
