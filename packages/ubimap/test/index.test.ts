@@ -112,13 +112,13 @@ describe('UbiMap', () => {
 
     const entries = [];
 
-    for (const [key, value] of ubimap) {
-      entries.push([key, value]);
+    for (const a of ubimap) {
+      entries.push(a);
     }
 
     expect(entries).toEqual([
-      ['key1 key2', 'value1'],
-      ['key3 key', 'value2']
+      ['key1', 'key2', 'value1'],
+      ['key3', 'key', 'value2']
     ]);
   });
 
@@ -128,8 +128,8 @@ describe('UbiMap', () => {
     ubimap.set('key3', 'key4', 'value2');
     const entries = [...ubimap];
     expect(entries).toEqual([
-      ['key1 key2', 'value1'],
-      ['key3 key4', 'value2']
+      ['key1', 'key2', 'value1'],
+      ['key3', 'key4', 'value2']
     ]);
   });
 
@@ -162,5 +162,16 @@ describe('UbiMap', () => {
     expect(ubimap.remove('key1', 'key2')).toBeTruthy();
     expect(ubimap.get('key1', 'key  2')).toBeUndefined();
     expect(ubimap.keys()).toHaveLength(0);
+  });
+
+  it('correctly calculates size()', () => {
+    const ubimap = new UbiMap<[string, string]>();
+    expect(ubimap.size()).toBe(0);
+    ubimap.set('key1', 'key2', 'value');
+    expect(ubimap.size()).toBe(1);
+    ubimap.set('key3', 'key4', 'value1');
+    expect(ubimap.size()).toBe(2);
+    ubimap.remove('key1', 'key2');
+    expect(ubimap.size()).toBe(1);
   });
 });

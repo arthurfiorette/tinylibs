@@ -15,24 +15,43 @@ export class UbiMap<
   V extends string | number = string,
   const S extends string = ' '
 > {
-  /** Internal map for storing keys mapped to values. */
-  private kmap: Record<Join<K, S>, V> = Object.create(null);
+  /** @internal map for storing keys mapped to values. */
+  private readonly kmap!: Record<Join<K, S>, V>;
 
-  /** Internal map for storing values mapped to keys. */
-  private vmap: Record<V, Join<K, S>> = Object.create(null);
+  /** @internal map for storing values mapped to keys. */
+  private readonly vmap!: Record<V, Join<K, S>>;
 
-  /**
-   * Creates a new instance of `UbiMap`.
-   *
-   * @param data - An optional initial dataset for the map, where keys are joined strings
-   *   and values are of type `V`.
-   * @param separator - The string used to separate components of compound keys. Defaults
-   *   to `' '`.
-   */
+  /** Creates a new instance of `UbiMap`. */
   constructor(
+    /**
+     * An optional initial dataset for the map, where keys are joined strings and values
+     * are of type `V`.
+     */
     data?: Record<Join<K, S>, V>,
+
+    /**
+     * The string used to separate components of compound keys.
+     *
+     * @default ' '
+     */
     readonly separator: S = ' ' as S
   ) {
+    // Define as hidden
+    Object.defineProperties(this, {
+      kmap: {
+        enumerable: false,
+        writable: false,
+        configurable: false,
+        value: Object.create(null)
+      },
+      vmap: {
+        enumerable: false,
+        writable: false,
+        configurable: false,
+        value: Object.create(null)
+      }
+    });
+
     if (data) {
       for (const [key, value] of Object.entries<V>(data)) {
         this.set(key as Join<K, S>, value);
@@ -242,10 +261,18 @@ export class UbiMap<
     return result;
   }
 
+  /** @returns The number of key-value pairs in the map. */
+  size(): number {
+    return Object.keys(this.kmap).length;
+  }
+
   /** Iterates over all key-value pairs in the map. */
   *[Symbol.iterator]() {
     for (const key in this.kmap) {
-      yield [key, this.kmap[key as Join<K, S>]];
+      yield [
+        ...(key.split(this.separator) as [...K, V]),
+        this.kmap[key as Join<K, S>]
+      ] as const;
     }
   }
 }
