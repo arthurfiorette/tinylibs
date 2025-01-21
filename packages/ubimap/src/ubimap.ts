@@ -1,5 +1,5 @@
 import { KeyAlreadyExistsError, ValueAlreadyExistsError } from './errors';
-import type { Join, PartialTuple } from './types';
+import type { Join, PartialTuple, UbimapOptions } from './types';
 
 /**
  * A safe, typed, enumerable bidirectional map that ensures unique values and supports
@@ -14,36 +14,20 @@ export class UbiMap<
   K extends (string | number)[],
   V extends string | number = string,
   const S extends string = ' '
-> {
+> implements UbimapOptions<S>
+{
   /** @internal map for storing keys mapped to values. */
   private readonly kmap!: Record<Join<K, S>, V>;
 
   /** @internal map for storing values mapped to keys. */
   private readonly vmap!: Record<V, Join<K, S>>;
 
+  // ubimap interface already documents these properties
+  readonly separator: S;
+  public throwOnNotFound = false;
+
   /** Creates a new instance of `UbiMap`. */
-  constructor(
-    /**
-     * An optional initial dataset for the map, where keys are joined strings and values
-     * are of type `V`.
-     */
-    data?: Record<Join<K, S>, V>,
-
-    /**
-     * The string used to separate components of compound keys.
-     *
-     * @default ' '
-     */
-    readonly separator: S = ' ' as S,
-
-    /**
-     * A boolean indicating whether to throw an error when a key is not found on a `get`
-     * operation.
-     *
-     * @default false
-     */
-    public throwOnNotFound = false
-  ) {
+  constructor(options?: Partial<UbimapOptions<S>> & { data?: Record<Join<K, S>, V> }) {
     // Define as hidden
     Object.defineProperties(this, {
       kmap: {
@@ -60,8 +44,11 @@ export class UbiMap<
       }
     });
 
-    if (data) {
-      for (const [key, value] of Object.entries<V>(data)) {
+    this.separator = options?.separator ?? (' ' as S);
+    this.throwOnNotFound = options?.throwOnNotFound ?? false;
+
+    if (options && options.data) {
+      for (const [key, value] of Object.entries<V>(options.data)) {
         this.set(key as Join<K, S>, value);
       }
     }

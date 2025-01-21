@@ -39,3 +39,21 @@ export type Join<I extends (string | number)[], D extends string> = I extends [
 export type PartialTuple<C extends unknown[]> = C extends [infer First, ...infer Rest]
   ? [] | [First, ...PartialTuple<Rest>]
   : [];
+
+/** Options for configuring a new `UbiMap` instance. */
+export interface UbimapOptions<S extends string> {
+  /**
+   * The string used to separate components of compound keys.
+   *
+   * @default ' '
+   */
+  separator: S;
+
+  /**
+   * A boolean indicating whether to throw an error when a key is not found on a `get`
+   * operation.
+   *
+   * @default false
+   */
+  throwOnNotFound: boolean;
+}

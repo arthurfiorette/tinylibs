@@ -7,8 +7,10 @@ describe('UbiMap', () => {
   });
 
   it('should initialize with provided data', () => {
-    const initialData = { 'a b': 'value1', 'c d': 'value2' };
-    const ubimap = new UbiMap<[string, string]>(initialData);
+    const ubimap = new UbiMap<[string, string]>({
+      data: { 'a b': 'value1', 'c d': 'value2' }
+    });
+
     expect(ubimap.get('a', 'b')).toBe('value1');
     expect(ubimap.get('c', 'd')).toBe('value2');
   });
@@ -135,7 +137,7 @@ describe('UbiMap', () => {
   });
 
   it('should handle custom separators', () => {
-    const ubimap = new UbiMap<[string, string], string, '-'>(undefined, '-');
+    const ubimap = new UbiMap<[string, string], string, '-'>({ separator: '-' });
     ubimap.set('key1', 'key2', 'value');
     expect(ubimap.get('key1', 'key2')).toBe('value');
     expect(ubimap.getKey('value')).toBe('key1-key2');
