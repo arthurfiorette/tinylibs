@@ -16,9 +16,33 @@
 
 <br />
 
-<div align="center">
-  <img src="./assets/logo.png" alt="UbiMap" width="80%" />
-</div>
+```ts
+type Team = 'Red' | 'Blue';
+type Role = 'Attack' | 'Defense';
+
+const match = new UbiMap<[Team, Role]>();
+
+// unique keys and values!
+match.set('Red', 'Attack', users[0]!.id);
+match.set('Red', 'Defense', users[1]!.id);
+match.set('Blue', 'Attack', users[2]!.id);
+match.set('Blue', 'Defense', users[3]!.id);
+
+const [team, role] = match.getKey(users[2]!.id)!;
+
+console.log(team, role); // Blue Attack
+
+const blueDefense = match.get('Blue', 'Defense');
+const redDefense = match.get('Red', 'Defense');
+
+for (const [team, role, userId] of match) {
+  console.log(`${userId} has the role of ${role} in the ${team} team.`);
+}
+
+for (const [, role, userId] of match.filter('Red')) {
+  console.log(`${userId} has the role of ${role} in the Red team.`);
+}
+```
 
 <h3 align="center">
   <code>Ubimap</code> is a safe, typed, enumerable bidirectional map that ensures unique values and supports compound keys.
