@@ -18,7 +18,8 @@
     "dist",
     "src",
     "LICENSE",
-    "README.md"
+    "README.md",
+    "!dist/tsconfig.build.tsbuildinfo"
   ],
   "scripts": {
     "build": "tsc -p tsconfig.build.json",

@@ -17,10 +17,7 @@
 <br />
 
 <div align="center">
-  <pre>
-  <h1>🏃<br />Ubimap</h1>
-  </pre>
-  <br />
+  <img src="./assets/logo.png" alt="UbiMap" width="80%" />
 </div>
 
 <h3 align="center">
@@ -169,8 +166,8 @@ const valuesWithPrefix = ubimap.values('value'); // ['value1', 'value2']
 You can also iterate over all key-value pairs using a `for...of` loop:
 
 ```ts
-for (const [key, value] of ubimap) {
-  console.log(key, value);
+for (const [firstKey, secondKey, value] of ubimap) {
+  console.log(firstKey, secondKey, value);
 }
 ```
 

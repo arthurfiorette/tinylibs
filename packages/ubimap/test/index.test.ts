@@ -107,13 +107,14 @@ describe('UbiMap', () => {
 
   it('is iterable within for-of loops', () => {
     const ubimap = new UbiMap<[string, string]>();
+
     ubimap.set('key1', 'key2', 'value1');
     ubimap.set('key3', 'key', 'value2');
 
     const entries = [];
 
-    for (const a of ubimap) {
-      entries.push(a);
+    for (const row of ubimap) {
+      entries.push(row);
     }
 
     expect(entries).toEqual([
@@ -173,5 +174,18 @@ describe('UbiMap', () => {
     expect(ubimap.size()).toBe(2);
     ubimap.remove('key1', 'key2');
     expect(ubimap.size()).toBe(1);
+  });
+
+  it('throws if throwOnNotFound is true', () => {
+    const ubimap = new UbiMap<[string, string]>();
+    ubimap.throwOnNotFound = true;
+
+    try {
+      ubimap.get('key1', 'key2');
+      throw new Error('Expected an error to be thrown');
+    } catch (error: any) {
+      expect(error.message).toBe("Key 'key1 key2' not found.");
+      expect(error.key).toBe('key1 key2');
+    }
   });
 });

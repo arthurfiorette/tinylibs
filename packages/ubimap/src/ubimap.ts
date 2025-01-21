@@ -34,7 +34,15 @@ export class UbiMap<
      *
      * @default ' '
      */
-    readonly separator: S = ' ' as S
+    readonly separator: S = ' ' as S,
+
+    /**
+     * A boolean indicating whether to throw an error when a key is not found on a `get`
+     * operation.
+     *
+     * @default false
+     */
+    public throwOnNotFound = false
   ) {
     // Define as hidden
     Object.defineProperties(this, {
@@ -125,11 +133,21 @@ export class UbiMap<
    * ubimap.set('key1 key2');
    * ```
    *
-   * @param key - The components of the compound key.
+   * @param keys - The components of the compound key.
    * @returns The value associated with the key.
+   * @throws An error if the key is not found and `throwOnNotFound` is `true`.
    */
-  get(...key: K | [Join<K, S>]): V {
-    return this.kmap[key.join(this.separator) as Join<K, S>];
+  get(...keys: K | [Join<K, S>]): V {
+    const key = keys.join(this.separator) as Join<K, S>;
+    const value = this.kmap[key];
+
+    if (value === undefined && this.throwOnNotFound) {
+      const error = new Error(`Key '${key}' not found.`);
+      Object.assign(error, { key });
+      throw error;
+    }
+
+    return value;
   }
 
   /**
