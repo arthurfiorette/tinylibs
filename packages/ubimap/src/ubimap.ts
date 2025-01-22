@@ -1,5 +1,5 @@
 import { KeyAlreadyExistsError, ValueAlreadyExistsError } from './errors';
-import type { Join, PartialTuple, UbimapOptions } from './types';
+import type { Join, PartialTuple } from './types';
 
 /**
  * A safe, typed, enumerable bidirectional map that ensures unique values and supports
@@ -14,41 +14,30 @@ export class UbiMap<
   K extends (string | number)[],
   V extends string | number = string,
   const S extends string = ' '
-> implements UbimapOptions<S>
-{
+> {
   /** @internal map for storing keys mapped to values. */
-  private readonly kmap!: Record<Join<K, S>, V>;
+  private readonly kmap = new Map<Join<K, S>, V>();
 
   /** @internal map for storing values mapped to keys. */
-  private readonly vmap!: Record<V, Join<K, S>>;
-
-  // ubimap interface already documents these properties
-  readonly separator: S;
-  public throwOnNotFound = false;
+  private readonly vmap = new Map<V, Join<K, S>>();
 
   /** Creates a new instance of `UbiMap`. */
-  constructor(options?: Partial<UbimapOptions<S>> & { data?: Record<Join<K, S>, V> }) {
-    // Define as hidden
-    Object.defineProperties(this, {
-      kmap: {
-        enumerable: false,
-        writable: false,
-        configurable: false,
-        value: Object.create(null)
-      },
-      vmap: {
-        enumerable: false,
-        writable: false,
-        configurable: false,
-        value: Object.create(null)
-      }
-    });
+  constructor(
+    /**
+     * An optional initial dataset for the map, where keys are joined strings and values
+     * are of type `V`.
+     */
+    data?: Record<Join<K, S>, V>,
 
-    this.separator = options?.separator ?? (' ' as S);
-    this.throwOnNotFound = options?.throwOnNotFound ?? false;
-
-    if (options && options.data) {
-      for (const [key, value] of Object.entries<V>(options.data)) {
+    /**
+     * The string used to separate components of compound keys.
+     *
+     * @default ' '
+     */
+    readonly separator: S = ' ' as S
+  ) {
+    if (data) {
+      for (const [key, value] of Object.entries<V>(data)) {
         this.set(key as Join<K, S>, value);
       }
     }
@@ -76,16 +65,16 @@ export class UbiMap<
     const value = input.pop() as V;
     const key = input.join(this.separator) as Join<K, S>;
 
-    if (this.kmap[key]) {
+    if (this.kmap.has(key)) {
       throw new KeyAlreadyExistsError(key);
     }
 
-    if (this.vmap[value]) {
+    if (this.vmap.has(value)) {
       throw new ValueAlreadyExistsError(value);
     }
 
-    this.kmap[key] = value;
-    this.vmap[value] = key;
+    this.kmap.set(key, value);
+    this.vmap.set(value, key);
   }
 
   /**
@@ -94,17 +83,29 @@ export class UbiMap<
    * This method uses `delete` under the hood since this map was designed be a fast access
    * map and not a volatile one.
    *
-   * @param key - The components of the compound key.
+   * @param keys - The components of the compound key.
    * @returns A boolean indicating whether the key was removed.
    */
-  remove(...key: K | [Join<K, S>]): boolean {
-    const keys = key.join(this.separator) as Join<K, S>;
+  remove(...keys: K | [Join<K, S>]): boolean {
+    const key = keys.join(this.separator) as Join<K, S>;
+    const value = this.kmap.get(key);
 
-    if (!this.kmap[keys]) {
+    if (!value) {
       return false;
     }
 
-    return delete this.vmap[this.kmap[keys]] && delete this.kmap[keys];
+    return this.kmap.delete(key) && this.vmap.delete(value);
+  }
+
+  /**
+   * Checks if a key exists in the map.
+   *
+   * @param keys - The components of the compound key.
+   * @returns A boolean indicating whether the key exists.
+   * @see {@linkcode throwOnNotFound}
+   */
+  has(...keys: K | [Join<K, S>]): boolean {
+    return this.kmap.has(keys.join(this.separator) as Join<K, S>);
   }
 
   /**
@@ -122,13 +123,13 @@ export class UbiMap<
    *
    * @param keys - The components of the compound key.
    * @returns The value associated with the key.
-   * @throws An error if the key is not found and `throwOnNotFound` is `true`.
+   * @throws An error if the key could not be found.
    */
   get(...keys: K | [Join<K, S>]): V {
     const key = keys.join(this.separator) as Join<K, S>;
-    const value = this.kmap[key];
+    const value = this.kmap.get(key)!;
 
-    if (value === undefined && this.throwOnNotFound) {
+    if (value === undefined) {
       const error = new Error(`Key '${key}' not found.`);
       Object.assign(error, { key });
       throw error;
@@ -140,6 +141,8 @@ export class UbiMap<
   /**
    * Retrieves the compound key associated with a value.
    *
+   * This method does not respects the `throwOnNotFound` property.
+   *
    * @example
    *
    * ```ts
@@ -148,6 +151,7 @@ export class UbiMap<
    * ubimap.set('a', 'b', 'value');
    *
    * console.log(ubimap.getKey('value')); // 'a b'
+   * console.log(ubimap.getKey('not value')); // undefined
    * ```
    *
    * @param value - The value to look up.
@@ -155,7 +159,7 @@ export class UbiMap<
    *   not exist.
    */
   getKey(value: V): Join<K, S> | undefined {
-    return this.vmap[value];
+    return this.vmap.get(value);
   }
 
   /**
@@ -183,12 +187,10 @@ export class UbiMap<
     const prefix = prefixes.join(this.separator);
     const result: string[] = [];
 
-    for (const key of Object.keys(this.kmap)) {
-      if (!key.startsWith(prefix)) {
-        continue;
+    for (const key of this.kmap.keys()) {
+      if (key.startsWith(prefix)) {
+        result.push(key);
       }
-
-      result.push(key);
     }
 
     return result as Join<K, S>[];
@@ -219,12 +221,10 @@ export class UbiMap<
     const prefix = prefixes.join(this.separator);
     const result: V[] = [];
 
-    for (const key of Object.keys(this.kmap)) {
-      if (!key.startsWith(prefix)) {
-        continue;
+    for (const [key, value] of this.kmap.entries()) {
+      if (key.startsWith(prefix)) {
+        result.push(value);
       }
-
-      result.push(this.kmap[key as Join<K, S>]);
     }
 
     return result;
@@ -253,7 +253,7 @@ export class UbiMap<
     const prefix = prefixes.join(this.separator);
     const result: [...K, V][] = [];
 
-    for (const [key, value] of Object.entries<V>(this.kmap)) {
+    for (const [key, value] of this.kmap.entries()) {
       if (!key.startsWith(prefix)) {
         continue;
       }
@@ -268,16 +268,13 @@ export class UbiMap<
 
   /** @returns The number of key-value pairs in the map. */
   size(): number {
-    return Object.keys(this.kmap).length;
+    return this.kmap.size;
   }
 
   /** Iterates over all key-value pairs in the map. */
   *[Symbol.iterator]() {
-    for (const key in this.kmap) {
-      yield [
-        ...(key.split(this.separator) as [...K, V]),
-        this.kmap[key as Join<K, S>]
-      ] as const;
+    for (const [key, value] of this.kmap.entries()) {
+      yield [...(key.split(this.separator) as [...K, V]), value] as const;
     }
   }
 }

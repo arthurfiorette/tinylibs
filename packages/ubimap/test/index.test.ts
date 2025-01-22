@@ -7,9 +7,7 @@ describe('UbiMap', () => {
   });
 
   it('should initialize with provided data', () => {
-    const ubimap = new UbiMap<[string, string]>({
-      data: { 'a b': 'value1', 'c d': 'value2' }
-    });
+    const ubimap = new UbiMap<[string, string]>({ 'a b': 'value1', 'c d': 'value2' });
 
     expect(ubimap.get('a', 'b')).toBe('value1');
     expect(ubimap.get('c', 'd')).toBe('value2');
@@ -137,7 +135,7 @@ describe('UbiMap', () => {
   });
 
   it('should handle custom separators', () => {
-    const ubimap = new UbiMap<[string, string], string, '-'>({ separator: '-' });
+    const ubimap = new UbiMap<[string, string], string, '-'>(undefined, '-');
     ubimap.set('key1', 'key2', 'value');
     expect(ubimap.get('key1', 'key2')).toBe('value');
     expect(ubimap.getKey('value')).toBe('key1-key2');
@@ -163,7 +161,7 @@ describe('UbiMap', () => {
     expect(ubimap.remove('key1', 'key2')).toBeFalsy();
     ubimap.set('key1', 'key2', 'value');
     expect(ubimap.remove('key1', 'key2')).toBeTruthy();
-    expect(ubimap.get('key1', 'key  2')).toBeUndefined();
+    expect(ubimap.has('key1', 'key  2')).toBeFalsy();
     expect(ubimap.keys()).toHaveLength(0);
   });
 
@@ -178,9 +176,8 @@ describe('UbiMap', () => {
     expect(ubimap.size()).toBe(1);
   });
 
-  it('throws if throwOnNotFound is true', () => {
+  it('throws if not found', () => {
     const ubimap = new UbiMap<[string, string]>();
-    ubimap.throwOnNotFound = true;
 
     try {
       ubimap.get('key1', 'key2');
@@ -189,5 +186,14 @@ describe('UbiMap', () => {
       expect(error.message).toBe("Key 'key1 key2' not found.");
       expect(error.key).toBe('key1 key2');
     }
+  });
+
+  it('tests has()', () => {
+    const ubimap = new UbiMap<[string, string]>();
+    expect(ubimap.has('key1', 'key2')).toBeFalsy();
+    expect(ubimap.has('key1', 'key3')).toBeFalsy();
+    ubimap.set('key1', 'key2', 'value');
+    expect(ubimap.has('key1', 'key2')).toBeTruthy();
+    expect(ubimap.has('key1', 'key3')).toBeFalsy();
   });
 });
