@@ -8,38 +8,19 @@
 [![Join the chat at https://gitter.im/tinylibs-js-org/community](https://badges.gitter.im/tinylibs-js-org/community.svg)](https://gitter.im/tinylibs-js-org/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Speed Blazing](https://img.shields.io/badge/speed-blazing%20%F0%9F%94%A5-brightgreen.svg)](https://twitter.com/acdlite/status/974390255393505280)
 
+[![Latest Version](https://img.shields.io/npm/v/@arthurfiorette/changesets-changelog-github)](https://www.npmjs.com/package/@arthurfiorette/changesets-changelog-github)
+[![Downloads](https://img.shields.io/npm/dw/@arthurfiorette/changesets-changelog-github)](https://www.npmjs.com/package/@arthurfiorette/changesets-changelog-github)
+[![JsDelivr](https://data.jsdelivr.com/v1/package/npm/@arthurfiorette/changesets-changelog-github/badge?style=rounded)](https://www.jsdelivr.com/package/npm/@arthurfiorette/changesets-changelog-github)
+[![Bundlephobia](https://img.shields.io/bundlephobia/minzip/@arthurfiorette/changesets-changelog-github/latest?style=flat)](https://bundlephobia.com/package/@arthurfiorette/changesets-changelog-github@latest)
+[![Packagephobia](https://packagephobia.com/badge?p=@arthurfiorette/changesets-changelog-github@latest)](https://packagephobia.com/result?p=@arthurfiorette/changesets-changelog-github@latest)
+
 <br />
 
-<div align="center">
-  <pre>
-  <h1>🗃️<br />Tiny Libs</h1>
-  </pre>
-  <br />
-</div>
-
 <h3 align="center">
-  <code>Tiny Libs</code> is a monorepo of several javascript related packages.
+  <code>@arthurfiorette/changesets-changelog-github</code>
   <br />
   <br />
 </h3>
-
-<br />
-
-## Table of Packages
-
-- [Fast Defer](packages/fast-defer)
-
-- [Ubimap](packages/ubimap)
-
-- [Object Code](packages/object-code)
-
-- [Cache Parser](packages/cache-parser)
-
-- [Axios Cache Hooks](packages/axios-cache-hooks)
-
-- [Prisma TypeGraphql Pagination](packages/prisma-typegraphql-pagination)
-
-- [Changesets Changelog Github](packages/changesets-changelog-github)
 
 <br />
 

@@ -1,0 +1,35 @@
+{
+  "name": "@arthurfiorette/changesets-changelog-github",
+  "version": "1.0.0",
+  "description": "A custom changelog generator for changesets.",
+  "homepage": "https://tinylibs.js.org/packages/ubimap",
+  "bugs": "https://github.com/arthurfiorette/tinylibs/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arthurfiorette/tinylibs.git",
+    "directory": "packages/ubimap"
+  },
+  "license": "MIT",
+  "author": "Arthur Fiorette <npm@arthur.place>",
+  "sideEffects": false,
+  "type": "commonjs",
+  "main": "dist/index.js",
+  "files": [
+    "dist",
+    "src",
+    "LICENSE",
+    "README.md",
+    "!dist/tsconfig.build.tsbuildinfo"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json"
+  },
+  "dependencies": {
+    "@changesets/changelog-github": "^0.5.0",
+    "@changesets/get-github-info": "^0.6.0",
+    "tslib": "^2.8.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.2"
+  }
+}
