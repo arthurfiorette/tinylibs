@@ -23,7 +23,11 @@ const modified = {
       .filter(Boolean)
       .join(', ');
 
-    return `- Dependencies ${commits ? `[${commits}]` : ''}:`;
+    if (!commits) {
+      return '';
+    }
+
+    return `- Dependencies [${commits}]`;
   }
 } satisfies typeof changelogFunctions;
 

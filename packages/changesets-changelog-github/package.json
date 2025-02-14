@@ -1,6 +1,6 @@
 {
   "name": "@arthurfiorette/changesets-changelog-github",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A custom changelog generator for changesets.",
   "homepage": "https://tinylibs.js.org/packages/ubimap",
   "bugs": "https://github.com/arthurfiorette/tinylibs/issues",
