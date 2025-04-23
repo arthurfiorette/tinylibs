@@ -10,7 +10,7 @@ importers:
     devDependencies:
       '@arthurfiorette/biomejs-config':
         specifier: ^1.0.6
-        version: 1.0.6
+        version: 1.0.8
       '@arthurfiorette/prettier-config':
         specifier: 1.0.12
         version: 1.0.12(prettier@3.3.3)(typescript@5.6.2)
@@ -175,8 +175,8 @@ packages:
   '@arrows/multimethod@1.4.1':
     resolution: {integrity: sha512-AZnAay0dgPnCJxn3We5uKiB88VL+1ZIF2SjZohLj6vqY2UyvB/sKdDnFP+LZNVsTC5lcnGPmLlRRkAh4sXkXsQ==}
 
-  '@arthurfiorette/biomejs-config@1.0.6':
-    resolution: {integrity: sha512-dWdFeeOlaDCUM+jP6BmhxhTsaVTOr3VGj2YjCAgsMNjje6NB0kUSfRu+Wu11KKrOHza8ZA3TV9+tlJiY5ZRysQ==}
+  '@arthurfiorette/biomejs-config@1.0.8':
+    resolution: {integrity: sha512-Fv+XQ/DgIQ7acBBq1JWfBTbxpYIVxt/SXPkLQN6nSFi4GQjmMHRorpD7DyJmxh7OkXgz/IORRhTbXGcMmvNJXw==}
 
   '@arthurfiorette/prettier-config@1.0.12':
     resolution: {integrity: sha512-jR36bHWLVv71FuKkU9XYeBe6ry/AN98EDh0WVyfo3QwjJFbhpeElFTS4nluwxeXfu6nJ8/Hv8bJf6cYeXzfeoA==}
@@ -3872,7 +3872,7 @@ snapshots:
       '@arrows/error': 1.0.2
       fast-deep-equal: 3.1.3
 
-  '@arthurfiorette/biomejs-config@1.0.6': {}
+  '@arthurfiorette/biomejs-config@1.0.8': {}
 
   '@arthurfiorette/prettier-config@1.0.12(prettier@3.3.3)(typescript@5.6.2)':
     dependencies:
