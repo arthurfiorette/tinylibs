@@ -65,13 +65,13 @@ importers:
     devDependencies:
       '@testing-library/react-hooks':
         specifier: 8.0.1
-        version: 8.0.1(@types/react@18.3.5)(react-test-renderer@18.3.1(react@18.2.0))(react@18.2.0)
+        version: 8.0.1(@types/react@18.3.24)(react-test-renderer@18.3.1(react@18.2.0))(react@18.2.0)
       '@types/express':
         specifier: 4.17.21
         version: 4.17.21
       '@types/react':
-        specifier: 18.3.5
-        version: 18.3.5
+        specifier: 18.3.24
+        version: 18.3.24
       express:
         specifier: 4.21.0
         version: 4.21.0
@@ -1165,8 +1165,8 @@ packages:
   '@types/range-parser@1.2.4':
     resolution: {integrity: sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw==}
 
-  '@types/react@18.3.5':
-    resolution: {integrity: sha512-WeqMfGJLGuLCqHGYRGHxnKrXcTitc6L/nBUWfWPcTarG3t9PsquqUMuVeXZeca+mglY4Vo5GZjCi0A3Or2lnxA==}
+  '@types/react@18.3.24':
+    resolution: {integrity: sha512-0dLEBsA1kI3OezMBF8nSsb7Nk19ZnsyE1LLhB8r27KbgU5H4pvuqZLdtE+aUkJVoXgTVuA+iLIwmZ0TuK4tx6A==}
 
   '@types/resolve@1.17.1':
     resolution: {integrity: sha512-yy7HuzQhj0dhGpD8RLXSZWEkLsV9ibvxvi6EiJ3bkqLAO1RGo0WbkWQiwpRlSFymTJRz0d3k5LM3kkx8ArDbLw==}
@@ -5021,13 +5021,13 @@ snapshots:
       magic-string: 0.25.9
       string.prototype.matchall: 4.0.8
 
-  '@testing-library/react-hooks@8.0.1(@types/react@18.3.5)(react-test-renderer@18.3.1(react@18.2.0))(react@18.2.0)':
+  '@testing-library/react-hooks@8.0.1(@types/react@18.3.24)(react-test-renderer@18.3.1(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@babel/runtime': 7.21.0
       react: 18.2.0
       react-error-boundary: 3.1.4(react@18.2.0)
     optionalDependencies:
-      '@types/react': 18.3.5
+      '@types/react': 18.3.24
       react-test-renderer: 18.3.1(react@18.2.0)
 
   '@tootallnate/once@2.0.0': {}
@@ -5151,7 +5151,7 @@ snapshots:
 
   '@types/range-parser@1.2.4': {}
 
-  '@types/react@18.3.5':
+  '@types/react@18.3.24':
     dependencies:
       '@types/prop-types': 15.7.5
       csstype: 3.1.2
