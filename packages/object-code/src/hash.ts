@@ -81,7 +81,7 @@ export function hash(val: unknown, seen?: WeakSet<object>): number {
     } else {
       toHash += String(val);
     }
-  } catch (error) {
+  } catch (_error) {
     toHash += String(Object.assign({}, val));
   }
 

@@ -30,7 +30,7 @@ jobs:
         run: pnpm build
 
       - name: Lint
-        run: pnpm lint:ci
+        run: pnpm lint-ci
 
       - name: Test
         run: pnpm test

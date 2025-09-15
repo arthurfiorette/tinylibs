@@ -20,8 +20,8 @@
     "format": "prettier --write .",
     "preinstall": "npx only-allow pnpm",
     "lint": "biome check .",
-    "lint:ci": "biome ci .",
-    "lint:fix": "biome check --write --unsafe .",
+    "lint-ci": "biome ci .",
+    "lint-fix": "biome check --write --unsafe .",
     "test": "pnpm -r --parallel test"
   },
   "devDependencies": {

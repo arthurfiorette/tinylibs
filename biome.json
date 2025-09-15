@@ -1,11 +1,8 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.0/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.2.4/schema.json",
   "extends": ["@arthurfiorette/biomejs-config"],
   "files": {
-    "ignore": [
-      "archive",
-      "packages/object-code/test/values.ts"
-    ]
+    "includes": ["**", "!**/archive", "!**/packages/object-code/test/values.ts"]
   },
   "formatter": {
     "enabled": false

@@ -1,7 +1,7 @@
 export function isDuration(val: unknown): boolean {
   return (
     (typeof val === 'string' || typeof val === 'number') &&
-    // biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
+    // biome-ignore lint/suspicious/noAssignInExpressions: to reduce one line
     (val = Number(val)) >= 0 &&
     (val as number) < Number.POSITIVE_INFINITY
   );
