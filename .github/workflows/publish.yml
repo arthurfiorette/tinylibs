@@ -21,6 +21,9 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.actor != 'dependabot[bot]' }}
 
+    environment:
+      name: NPM Registry
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
