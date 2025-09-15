@@ -35,11 +35,11 @@
 
 - [Cache Parser](packages/cache-parser)
 
-- [Axios Cache Hooks](packages/axios-cache-hooks)
+<!-- - [Axios Cache Hooks](packages/axios-cache-hooks) -->
 
-- [Prisma TypeGraphql Pagination](packages/prisma-typegraphql-pagination)
+<!-- - [Prisma TypeGraphql Pagination](packages/prisma-typegraphql-pagination) -->
 
-- [Changesets Changelog Github](packages/changesets-changelog-github)
+<!-- - [Changesets Changelog Github](packages/changesets-changelog-github) -->
 
 <br />
 
