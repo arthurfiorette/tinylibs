@@ -8,7 +8,7 @@ module.exports = {
       'ts-jest',
       {
         tsconfig: './tsconfig.build.json',
-        useESM: true,
+        useESM: true
       }
     ]
   }

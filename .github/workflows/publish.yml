@@ -44,6 +44,5 @@ jobs:
       - name: Build
         run: pnpm build
 
-
       - name: Publish to NPM # OIDC authentication
         run: pnpm publish --access public --no-git-checks
