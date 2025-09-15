@@ -1,2 +1,6 @@
 packages:
   - 'packages/*'
+
+catalogs:
+  bundle:
+    "microbundle": ^0.15.1

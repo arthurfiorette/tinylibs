@@ -29,6 +29,6 @@
     "test": "jest --coverage"
   },
   "devDependencies": {
-    "microbundle": "0.15.1"
+    "microbundle": "catalog:bundle"
   }
 }

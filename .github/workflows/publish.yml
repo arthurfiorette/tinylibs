@@ -1,48 +1,60 @@
-name: Publish to NPM
+name: Release Flow
 
 on:
+  push:
+    branches: [main]
+
+  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-    inputs:
-      package:
-        description: 'Package to publish'
-        required: true
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 permissions:
   id-token: write # Required for OIDC
-  contents: read
+  contents: write
+  pull-requests: write # Required to create a release PR
+  checks: write # Required to create a check run
+  issues: write # Required to create issues
 
 jobs:
-  publish:
-    name: Publish ${{ github.event.inputs.package }}
+  release:
     runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        working-directory: './packages/${{ github.event.inputs.package }}/'
-
-    environment:
-      name: NPM Registry
+    if: ${{ github.actor != 'dependabot[bot]' }}
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
+
+      # https://github.com/actions/checkout/issues/1471
+      - name: Fetch tags
+        run: git fetch --prune --unshallow --tags
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
 
       - name: Setup node and restore cached dependencies
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: '18'
+          node-version-file: '.nvmrc'
           cache: 'pnpm'
-          registry-url: 'https://registry.npmjs.org/'
 
       - name: Install packages
         run: pnpm install --frozen-lockfile
 
-      # Build first to avoid broken monorepo dependencies
       - name: Build
         run: pnpm build
 
-      - name: Publish to NPM # OIDC authentication
-        run: pnpm publish --access public --no-git-checks
+      - name: Create Release Pull Request or Publish
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          version: pnpm ci:version
+          commit: 'chore: update versions'
+          title: 'Release plan'
+
+          # https://github.com/changesets/action/issues/246
+          # https://github.com/changesets/changesets/pull/674
+          publish: pnpm ci:publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true
