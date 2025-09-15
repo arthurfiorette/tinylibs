@@ -48,13 +48,13 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
-          version: pnpm ci:version
+          version: pnpm ci-version
           commit: 'chore: update versions'
           title: 'Release plan'
 
           # https://github.com/changesets/action/issues/246
           # https://github.com/changesets/changesets/pull/674
-          publish: pnpm ci:publish
+          publish: pnpm ci-publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_CONFIG_PROVENANCE: true
