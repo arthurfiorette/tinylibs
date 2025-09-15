@@ -9,7 +9,6 @@ module.exports = {
       {
         tsconfig: './tsconfig.build.json',
         useESM: true,
-        isolatedModules: true
       }
     ]
   }
