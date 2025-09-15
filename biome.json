@@ -3,9 +3,8 @@
   "extends": ["@arthurfiorette/biomejs-config"],
   "files": {
     "ignore": [
-      "packages/axios-cache-hooks",
-      "packages/object-code/test/values.ts",
-      "packages/prisma-typegraphql-pagination"
+      "archive",
+      "packages/object-code/test/values.ts"
     ]
   },
   "formatter": {

@@ -1,5 +1,5 @@
-import express from 'express';
 import type { Server } from 'node:http';
+import express from 'express';
 export const app = express();
 
 app.get('/', (_, res) => {
