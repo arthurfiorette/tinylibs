@@ -132,7 +132,8 @@ provide excellent collision resistance while maintaining high performance.
 The hash function produces 32-bit signed integers, giving approximately **4.3 billion**
 unique values. While not cryptographically secure, it provides:
 
-- **Zero collisions** in our test suite of hundreds of diverse values (including edge cases)
+- **Zero collisions** in our test suite of hundreds of diverse values (including edge
+  cases)
 - Excellent distribution for typical use cases (object indexing, memoization, comparison)
 - Special handling to avoid common collision patterns
 
@@ -161,28 +162,31 @@ This is the result of a [benchmark](./benchmark/benchmark.js) between `object-ha
 
 ```txt
 Running "Benchmark (Object)" suite...
+Progress: 100%
 
   Object Code:
-    163 689 ops/s, ±0.97%   | fastest
+    214 853 ops/s, ±0.73%   | fastest
 
   Object Hash:
-    23 547 ops/s, ±0.73%    | slowest, 85.61% slower
+    24 568 ops/s, ±0.65%    | slowest, 88.57% slower
 
 Running "Benchmark (Jsonified Object)" suite...
+Progress: 100%
 
   Object Code:
-    187 558 ops/s, ±0.42%   | fastest
+    201 261 ops/s, ±0.63%   | fastest
 
   Object Hash:
-    130 435 ops/s, ±0.42%   | slowest, 30.46% slower
+    135 867 ops/s, ±0.63%   | slowest, 32.49% slower
 
 Running "Benchmark (String)" suite...
+Progress: 100%
 
-  Object Code):
-    1 386 699 ops/s, ±0.62%   | fastest
+  Object Code:
+    2 112 297 ops/s, ±1.37%   | fastest
 
-  Object Hash):
-    394 495 ops/s, ±0.51%     | slowest, 71.55% slower
+  Object Hash:
+    381 451 ops/s, ±1.62%     | slowest, 81.94% slower
 ```
 
 <br />
