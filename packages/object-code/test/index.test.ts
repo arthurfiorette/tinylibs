@@ -1,4 +1,3 @@
-import { FormData } from 'formdata-node';
 import { hash } from '../src';
 import { values } from './values';
 
