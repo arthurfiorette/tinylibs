@@ -1,3 +1,4 @@
+import { FormData } from 'formdata-node';
 import { hash } from '../src';
 import { values } from './values';
 
@@ -47,5 +48,37 @@ describe('tests', () => {
     }
 
     expect(typeof hash({ b: { example } })).toBe('number');
+  });
+
+  it('should hash FormData with different contents differently', () => {
+    const form1 = new FormData();
+    form1.append('a', '1');
+    const hash1 = hash(form1);
+
+    const form2 = new FormData();
+    form2.append('a', '1');
+    form2.append('b', '2');
+    const hash2 = hash(form2);
+
+    const form3 = new FormData();
+    form3.append('b', '2');
+    form3.append('a', '1');
+    const hash3 = hash(form3);
+
+    expect(hash1).not.toBe(hash2);
+    // hash2 and hash3 should be equal because keys are sorted
+    expect(hash2).toBe(hash3);
+  });
+
+  it('should hash identical FormData consistently', () => {
+    const form1 = new FormData();
+    form1.append('a', '1');
+    form1.append('b', '2');
+
+    const form2 = new FormData();
+    form2.append('a', '1');
+    form2.append('b', '2');
+
+    expect(hash(form1)).toBe(hash(form2));
   });
 });

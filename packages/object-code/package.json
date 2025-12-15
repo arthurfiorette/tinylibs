@@ -32,6 +32,7 @@
   "devDependencies": {
     "@types/object-hash": "^3.0.6",
     "benny": "^3.7.1",
+    "formdata-node": "^6.0.3",
     "microbundle": "catalog:bundle",
     "object-hash": "^3.0.0"
   }

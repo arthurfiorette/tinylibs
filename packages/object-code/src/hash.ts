@@ -41,6 +41,24 @@ export function hash(val: unknown, seen?: WeakSet<object>): number {
     // Sort keys to keep the hash consistent
     const keys = Object.keys(val).sort(sortNumbers);
 
+    // If object has no enumerable keys but has entries() method,
+    // use entries instead (e.g., FormData, URLSearchParams)
+    if (keys.length === 0 && typeof (val as any).entries === 'function') {
+      const entries = Array.from((val as any).entries()) as [unknown, unknown][];
+      // Sort entries by key to ensure consistent hashing
+      entries.sort((a, b) => (String(a[0]) > String(b[0]) ? 1 : -1));
+
+      for (const [key, value] of entries) {
+        h = (h * 33) ^ hash(key, seen);
+        h = (h * 33) ^ hash(value, seen);
+      }
+
+      // Also hash the constructor
+      h = (h * 33) ^ hash(val.constructor, seen);
+
+      return h;
+    }
+
     for (let i = 0; i < keys.length; i++) {
       const key = keys[i];
       const value = val[key as keyof typeof val] as object;

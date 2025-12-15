@@ -1,6 +1,7 @@
 /* eslint-disable */
 /* istanbul ignore file */
 
+import { FormData } from 'formdata-node';
 import { URLSearchParams } from 'node:url';
 import { hash } from '../src';
 
@@ -151,7 +152,25 @@ export const values = [
   new URLSearchParams({ b: '1' }),
   new URLSearchParams({ a: '1', b: '1' }),
   Buffer.from('asd'),
-  Buffer.from('asd1')
+  Buffer.from('asd1'),
+
+  // FormData
+  (() => {
+    const fd = new FormData();
+    fd.append('a', '1');
+    return fd;
+  })(),
+  (() => {
+    const fd = new FormData();
+    fd.append('b', '1');
+    return fd;
+  })(),
+  (() => {
+    const fd = new FormData();
+    fd.append('a', '1');
+    fd.append('b', '2');
+    return fd;
+  })()
 ];
 
 // Adds self reference
