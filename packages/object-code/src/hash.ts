@@ -1,4 +1,4 @@
-import { sortNumbers } from './util';
+import { entriesToPairs, keysToPairs, sortNumbers } from './util';
 
 /**
  * Hashes a given value into a unique number.
@@ -47,14 +47,12 @@ export function hash(val: unknown, seen?: WeakSet<object>): number {
     // If object has no enumerable keys but has entries() method,
     // use entries instead (e.g., FormData, URLSearchParams)
     if (keys.length === 0 && typeof (val as any).entries === 'function') {
-      pairs = Array.from((val as any).entries()) as [unknown, unknown][];
+      pairs = entriesToPairs(val);
       // Sort entries by key to ensure consistent hashing
       pairs.sort((a, b) => sortNumbers(String(a[0]), String(b[0])));
     } else {
       // Convert object keys to [key, value] pairs
-      pairs = keys.map(
-        (key) => [key, val[key as keyof typeof val]] as [unknown, unknown]
-      );
+      pairs = keysToPairs(keys, val);
     }
 
     for (let i = 0; i < pairs.length; i++) {
