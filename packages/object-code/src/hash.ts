@@ -27,6 +27,53 @@ import { sortNumbers, sortPairsByKey } from './util';
 export function hash(val: unknown, seen?: WeakSet<object>): number {
   let h = 5381;
 
+  // Handle objects with entries() method but no enumerable keys
+  // (e.g., FormData, URLSearchParams, Map, Set)
+  if (
+    typeof val === 'object' &&
+    val !== null &&
+    typeof (val as any).entries === 'function' &&
+    Object.keys(val).length === 0
+  ) {
+    if (!seen) {
+      seen = new WeakSet();
+    }
+
+    const pairs = Array.from((val as any).entries()) as [unknown, unknown][];
+    // Sort entries by key to ensure consistent hashing
+    pairs.sort(sortPairsByKey);
+
+    for (let i = 0; i < pairs.length; i++) {
+      const [key, value] = pairs[i]!;
+
+      h = (h * 33) ^ hash(key, seen);
+
+      // Uses an internal WeakMap to keep track of previous seen values
+      // and avoid circular references serializations which would cause
+      // an infinite loop.
+      if (
+        typeof value === 'object' &&
+        value !== null &&
+        (value.toString === Object.prototype.toString ||
+          value.toString === Array.prototype.toString)
+      ) {
+        if (seen.has(value as object)) {
+          continue;
+        }
+
+        seen.add(value as object);
+      }
+
+      // Hashes the value
+      h = (h * 33) ^ hash(value, seen);
+    }
+
+    // Also hash the constructor
+    h = (h * 33) ^ hash(val.constructor, seen);
+
+    return h;
+  }
+
   // Objects should be recursively hashed
   if (
     typeof val === 'object' &&
@@ -42,18 +89,10 @@ export function hash(val: unknown, seen?: WeakSet<object>): number {
     const keys = Object.keys(val).sort(sortNumbers);
 
     // Build array of [key, value] pairs for unified processing
-    let pairs: [string, unknown][];
-
-    // If object has no enumerable keys but has entries() method,
-    // use entries instead (e.g., FormData, URLSearchParams)
-    if (keys.length === 0 && typeof (val as any).entries === 'function') {
-      pairs = Array.from((val as any).entries());
-      // Sort entries by key to ensure consistent hashing
-      pairs.sort(sortPairsByKey);
-    } else {
-      // Convert object keys to [key, value] pairs
-      pairs = keys.map((key) => [key, val[key as keyof typeof val]]);
-    }
+    const pairs = keys.map((key) => [key, val[key as keyof typeof val]]) as [
+      string,
+      unknown
+    ][];
 
     for (let i = 0; i < pairs.length; i++) {
       const [key, value] = pairs[i]!;
