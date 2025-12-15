@@ -9,11 +9,3 @@ export function sortPairsByKey(a: [unknown, unknown], b: [unknown, unknown]) {
 export function keyToKeyValuePair(val: any, key: string): [unknown, unknown] {
   return [key, val[key]];
 }
-
-export function entriesToPairs(val: any): [unknown, unknown][] {
-  return Array.from(val.entries()) as [unknown, unknown][];
-}
-
-export function keysToPairs(keys: string[], val: any): [unknown, unknown][] {
-  return keys.map((key) => keyToKeyValuePair(val, key));
-}

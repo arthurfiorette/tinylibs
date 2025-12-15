@@ -1,4 +1,4 @@
-import { entriesToPairs, keysToPairs, sortNumbers, sortPairsByKey } from './util';
+import { keyToKeyValuePair, sortNumbers, sortPairsByKey } from './util';
 
 /**
  * Hashes a given value into a unique number.
@@ -39,7 +39,7 @@ export function hash(val: unknown, seen?: WeakSet<object>): number {
       seen = new WeakSet();
     }
 
-    const pairs = entriesToPairs(val);
+    const pairs = Array.from((val as any).entries()) as [unknown, unknown][];
     // Sort entries by key to ensure consistent hashing
     pairs.sort(sortPairsByKey);
 
@@ -89,7 +89,7 @@ export function hash(val: unknown, seen?: WeakSet<object>): number {
     const keys = Object.keys(val).sort(sortNumbers);
 
     // Build array of [key, value] pairs for unified processing
-    const pairs: [unknown, unknown][] = keysToPairs(keys, val);
+    const pairs = keys.map((key) => keyToKeyValuePair(val, key));
 
     for (let i = 0; i < pairs.length; i++) {
       const [key, value] = pairs[i]!;
