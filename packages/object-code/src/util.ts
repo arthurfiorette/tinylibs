@@ -24,7 +24,7 @@ export function normalizeNumber(val: number): number {
   if (val === -Infinity) return 0xfff00000;
 
   // For very large numbers, hash them as strings to avoid precision loss
-  if (!Number.isFinite(val) || Math.abs(val) > Number.MAX_SAFE_INTEGER) {
+  if (Math.abs(val) > Number.MAX_SAFE_INTEGER) {
     // Convert to string and hash the string representation
     const str = String(val);
     let h = 0;

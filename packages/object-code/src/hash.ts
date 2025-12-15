@@ -40,6 +40,7 @@ export function hash(val: unknown, seen?: WeakSet<object>): number {
       if (!seen) {
         seen = new WeakSet();
       }
+      seen.add(val);
 
       // Get key-value pairs: use entries() for special objects, Object.keys() for regular ones
       const pairs: [unknown, unknown][] =
