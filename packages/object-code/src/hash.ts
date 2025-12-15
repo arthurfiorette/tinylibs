@@ -1,4 +1,4 @@
-import { sortNumbers } from './util';
+import { mix, normalizeNumber, sortNumbers, sortPairsByKey } from './util';
 
 /**
  * Hashes a given value into a unique number.
@@ -25,68 +25,101 @@ import { sortNumbers } from './util';
  * @see https://tinylibs.js.org/packages/object-code/
  */
 export function hash(val: unknown, seen?: WeakSet<object>): number {
-  let h = 5381;
+  let h = 5381; // DJB2 seed
 
-  // Objects should be recursively hashed
-  if (
-    typeof val === 'object' &&
-    val !== null &&
-    (val.toString === Object.prototype.toString ||
-      val.toString === Array.prototype.toString)
-  ) {
-    if (!seen) {
-      seen = new WeakSet();
-    }
+  // Handle objects and array-like structures
+  if (typeof val === 'object' && val !== null) {
+    const hasEntries = typeof (val as any).entries === 'function';
+    const hasEnumerableKeys = Object.keys(val).length > 0;
+    const shouldHashAsObject =
+      val.toString === Object.prototype.toString ||
+      val.toString === Array.prototype.toString;
 
-    // Sort keys to keep the hash consistent
-    const keys = Object.keys(val).sort(sortNumbers);
+    // Hash objects with enumerable keys OR entries() method (Map, Set, FormData, etc.)
+    if (shouldHashAsObject || (hasEntries && !hasEnumerableKeys)) {
+      if (!seen) {
+        seen = new WeakSet();
+      }
+      seen.add(val);
 
-    for (let i = 0; i < keys.length; i++) {
-      const key = keys[i];
-      const value = val[key as keyof typeof val] as object;
+      // Get key-value pairs: use entries() for special objects, Object.keys() for regular ones
+      const pairs: [unknown, unknown][] =
+        hasEntries && !hasEnumerableKeys
+          ? Array.from((val as any).entries())
+          : Object.keys(val)
+              .sort(sortNumbers)
+              .map((key) => [key, val[key as keyof typeof val]]);
 
-      h = (h * 33) ^ hash(key, seen);
-
-      // Uses an internal WeakMap to keep track of previous seen values
-      // and avoid circular references serializations which would cause
-      // an infinite loop.
-      if (
-        typeof value === 'object' &&
-        value !== null &&
-        (val.toString === Object.prototype.toString ||
-          val.toString === Array.prototype.toString)
-      ) {
-        if (seen.has(value)) {
-          continue;
-        }
-
-        seen.add(value);
+      // Sort by key for consistent hashing (only needed for entries() path)
+      if (hasEntries && !hasEnumerableKeys) {
+        pairs.sort(sortPairsByKey);
       }
 
-      // Hashes the value
-      h = (h * 33) ^ hash(value, seen);
+      // Hash all key-value pairs
+      for (let i = 0; i < pairs.length; i++) {
+        const [key, value] = pairs[i]!;
+
+        h = mix(h, hash(key, seen));
+
+        // Track circular references for object values
+        if (
+          typeof value === 'object' &&
+          value !== null &&
+          (value.toString === Object.prototype.toString ||
+            value.toString === Array.prototype.toString)
+        ) {
+          if (seen.has(value)) {
+            continue;
+          }
+          seen.add(value);
+        }
+
+        h = mix(h, hash(value, seen));
+      }
+
+      // Hash the constructor for type differentiation
+      h = mix(h, hash(val.constructor, seen));
+
+      return h;
     }
-
-    // Also hashes the constructor
-    h = (h * 33) ^ hash(val.constructor, seen);
-
-    return h;
   }
 
-  let toHash = typeof val;
+  // Hash primitives efficiently - avoid string concatenation overhead
+  const type = typeof val;
 
+  // Hash the type first to differentiate types
+  for (let i = 0; i < type.length; i++) {
+    h = mix(h, type.charCodeAt(i));
+  }
+
+  if (val instanceof Date) {
+    // Hash dates by their numeric timestamp directly
+    return mix(h, val.getTime());
+  }
+
+  if (type === 'number') {
+    // Normalize special numbers to prevent collisions
+    return mix(h, normalizeNumber(val as number));
+  }
+
+  if (type === 'boolean') {
+    // Hash booleans as distinct values
+    return mix(h, val ? 1 : 0);
+  }
+
+  // For other types, get string representation
+  let toHash: string;
+
+  // Handles null prototype objects and symbols
   try {
-    if (val instanceof Date) {
-      toHash += val.getTime();
-    } else {
-      toHash += String(val);
-    }
-  } catch (_error) {
-    toHash += String(Object.assign({}, val));
+    toHash = String(val);
+  } catch {
+    toHash = Object.prototype.toString.call(val);
   }
 
+  // Hash the string representation
   for (let i = 0; i < toHash.length; i++) {
-    h = (h * 33) ^ toHash.charCodeAt(i);
+    h = mix(h, toHash.charCodeAt(i));
   }
 
   return h;

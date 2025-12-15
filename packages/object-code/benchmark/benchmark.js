@@ -16,7 +16,23 @@ const DUMMY_OBJECT = {
     boolean: false,
     symbol: Symbol(),
     date: new Date(2012, 5, 2)
-  }
+  },
+  array: [
+    {
+      string: 'array-string',
+      number: 2345234,
+      boolean: true,
+      symbol: Symbol('array-symbol'),
+      date: new Date(2020, 1, 1)
+    },
+    {
+      string: 'another-array-string',
+      number: -9876543,
+      boolean: false,
+      symbol: Symbol(),
+      date: new Date(1999, 11, 31)
+    }
+  ]
 };
 
 const DUMMY_STRING = JSON.stringify(DUMMY_OBJECT);
@@ -32,19 +48,39 @@ Benny.suite(
     objectHash(DUMMY_OBJECT);
   }),
 
-  Benny.add('Object Code (Jsonified Object)', () => {
+  Benny.cycle(),
+
+  Benny.complete(() => {
+    console.log();
+  })
+);
+
+Benny.suite(
+  'Benchmark (Jsonified Object)',
+
+  Benny.add('Object Code', () => {
     objectCode.hash(JSON.stringify(DUMMY_OBJECT));
   }),
 
-  Benny.add('Object Hash (Jsonified Object)', () => {
+  Benny.add('Object Hash', () => {
     objectHash(JSON.stringify(DUMMY_OBJECT));
   }),
 
-  Benny.add('Object Code (String)', () => {
+  Benny.cycle(),
+
+  Benny.complete(() => {
+    console.log();
+  })
+);
+
+Benny.suite(
+  'Benchmark (String)',
+
+  Benny.add('Object Code', () => {
     objectCode.hash(DUMMY_STRING);
   }),
 
-  Benny.add('Object Hash (String)', () => {
+  Benny.add('Object Hash', () => {
     objectHash(DUMMY_STRING);
   }),
 

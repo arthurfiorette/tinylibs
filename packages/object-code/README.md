@@ -39,6 +39,9 @@
   - [Browser](#browser)
   - [Url Import](#url-import)
 - [Getting Started](#getting-started)
+- [Hashing \& Collision Resistance](#hashing--collision-resistance)
+  - [How it works](#how-it-works)
+  - [Collision Probability](#collision-probability)
 - [Compatibility](#compatibility)
 - [Benchmark](#benchmark)
 - [License](#license)
@@ -110,6 +113,35 @@ const hash = hash(myWeirdObject);
 // -1352827948
 ```
 
+<br />
+
+## Hashing & Collision Resistance
+
+Object Code uses a modified **DJB2 algorithm** with special handling for edge cases to
+provide excellent collision resistance while maintaining high performance.
+
+### How it works
+
+- Uses bitwise XOR operations (much faster than cryptographic hashing)
+- Hashes the type separately from the value to prevent cross-type collisions
+- NaN, Infinity, -Infinity, and very large numbers are normalized to prevent collisions
+- Objects and arrays are hashed recursively with circular reference detection
+
+### Collision Probability
+
+The hash function produces 32-bit signed integers, giving approximately **4.3 billion**
+unique values. While not cryptographically secure, it provides:
+
+- **Zero collisions** in our test suite of hundreds of diverse values (including edge
+  cases)
+- Excellent distribution for typical use cases (object indexing, memoization, comparison)
+- Special handling to avoid common collision patterns
+
+**Note**: This is a **non-cryptographic** hash function optimized for speed. Don't use it
+for security purposes like password hashing or data integrity verification.
+
+<br />
+
 ## Compatibility
 
 See all unique values at [`test/values.ts`](test/values.ts)
@@ -129,23 +161,32 @@ This is the result of a [benchmark](./benchmark/benchmark.js) between `object-ha
 `object-code`:
 
 ```txt
+Running "Benchmark (Object)" suite...
+Progress: 100%
+
   Object Code:
-    492 919 ops/s, ±0.90%     | 84.72% slower
+    214 853 ops/s, ±0.73%   | fastest
 
   Object Hash:
-    48 311 ops/s, ±0.89%      | slowest, 98.5% slower
+    24 568 ops/s, ±0.65%    | slowest, 88.57% slower
 
-  Object Code (Jsonified Object):
-    401 901 ops/s, ±0.75%     | 87.54% slower
+Running "Benchmark (Jsonified Object)" suite...
+Progress: 100%
 
-  Object Hash (Jsonified Object):
-    213 819 ops/s, ±0.48%     | 93.37% slower
+  Object Code:
+    201 261 ops/s, ±0.63%   | fastest
 
-  Object Code (String):
-    3 225 590 ops/s, ±1.94%   | fastest
+  Object Hash:
+    135 867 ops/s, ±0.63%   | slowest, 32.49% slower
 
-  Object Hash (String):
-    424 569 ops/s, ±2.88%     | 86.84% slower
+Running "Benchmark (String)" suite...
+Progress: 100%
+
+  Object Code:
+    2 112 297 ops/s, ±1.37%   | fastest
+
+  Object Hash:
+    381 451 ops/s, ±1.62%     | slowest, 81.94% slower
 ```
 
 <br />
