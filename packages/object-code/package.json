@@ -1,6 +1,6 @@
 {
   "name": "object-code",
-  "version": "1.3.4",
+  "version": "2.0.0",
   "description": "A blazing fast hash code generator that supports every possible javascript value.",
   "homepage": "https://tinylibs.js.org/packages/object-code",
   "bugs": "https://github.com/arthurfiorette/tinylibs/issues",
