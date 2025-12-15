@@ -76,7 +76,7 @@ Benny.suite(
 Benny.suite(
   'Benchmark (String)',
 
-  Benny.add('Object Code)', () => {
+  Benny.add('Object Code', () => {
     objectCode.hash(DUMMY_STRING);
   }),
 

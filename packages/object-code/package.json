@@ -27,7 +27,7 @@
   "scripts": {
     "benchmark": "pnpm build && node benchmark/benchmark.js",
     "build": "microbundle --tsconfig tsconfig.build.json",
-    "test": "jest --coverage"
+    "test": "tsx --test test/**/*.test.ts"
   },
   "devDependencies": {
     "@types/object-hash": "^3.0.6",

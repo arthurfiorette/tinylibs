@@ -54,6 +54,7 @@ export const values = [
   (a: any) => a,
   (b: any) => b,
   function withName() {},
+  function Asd() {},
   () => {},
   { lambda: () => {} },
   { lam2da: () => {} },
@@ -152,6 +153,7 @@ export const values = [
   new URLSearchParams({ a: '1', b: '1' }),
   Buffer.from('asd'),
   Buffer.from('asd1'),
+  Object.create(null),
 
   // Map
   (() => {

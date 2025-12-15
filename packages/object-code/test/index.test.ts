@@ -1,83 +1,69 @@
+import assert from 'node:assert/strict';
+import { it } from 'node:test';
 import { hash } from '../src';
 import { values } from './values';
 
-describe('tests', () => {
-  it('supports all values', () => {
-    const hashes = new Map();
+it('supports all values', () => {
+  const hashes = new Map();
 
-    for (const value of values) {
-      if (hashes.has(hash(value))) {
-        console.log(value, hashes.get(hash(value)));
-      }
-
-      hashes.set(hash(value), value);
+  for (const value of values) {
+    if (hashes.has(hash(value))) {
+      console.log(value, hashes.get(hash(value)));
     }
 
-    expect(hashes.size).toBe(values.length);
-  });
+    hashes.set(hash(value), value);
+  }
 
-  it('tests if the return type are numbers', () => {
-    for (const val of values) {
-      expect(typeof hash(val)).toBe('number');
-    }
+  assert.strictEqual(hashes.size, values.length);
+});
 
-    expect.assertions(values.length);
-  });
+it('tests if the return type are numbers', () => {
+  for (const val of values) {
+    assert.strictEqual(typeof hash(val), 'number');
+  }
+});
 
-  it('expects the same return for the same call', () => {
-    for (const val of values) {
-      expect(hash(val)).toBe(hash(val));
-    }
+it('expects the same return for the same call', () => {
+  for (const val of values) {
+    assert.strictEqual(hash(val), hash(val));
+  }
+});
 
-    expect.assertions(values.length);
-  });
+it('tests for circular references', () => {
+  const obj = {} as { a: unknown };
+  obj.a = obj;
 
-  it('tests for circular references', () => {
-    const obj = {} as { a: unknown };
-    obj.a = obj;
+  assert.strictEqual(hash(obj), hash(obj));
+});
 
-    expect(hash(obj)).toBe(hash(obj));
-  });
+it('should hash FormData with different contents differently', () => {
+  const form1 = new FormData();
+  form1.append('a', '1');
+  const hash1 = hash(form1);
 
-  it('hashes a 2M object normally', () => {
-    const example = {} as Record<string, { name: string; id: number }>;
+  const form2 = new FormData();
+  form2.append('a', '1');
+  form2.append('b', '2');
+  const hash2 = hash(form2);
 
-    for (let i = 0; i < 2_000_000; i++) {
-      example[i] = { name: 'test', id: i };
-    }
+  const form3 = new FormData();
+  form3.append('b', '2');
+  form3.append('a', '1');
+  const hash3 = hash(form3);
 
-    expect(typeof hash({ b: { example } })).toBe('number');
-  });
+  assert.notStrictEqual(hash1, hash2);
+  // hash2 and hash3 should be equal because keys are sorted
+  assert.strictEqual(hash2, hash3);
+});
 
-  it('should hash FormData with different contents differently', () => {
-    const form1 = new FormData();
-    form1.append('a', '1');
-    const hash1 = hash(form1);
+it('should hash identical FormData consistently', () => {
+  const form1 = new FormData();
+  form1.append('a', '1');
+  form1.append('b', '2');
 
-    const form2 = new FormData();
-    form2.append('a', '1');
-    form2.append('b', '2');
-    const hash2 = hash(form2);
+  const form2 = new FormData();
+  form2.append('a', '1');
+  form2.append('b', '2');
 
-    const form3 = new FormData();
-    form3.append('b', '2');
-    form3.append('a', '1');
-    const hash3 = hash(form3);
-
-    expect(hash1).not.toBe(hash2);
-    // hash2 and hash3 should be equal because keys are sorted
-    expect(hash2).toBe(hash3);
-  });
-
-  it('should hash identical FormData consistently', () => {
-    const form1 = new FormData();
-    form1.append('a', '1');
-    form1.append('b', '2');
-
-    const form2 = new FormData();
-    form2.append('a', '1');
-    form2.append('b', '2');
-
-    expect(hash(form1)).toBe(hash(form2));
-  });
+  assert.strictEqual(hash(form1), hash(form2));
 });

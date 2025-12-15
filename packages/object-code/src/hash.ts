@@ -91,24 +91,29 @@ export function hash(val: unknown, seen?: WeakSet<object>): number {
     h = mix(h, type.charCodeAt(i));
   }
 
+  if (val instanceof Date) {
+    // Hash dates by their numeric timestamp directly
+    return mix(h, val.getTime());
+  }
+
+  if (type === 'number') {
+    // Normalize special numbers to prevent collisions
+    return mix(h, normalizeNumber(val as number));
+  }
+
+  if (type === 'boolean') {
+    // Hash booleans as distinct values
+    return mix(h, val ? 1 : 0);
+  }
+
+  // For other types, get string representation
   let toHash: string;
 
+  // Handles null prototype objects and symbols
   try {
-    if (val instanceof Date) {
-      // Hash dates by their numeric timestamp directly
-      return mix(h, val.getTime());
-    } else if (type === 'number') {
-      // Normalize special numbers to prevent collisions
-      return mix(h, normalizeNumber(val as number));
-    } else if (type === 'boolean') {
-      // Hash booleans as distinct values
-      return mix(h, val ? 1 : 0);
-    } else {
-      // For other types, get string representation
-      toHash = String(val);
-    }
-  } catch (_error) {
-    toHash = String(Object.assign({}, val));
+    toHash = String(val);
+  } catch {
+    toHash = Object.prototype.toString.call(val);
   }
 
   // Hash the string representation
