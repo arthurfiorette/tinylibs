@@ -1,5 +1,3 @@
-import assert from 'node:assert/strict';
-import { it } from 'node:test';
 import { hash } from '../src';
 
 it('hashes a 2M object normally', () => {
@@ -9,5 +7,5 @@ it('hashes a 2M object normally', () => {
     example[i] = { name: 'test', id: i };
   }
 
-  assert.strictEqual(typeof hash({ b: { example } }), 'number');
+  expect(typeof hash({ b: { example } })).toBe('number');
 });
