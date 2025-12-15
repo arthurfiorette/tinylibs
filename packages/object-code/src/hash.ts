@@ -46,7 +46,7 @@ export function hash(val: unknown, seen?: WeakSet<object>): number {
     if (keys.length === 0 && typeof (val as any).entries === 'function') {
       const entries = Array.from((val as any).entries()) as [unknown, unknown][];
       // Sort entries by key to ensure consistent hashing
-      entries.sort((a, b) => (String(a[0]) > String(b[0]) ? 1 : -1));
+      entries.sort((a, b) => sortNumbers(String(a[0]), String(b[0])));
 
       for (const [key, value] of entries) {
         h = (h * 33) ^ hash(key, seen);
