@@ -41,27 +41,24 @@ export function hash(val: unknown, seen?: WeakSet<object>): number {
     // Sort keys to keep the hash consistent
     const keys = Object.keys(val).sort(sortNumbers);
 
+    // Build array of [key, value] pairs for unified processing
+    let pairs: [unknown, unknown][];
+
     // If object has no enumerable keys but has entries() method,
     // use entries instead (e.g., FormData, URLSearchParams)
     if (keys.length === 0 && typeof (val as any).entries === 'function') {
-      const entries = Array.from((val as any).entries()) as [unknown, unknown][];
+      pairs = Array.from((val as any).entries()) as [unknown, unknown][];
       // Sort entries by key to ensure consistent hashing
-      entries.sort((a, b) => sortNumbers(String(a[0]), String(b[0])));
-
-      for (const [key, value] of entries) {
-        h = (h * 33) ^ hash(key, seen);
-        h = (h * 33) ^ hash(value, seen);
-      }
-
-      // Also hash the constructor
-      h = (h * 33) ^ hash(val.constructor, seen);
-
-      return h;
+      pairs.sort((a, b) => sortNumbers(String(a[0]), String(b[0])));
+    } else {
+      // Convert object keys to [key, value] pairs
+      pairs = keys.map(
+        (key) => [key, val[key as keyof typeof val]] as [unknown, unknown]
+      );
     }
 
-    for (let i = 0; i < keys.length; i++) {
-      const key = keys[i];
-      const value = val[key as keyof typeof val] as object;
+    for (let i = 0; i < pairs.length; i++) {
+      const [key, value] = pairs[i]!;
 
       h = (h * 33) ^ hash(key, seen);
 
@@ -71,14 +68,14 @@ export function hash(val: unknown, seen?: WeakSet<object>): number {
       if (
         typeof value === 'object' &&
         value !== null &&
-        (val.toString === Object.prototype.toString ||
-          val.toString === Array.prototype.toString)
+        (value.toString === Object.prototype.toString ||
+          value.toString === Array.prototype.toString)
       ) {
-        if (seen.has(value)) {
+        if (seen.has(value as object)) {
           continue;
         }
 
-        seen.add(value);
+        seen.add(value as object);
       }
 
       // Hashes the value
