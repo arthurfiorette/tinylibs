@@ -38,7 +38,7 @@ export function compare(
   vary: VaryHeader,
   source: CompareHeaders,
   target: CompareHeaders
-): boolean {
+): vary is string[] {
   // Wildcard always differs
   if (vary === '*') {
     return false;
