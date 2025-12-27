@@ -429,16 +429,19 @@ describe('compare() tests', () => {
       expect(compare(vary, req1, req2)).toBe(false);
     });
 
-    it('type guards vary as string[] when returning true', () => {
+    it('handles parse() result with matching headers', () => {
       const varyHeader = 'Accept-Encoding';
       const vary = parse(varyHeader);
 
       const req1 = { 'Accept-Encoding': 'gzip' };
       const req2 = { 'Accept-Encoding': 'gzip' };
 
-      if (compare(vary, req1, req2)) {
-        // TypeScript knows vary is string[] here
-        expect(Array.isArray(vary)).toBe(true);
+      const result = compare(vary, req1, req2);
+      expect(result).toBe(true);
+
+      // Verify vary is parsed correctly
+      expect(Array.isArray(vary)).toBe(true);
+      if (Array.isArray(vary)) {
         expect(vary).toContain('accept-encoding');
       }
     });
