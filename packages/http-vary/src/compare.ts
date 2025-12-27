@@ -28,19 +28,19 @@ import type { CompareHeaders, VaryHeader } from './types';
  * // => true
  * ```
  *
- * @param {VaryHeader} vary - The Vary header specifying which fields to compare
+ * @param {VaryHeader | null} vary - The Vary header specifying which fields to compare
  * @param {CompareHeaders} source - The first set of request headers
  * @param {CompareHeaders} target - The second set of request headers
  * @returns {boolean} `true` if the headers are equivalent for the given Vary header,
  *   `false` otherwise
  */
 export function compare(
-  vary: VaryHeader,
+  vary: VaryHeader | null,
   source: CompareHeaders,
   target: CompareHeaders
 ): vary is string[] {
-  // Wildcard always differs
-  if (vary === '*') {
+  // Wildcard and null always differ
+  if (vary === '*' || vary === null) {
     return false;
   }
 

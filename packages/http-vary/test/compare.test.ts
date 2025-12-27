@@ -1,8 +1,9 @@
 import { compare } from '../src/compare';
+import { parse } from '../src/parse';
 import type { CompareHeaders, VaryHeader } from '../src/types';
 
 describe('compare() tests', () => {
-  describe('Wildcard behavior', () => {
+  describe('Wildcard and null behavior', () => {
     it('always returns false for wildcard vary', () => {
       const headers1 = { 'Accept-Encoding': 'gzip' };
       const headers2 = { 'Accept-Encoding': 'gzip' };
@@ -22,6 +23,17 @@ describe('compare() tests', () => {
 
     it('returns false for wildcard with empty headers', () => {
       expect(compare('*', {}, {})).toBe(false);
+    });
+
+    it('returns false for null vary (invalid parse result)', () => {
+      const headers1 = { 'Accept-Encoding': 'gzip' };
+      const headers2 = { 'Accept-Encoding': 'gzip' };
+
+      expect(compare(null, headers1, headers2)).toBe(false);
+    });
+
+    it('returns false for null vary with empty headers', () => {
+      expect(compare(null, {}, {})).toBe(false);
     });
   });
 
@@ -214,6 +226,89 @@ describe('compare() tests', () => {
     });
   });
 
+  describe('Type coercion (any type compatibility)', () => {
+    it('handles null values', () => {
+      const vary: VaryHeader = ['x-custom'];
+      const headers1: CompareHeaders = { 'X-Custom': null };
+      const headers2: CompareHeaders = { 'X-Custom': null };
+
+      // null.toString() = 'null'
+      expect(compare(vary, headers1, headers2)).toBe(true);
+    });
+
+    it('handles undefined values', () => {
+      const vary: VaryHeader = ['x-custom'];
+      const headers1: CompareHeaders = { 'X-Custom': undefined };
+      const headers2: CompareHeaders = { 'X-Custom': undefined };
+
+      // Both undefined, so they match
+      expect(compare(vary, headers1, headers2)).toBe(true);
+    });
+
+    it('handles boolean values', () => {
+      const vary: VaryHeader = ['x-custom'];
+      const headers1: CompareHeaders = { 'X-Custom': true };
+      const headers2: CompareHeaders = { 'X-Custom': 'true' };
+
+      // true.toString() = 'true'
+      expect(compare(vary, headers1, headers2)).toBe(true);
+    });
+
+    it('handles boolean false values', () => {
+      const vary: VaryHeader = ['x-custom'];
+      const headers1: CompareHeaders = { 'X-Custom': false };
+      const headers2: CompareHeaders = { 'X-Custom': 'false' };
+
+      // false.toString() = 'false'
+      expect(compare(vary, headers1, headers2)).toBe(true);
+    });
+
+    it('handles number values', () => {
+      const vary: VaryHeader = ['content-length'];
+      const headers1: CompareHeaders = { 'Content-Length': 1234 };
+      const headers2: CompareHeaders = { 'Content-Length': '1234' };
+
+      // (1234).toString() = '1234'
+      expect(compare(vary, headers1, headers2)).toBe(true);
+    });
+
+    it('handles zero value', () => {
+      const vary: VaryHeader = ['x-custom'];
+      const headers1: CompareHeaders = { 'X-Custom': 0 };
+      const headers2: CompareHeaders = { 'X-Custom': '0' };
+
+      // (0).toString() = '0'
+      expect(compare(vary, headers1, headers2)).toBe(true);
+    });
+
+    it('treats null and undefined as equivalent', () => {
+      const vary: VaryHeader = ['x-custom'];
+      const headers1: CompareHeaders = { 'X-Custom': null };
+      const headers2: CompareHeaders = { 'X-Custom': undefined };
+
+      // Both null?.toString() and undefined?.toString() return undefined
+      expect(compare(vary, headers1, headers2)).toBe(true);
+    });
+
+    it('distinguishes null from string "null"', () => {
+      const vary: VaryHeader = ['x-custom'];
+      const headers1: CompareHeaders = { 'X-Custom': null };
+      const headers2: CompareHeaders = { 'X-Custom': 'null' };
+
+      // null?.toString() = undefined, 'null'.toString() = 'null'
+      expect(compare(vary, headers1, headers2)).toBe(false);
+    });
+
+    it('distinguishes undefined from empty string', () => {
+      const vary: VaryHeader = ['x-custom'];
+      const headers1: CompareHeaders = { 'X-Custom': undefined };
+      const headers2: CompareHeaders = { 'X-Custom': '' };
+
+      // undefined != ''
+      expect(compare(vary, headers1, headers2)).toBe(false);
+    });
+  });
+
   describe('Empty vary array', () => {
     it('returns true for empty vary array', () => {
       const vary: VaryHeader = [];
@@ -299,6 +394,53 @@ describe('compare() tests', () => {
 
       expect(compare(vary, jsonRequest, htmlRequest)).toBe(false);
       expect(compare(vary, jsonRequest, jsonRequest)).toBe(true);
+    });
+  });
+
+  describe('Integration with parse()', () => {
+    it('works with parse() result for valid header', () => {
+      const varyHeader = 'Accept-Encoding, User-Agent';
+      const vary = parse(varyHeader);
+
+      const req1 = { 'Accept-Encoding': 'gzip', 'User-Agent': 'Chrome' };
+      const req2 = { 'Accept-Encoding': 'gzip', 'User-Agent': 'Chrome' };
+
+      expect(compare(vary, req1, req2)).toBe(true);
+    });
+
+    it('works with parse() result for wildcard', () => {
+      const varyHeader = '*';
+      const vary = parse(varyHeader);
+
+      const req1 = { 'Accept-Encoding': 'gzip' };
+      const req2 = { 'Accept-Encoding': 'gzip' };
+
+      expect(compare(vary, req1, req2)).toBe(false);
+    });
+
+    it('works with parse() result for invalid header (null)', () => {
+      const varyHeader = 'Invalid Header!';
+      const vary = parse(varyHeader);
+
+      const req1 = { 'Accept-Encoding': 'gzip' };
+      const req2 = { 'Accept-Encoding': 'gzip' };
+
+      expect(vary).toBe(null);
+      expect(compare(vary, req1, req2)).toBe(false);
+    });
+
+    it('type guards vary as string[] when returning true', () => {
+      const varyHeader = 'Accept-Encoding';
+      const vary = parse(varyHeader);
+
+      const req1 = { 'Accept-Encoding': 'gzip' };
+      const req2 = { 'Accept-Encoding': 'gzip' };
+
+      if (compare(vary, req1, req2)) {
+        // TypeScript knows vary is string[] here
+        expect(Array.isArray(vary)).toBe(true);
+        expect(vary).toContain('accept-encoding');
+      }
     });
   });
 });

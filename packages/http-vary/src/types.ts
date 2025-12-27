@@ -23,4 +23,4 @@ export type HttpHeaders = Record<string, string | string[] | undefined>;
  * Type representing HTTP headers for comparison. Values must be strings or arrays (no
  * undefined).
  */
-export type CompareHeaders = Record<string, string | string[]>;
+export type CompareHeaders = Record<string, any>;
