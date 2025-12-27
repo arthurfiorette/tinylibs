@@ -27,19 +27,11 @@
 
 ## Table of Packages
 
-- [Fast Defer](packages/fast-defer)
-
-- [Ubimap](packages/ubimap)
-
-- [Object Code](packages/object-code)
-
 - [Cache Parser](packages/cache-parser)
-
-<!-- - [Axios Cache Hooks](packages/axios-cache-hooks) -->
-
-<!-- - [Prisma TypeGraphql Pagination](packages/prisma-typegraphql-pagination) -->
-
-<!-- - [Changesets Changelog Github](packages/changesets-changelog-github) -->
+- [Fast Defer](packages/fast-defer)
+- [Http Vary](packages/http-vary)
+- [Object Code](packages/object-code)
+- [Ubimap](packages/ubimap)
 
 <br />
 

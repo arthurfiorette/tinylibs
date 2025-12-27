@@ -78,6 +78,12 @@ importers:
         specifier: catalog:bundle
         version: 0.15.1(@types/babel__core@7.20.5)
 
+  packages/http-vary:
+    devDependencies:
+      microbundle:
+        specifier: catalog:bundle
+        version: 0.15.1(@types/babel__core@7.20.5)
+
   packages/object-code:
     devDependencies:
       '@types/object-hash':
