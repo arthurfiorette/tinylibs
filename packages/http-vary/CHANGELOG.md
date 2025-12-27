@@ -1,5 +1,12 @@
 # http-vary
 
+## 1.0.3
+
+### Patch Changes
+
+- Removed type assert
+  ([50cf5c4](https://github.com/arthurfiorette/tinylibs/commit/50cf5c4c329dad2500da491c3d20a9ca1e43139f))
+
 ## 1.0.2
 
 ### Patch Changes
