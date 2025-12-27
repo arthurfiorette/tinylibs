@@ -1,5 +1,12 @@
 # http-vary
 
+## 1.0.1
+
+### Patch Changes
+
+- Asserts string[] type on compare result
+  ([8b85c4b](https://github.com/arthurfiorette/tinylibs/commit/8b85c4b1bfa0517afb38f3ff7f2ba1b8a531f82d))
+
 ## 1.0.0
 
 ### Major Changes
