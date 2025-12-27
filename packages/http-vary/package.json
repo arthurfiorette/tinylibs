@@ -1,6 +1,6 @@
 {
   "name": "http-vary",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A minimal parser and utility for the HTTP Vary header.",
   "keywords": [
     "vary",
