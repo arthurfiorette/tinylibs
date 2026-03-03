@@ -31,7 +31,7 @@
     "@arthurfiorette/biomejs-config": "^2.0.1",
     "@arthurfiorette/prettier-config": "^1.0.12",
     "@biomejs/biome": "^2.3.9",
-    "@changesets/cli": "^2.29.8",
+    "@changesets/cli": "^2.30.0",
     "@types/jest": "^30.0.0",
     "@types/node": "^24.4.0",
     "changesets-format-with-issue-links": "^0.3.0",
